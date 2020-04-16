@@ -2,50 +2,38 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * $file.filename is part of the TD-Bot
- * Last edit: 2020.4.14
+ * Last edit: 2020.4.16
  */
 
 package de.th3ph4nt0m.tdbot;
 
+import de.th3ph4nt0m.tdbot.listener.MessageReceive;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 
 import javax.security.auth.login.LoginException;
+import java.util.EventListener;
 
 public
-class Main
+class Main implements EventListener
 {
 
-    public static JDA jda;
+    private JDA jda;
+    private static Main instance;
+    Object obj = null;
 
     public
     Main()
     {
+        instance = this;
         try {
-            this.jda = jda = JDABuilder.createDefault("Njk5Mzc4NDM2OTA4Nzc3NTAz.XpTosg.GGLbEsUH6YmwpSW676z6FEUVFxU").setAutoReconnect(true).setStatus(OnlineStatus.ONLINE).setActivity(Activity.watching("over TD-Nation")).build();
+            this.jda = JDABuilder.createDefault("Njk5Mzc4NDM2OTA4Nzc3NTAz.XpTosg.GGLbEsUH6YmwpSW676z6FEUVFxU").setAutoReconnect(true).setStatus(OnlineStatus.ONLINE).setActivity(Activity.watching("over TD-Nation")).build();
+            jda.addEventListener(new MessageReceive());
         } catch (LoginException e) {
             e.printStackTrace();
         }
-    }
-
-    public static
-    void main(String[] args) throws LoginException, InterruptedException
-    {
-//        DefaultShardManagerBuilder builder = new DefaultShardManagerBuilder();
-//        builder.setToken("Njk5Mzc4NDM2OTA4Nzc3NTAz.XpT4xg.hnWxGyfeACipKs-0D2bxJkDE4Fo");
-//        builder.build();
-//        JDABuilder builder = new JDABuilder(AccountType.BOT);
-//        builder.setToken("Njk5Mzc4NDM2OTA4Nzc3NTAz.XpT4xg.hnWxGyfeACipKs-0D2bxJkDE4Fo");
-//        builder.setActivity(Activity.watching("over TD-Nation"));
-//        builder.setStatus(OnlineStatus.ONLINE);
-//        builder.setAutoReconnect(true);
-//        try {
-//            builder.build();
-//        } catch (LoginException e) {
-//            e.printStackTrace();
-//        }
     }
 
 
@@ -53,5 +41,11 @@ class Main
     JDA getJda()
     {
         return jda;
+    }
+
+    public static
+    Main getInstance()
+    {
+        return instance;
     }
 }
