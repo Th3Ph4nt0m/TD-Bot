@@ -2,10 +2,10 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * BotLauncher.java is part of the TD-Bot
- * Last edit: 2020.4.20
+ * Last edit: 2020.4.22
  */
 
-package de.th3ph4nt0m.tdbot.launcher;
+package de.th3ph4nt0m.tdbot.core;
 
 import de.th3ph4nt0m.tdbot.Bot;
 

@@ -2,15 +2,12 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * Bot.java is part of the TD-Bot
- * Last edit: 2020.4.20
+ * Last edit: 2020.4.22
  */
 
 package de.th3ph4nt0m.tdbot;
 
-import de.th3ph4nt0m.tdbot.listener.MessageReceive;
-import de.th3ph4nt0m.tdbot.listener.VoiceConnect;
-import de.th3ph4nt0m.tdbot.listener.VoiceLeave;
-import de.th3ph4nt0m.tdbot.listener.VoiceMove;
+import de.th3ph4nt0m.tdbot.listener.*;
 import de.th3ph4nt0m.tdbot.utils.ChannelCreator;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -43,6 +40,7 @@ class Bot implements EventListener
             jda.addEventListener(new VoiceConnect());
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
+            jda.addEventListener(new CommandListener());
         } catch (LoginException e) {
             e.printStackTrace();
         }
@@ -72,4 +70,5 @@ class Bot implements EventListener
     {
         return channelCreator;
     }
+
 }
