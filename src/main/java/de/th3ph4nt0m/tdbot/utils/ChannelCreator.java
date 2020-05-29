@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * ChannelCreator.java is part of the TD-Bot
- * Last edit: 2020.4.20
+ * Last edit: 2020.5.29
  */
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -26,5 +26,6 @@ class ChannelCreator
         VoiceChannel channel = temp.complete();
         Bot.getInstance().getOwChannels().add(channel);
         member.getGuild().moveVoiceMember(member, channel).queue();
+        //1588111200000
     }
 }
