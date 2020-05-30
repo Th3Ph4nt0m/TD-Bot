@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * MongoHandler.java is part of the TD-Bot
- * Last edit: 2020.5.29
+ * Last edit: 2020.5.31
  */
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -24,7 +24,7 @@ class MongoHandler
 
     public MongoHandler()
     {
-        this.mongoClient = new MongoClient(new ServerAddress("lostname.eu", 27017), MongoCredential.createCredential("henrik", "Th3Ph4nt0m", "3Q062&vIXAoX5ljm7DGE99dz^1jraaW0$e0nk#1RhI7qLy0ctG4NM#pf7rjpShLp".toCharArray()), MongoClientOptions.builder().build());
+        this.mongoClient = new MongoClient(new ServerAddress("lostname.eu", 27017), MongoCredential.createCredential("henrik", "admin", "3Q062&vIXAoX5ljm7DGE99dz^1jraaW0$e0nk#1RhI7qLy0ctG4NM#pf7rjpShLp".toCharArray()), MongoClientOptions.builder().build());
         this.mongoDatabase = mongoClient.getDatabase("Th3Ph4nt0m");
     }
 

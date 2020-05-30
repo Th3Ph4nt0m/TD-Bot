@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * IUser.java is part of the TD-Bot
- * Last edit: 2020.5.29
+ * Last edit: 2020.5.31
  */
 
 package de.th3ph4nt0m.tdbot.interfaces;
@@ -18,11 +18,13 @@ import org.bson.Document;
 @SuppressWarnings ("SpellCheckingInspection") public class IUser
 {
     private final User user;
+    private String id;
 
     public IUser(String id)
     {
         this.user = Bot.getInstance().getJda().getUserById(id);
 
+        this.id = id;
     }
 
     private MongoCollection<Document> users()
@@ -43,7 +45,7 @@ import org.bson.Document;
 
     public void createInDB()
     {
-        Document append = new Document("_id", user.getId());
+        Document append = new Document("_id", id);
         users().insertOne(append);
     }
 
