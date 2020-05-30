@@ -2,13 +2,14 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * Bot.java is part of the TD-Bot
- * Last edit: 2020.5.29
+ * Last edit: 2020.5.30
  */
 
 package de.th3ph4nt0m.tdbot;
 
 import de.th3ph4nt0m.tdbot.listener.*;
 import de.th3ph4nt0m.tdbot.utils.ChannelCreator;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import de.th3ph4nt0m.tdbot.utils.MongoHandler;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -36,7 +37,7 @@ class Bot implements EventListener
     {
         instance = this;
         try {
-            this.jda = JDABuilder.createDefault("Njk5Mzc4NDM2OTA4Nzc3NTAz.XpTosg.GGLbEsUH6YmwpSW676z6FEUVFxU").setAutoReconnect(true).setStatus(OnlineStatus.ONLINE).setActivity(Activity.watching("over TD-Nation")).build();
+            this.jda = JDABuilder.createDefault("NzE2MDcwMjg3NzI4MzEyMzcy.XtGajA.wum_0T-ymhloL_31JzM7WdYfJXI").setAutoReconnect(true).setStatus(OnlineStatus.ONLINE).setActivity(Activity.watching("over TD-Nation")).build();
             this.channelCreator = new ChannelCreator();
             this.mongoHandler = new MongoHandler();
             jda.addEventListener(new MessageReceive());
@@ -44,8 +45,11 @@ class Bot implements EventListener
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
             jda.addEventListener(new CommandListener());
+            jda.awaitReady();
+
+            new MessageCenter(true);
 //            CommandHandler.commands.put("hgw", new Dominik_HGW());
-        } catch (LoginException e) {
+        } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
     }
