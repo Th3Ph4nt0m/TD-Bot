@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * Bot.java is part of the TD-Bot
- * Last edit: 2020.5.30
+ * Last edit: 2020.5.31
  */
 
 package de.th3ph4nt0m.tdbot;
@@ -28,7 +28,7 @@ class Bot implements EventListener
 
     private JDA jda;
     private static Bot instance;
-    private List <VoiceChannel> owChannels = new ArrayList <>();
+    private final List<VoiceChannel> owChannels = new ArrayList<>();
     private ChannelCreator channelCreator;
     private MongoHandler mongoHandler;
 
@@ -45,6 +45,7 @@ class Bot implements EventListener
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
             jda.addEventListener(new CommandListener());
+            jda.addEventListener(new ReactionListener());
             jda.awaitReady();
 
             new MessageCenter(true);
