@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * MessageCenter.java is part of the TD-Bot
- * Last edit: 2020.5.30
+ * Last edit: 2020.5.31
  */
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -18,7 +18,7 @@ public class MessageCenter
     public MessageCenter(boolean autoPrint)
     {
         if (autoPrint) {
-//            autoPrint();
+            autoPrint();
         }
     }
 
