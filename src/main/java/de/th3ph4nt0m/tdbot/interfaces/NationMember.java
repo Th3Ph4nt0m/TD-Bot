@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
- * IUser.java is part of the TD-Bot
+ * NationMember.java is part of the TD-Bot
  * Last edit: 2020.5.31
  */
 
@@ -13,17 +13,17 @@ import de.th3ph4nt0m.tdbot.Bot;
 import net.dv8tion.jda.api.entities.Member;
 import org.bson.Document;
 
-@SuppressWarnings ("SpellCheckingInspection") public class IUser
+@SuppressWarnings ("SpellCheckingInspection") public class NationMember
 {
     private Member member;
     private String id;
 
-    public IUser(Member member)
+    public NationMember(Member member)
     {
         this.member = member;
     }
 
-    public IUser(String id)
+    public NationMember(String id)
     {
         this.id = id;
     }
