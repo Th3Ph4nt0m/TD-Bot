@@ -10,6 +10,7 @@ package de.th3ph4nt0m.tdbot.interfaces;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import de.th3ph4nt0m.tdbot.Bot;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.requests.RestAction;
@@ -17,14 +18,20 @@ import org.bson.Document;
 
 @SuppressWarnings ("SpellCheckingInspection") public class IUser
 {
-    private final User user;
+    private User user;
     private String id;
+    private Member member;
 
-    public IUser(String id)
+    public IUser(String name, String discriminator)
     {
-        this.user = Bot.getInstance().getJda().getUserById(id);
+        this.user = Bot.getInstance().getJda().getUserByTag(name, discriminator);
+        assert user != null;
+        this.id = user.getId();
+    }
 
-        this.id = id;
+    public IUser(Member member)
+    {
+        this.member = member;
     }
 
     private MongoCollection<Document> users()
@@ -45,7 +52,7 @@ import org.bson.Document;
 
     public void createInDB()
     {
-        Document append = new Document("_id", id);
+        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
         users().insertOne(append);
     }
 
