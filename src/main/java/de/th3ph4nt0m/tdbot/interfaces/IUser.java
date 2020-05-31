@@ -35,7 +35,7 @@ import org.bson.Document;
 
     public Document getDocument()
     {
-        return users().find(Filters.eq("_id", member.getId())).first();
+        return users().find(Filters.eq("_id", id)).first();
     }
 
 

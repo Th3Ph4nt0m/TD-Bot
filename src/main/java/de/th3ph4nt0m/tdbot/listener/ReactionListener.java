@@ -23,7 +23,9 @@ public class ReactionListener extends ListenerAdapter
         if (!event.getUser().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
             if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("713698879283003462"))) {
                 IUser iUser = new IUser(event.getMember());
-                iUser.createInDB();
+                if (!iUser.existsinDB()) {
+                    iUser.createInDB();
+                }
                 event.getMember().getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(Bot.getInstance().getJda().getRoleById("713424766052335678"))).queue();
             }
         }
@@ -34,7 +36,10 @@ public class ReactionListener extends ListenerAdapter
     {
         if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("713698879283003462"))) {
             IUser iUser = new IUser(event.getUserId());
-            iUser.removeFromDB();
+            if (iUser.existsinDB()) {
+                iUser.removeFromDB();
+            }
+            event.getGuild().removeRoleFromMember(event.getUserId(), Objects.requireNonNull(event.getJDA().getRoleById("713424766052335678"))).queue();
         }
     }
 }
