@@ -10,6 +10,7 @@ package de.th3ph4nt0m.tdbot.listener;
 import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.IUser;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
+import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Objects;
@@ -25,6 +26,15 @@ public class ReactionListener extends ListenerAdapter
                 iUser.createInDB();
                 event.getMember().getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(Bot.getInstance().getJda().getRoleById("713424766052335678"))).queue();
             }
+        }
+    }
+
+    @Override
+    public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event)
+    {
+        if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("713698879283003462"))) {
+            IUser iUser = new IUser(event.getUserId());
+            iUser.removeFromDB();
         }
     }
 }

@@ -11,27 +11,21 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import de.th3ph4nt0m.tdbot.Bot;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.PrivateChannel;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.requests.RestAction;
 import org.bson.Document;
 
 @SuppressWarnings ("SpellCheckingInspection") public class IUser
 {
-    private User user;
-    private String id;
     private Member member;
-
-    public IUser(String name, String discriminator)
-    {
-        this.user = Bot.getInstance().getJda().getUserByTag(name, discriminator);
-        assert user != null;
-        this.id = user.getId();
-    }
+    private String id;
 
     public IUser(Member member)
     {
         this.member = member;
+    }
+
+    public IUser(String id)
+    {
+        this.id = id;
     }
 
     private MongoCollection<Document> users()
@@ -41,7 +35,7 @@ import org.bson.Document;
 
     public Document getDocument()
     {
-        return users().find(Filters.eq("_id", user.getId())).first();
+        return users().find(Filters.eq("_id", member.getId())).first();
     }
 
 
@@ -56,28 +50,18 @@ import org.bson.Document;
         users().insertOne(append);
     }
 
+    public void removeFromDB()
+    {
+        users().deleteOne(Filters.eq("_id", id));
+    }
+
     public String getNickname()
     {
-        return user.getName();
+        return member.getEffectiveName();
     }
 
     public String asTag()
     {
-        return user.getAsTag();
-    }
-
-    public boolean isBot()
-    {
-        return user.isBot();
-    }
-
-    public RestAction<PrivateChannel> openPrivateChannel()
-    {
-        return user.openPrivateChannel();
-    }
-
-    public User asUser()
-    {
-        return user;
+        return member.getAsMention();
     }
 }
