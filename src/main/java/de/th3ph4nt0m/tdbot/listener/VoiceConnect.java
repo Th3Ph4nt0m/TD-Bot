@@ -22,8 +22,7 @@ class VoiceConnect extends ListenerAdapter
         NationMember nMemberByID = new NationMember(event.getMember().getId());
         if (event.getChannelJoined().getId().equals("713791200490160209")) {
             if (nMemberByID.existsinDB()) {
-                Bot.getInstance().getVoiceSystem().createVoiceChannel(nMember.getGame(), event.getGuild(), event.getMember());
-
+                Bot.getInstance().getVoiceSystem().createVoiceChannel(nMember.getGame(), event.getGuild(), event.getMember(), event.getChannelJoined());
             } else {
                 event.getMember().getGuild().kickVoiceMember(event.getMember()).queue();
                 MessageCenter.getInstance().sendPrivacyNotAccepted(event.getMember().getUser().openPrivateChannel());
