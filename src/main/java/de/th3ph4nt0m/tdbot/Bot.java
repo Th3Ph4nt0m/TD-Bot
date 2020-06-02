@@ -15,15 +15,12 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
-import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.EventListener;
-import java.util.List;
 
 public
 class Bot implements EventListener
@@ -31,7 +28,6 @@ class Bot implements EventListener
 
     private JDA jda;
     private static Bot instance;
-    private final List<VoiceChannel> owChannels = new ArrayList<>();
     private MongoHandler mongoHandler;
     private VoiceSystem voiceSystem;
 
@@ -79,9 +75,5 @@ class Bot implements EventListener
         return voiceSystem;
     }
 
-    public List<VoiceChannel> getOwChannels()
-    {
-        return owChannels;
-    }
 
 }
