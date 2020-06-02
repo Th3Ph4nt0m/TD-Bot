@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * NationMember.java is part of the TD-Bot
- * Last edit: 2020.5.31
+ * Last edit: 2020.6.2
  */
 
 package de.th3ph4nt0m.tdbot.interfaces;
@@ -13,7 +13,7 @@ import de.th3ph4nt0m.tdbot.Bot;
 import net.dv8tion.jda.api.entities.Member;
 import org.bson.Document;
 
-@SuppressWarnings ("SpellCheckingInspection") public class NationMember
+@SuppressWarnings ({"SpellCheckingInspection", "ConstantConditions"}) public class NationMember
 {
     private Member member;
     private String id;
@@ -48,6 +48,11 @@ import org.bson.Document;
     {
         Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
         users().insertOne(append);
+    }
+
+    public String getGame()
+    {
+        return member.getActivities().get(0).getName();
     }
 
     public void removeFromDB()
