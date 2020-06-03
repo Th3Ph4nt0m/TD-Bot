@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * NationMember.java is part of the TD-Bot
- * Last edit: 2020.6.2
+ * Last edit: 2020.6.3
  */
 
 package de.th3ph4nt0m.tdbot.interfaces;
@@ -52,7 +52,11 @@ import org.bson.Document;
 
     public String getGame()
     {
-        return member.getActivities().get(0).getName();
+        if (member.getActivities().size() >= 1) {
+            return member.getActivities().get(0).getName();
+        } else {
+            return null;
+        }
     }
 
     public void removeFromDB()

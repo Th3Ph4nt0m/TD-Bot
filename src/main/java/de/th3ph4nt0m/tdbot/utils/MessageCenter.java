@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * MessageCenter.java is part of the TD-Bot
- * Last edit: 2020.6.2
+ * Last edit: 2020.6.3
  */
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -60,6 +60,16 @@ public class MessageCenter
         builder.setTitle("Authentication Error!")
                 .setColor(Color.RED)
                 .setDescription("you need to accept our Privacy Policy to use this service\n")
+                .setFooter("TD-Bot ©Th3Ph4nt0m");
+        channel.complete().sendMessage(builder.build()).queue();
+    }
+
+    public void sendNoGame(RestAction<PrivateChannel> channel)
+    {
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.ORANGE)
+                .setTitle("No game detected")
+                .setDescription("I could not detect a game in your rich presence\n\nFor creating a ``»Talk``, please join the ``Voice × Creator``\nFor creating a ``competitive channel``, please enable rich presence in ``User settings --> Game Activity --> Display currently running game as a status message.`` and join ''Comp × Creator`` again.")
                 .setFooter("TD-Bot ©Th3Ph4nt0m");
         channel.complete().sendMessage(builder.build()).queue();
     }
