@@ -41,10 +41,10 @@ public class MessageCenter
         builder.setTitle(":scroll: Rules - :lock: privacy");
         builder.setDescription("To use the services of the TD-Nation Discord server, you need to accept the rules and agree with our privacy policy.\n" +
                 "\n" +
-                "**Rules**\n[link following]\n" +
+                "**Rules**\n https://lostname.eu/partner/td-nation/rules.html\n" +
                 "\n" +
-                "**Privacy Policy**\n [link following]\n ")
-                .setFooter("TD-Bot ©Th3Ph4nt0m");
+                "**Privacy Policy**\n https://lostname.eu/partner/td-nation/privacy.html\n ")
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         assert channel != null;
         channel.sendMessage(builder.build()).queue(message -> message.addReaction("✅").queue());
     }
@@ -60,7 +60,7 @@ public class MessageCenter
         builder.setTitle("Authentication Error!")
                 .setColor(Color.RED)
                 .setDescription("you need to accept our Privacy Policy to use this service\n")
-                .setFooter("TD-Bot ©Th3Ph4nt0m");
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         channel.complete().sendMessage(builder.build()).queue();
     }
 
@@ -70,7 +70,7 @@ public class MessageCenter
         builder.setColor(Color.ORANGE)
                 .setTitle("No game detected")
                 .setDescription("I could not detect a game in your rich presence\n\nFor creating a ``»Talk``, please join the ``Voice × Creator``\nFor creating a ``competitive channel``, please enable rich presence in ``User settings --> Game Activity --> Display currently running game as a status message.`` and join ''Comp × Creator`` again.")
-                .setFooter("TD-Bot ©Th3Ph4nt0m");
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         channel.complete().sendMessage(builder.build()).queue();
     }
 }
