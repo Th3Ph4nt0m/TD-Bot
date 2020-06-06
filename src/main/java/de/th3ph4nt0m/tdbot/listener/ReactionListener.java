@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * ReactionListener.java is part of the TD-Bot
- * Last edit: 2020.5.31
+ * Last edit: 2020.6.6
  */
 
 package de.th3ph4nt0m.tdbot.listener;
@@ -22,7 +22,7 @@ public class ReactionListener extends ListenerAdapter
     {
         if (!event.getUser().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
             if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("713698879283003462"))) {
-                NationMember nationMember = new NationMember(event.getMember());
+                NationMember nationMember = new NationMember(event.getMember(), event.getMember().getId());
                 if (!nationMember.existsinDB()) {
                     nationMember.createInDB();
                 }
@@ -35,7 +35,7 @@ public class ReactionListener extends ListenerAdapter
     public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event)
     {
         if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("713698879283003462"))) {
-            NationMember nationMember = new NationMember(event.getUserId());
+            NationMember nationMember = new NationMember(event.getMember(), event.getUserId());
             if (nationMember.existsinDB()) {
                 nationMember.removeFromDB();
             }

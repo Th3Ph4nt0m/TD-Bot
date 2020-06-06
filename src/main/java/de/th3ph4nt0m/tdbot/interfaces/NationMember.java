@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * NationMember.java is part of the TD-Bot
- * Last edit: 2020.6.3
+ * Last edit: 2020.6.6
  */
 
 package de.th3ph4nt0m.tdbot.interfaces;
@@ -15,16 +15,13 @@ import org.bson.Document;
 
 @SuppressWarnings ({"SpellCheckingInspection", "ConstantConditions"}) public class NationMember
 {
-    private Member member;
-    private String id;
+    private final Member member;
+    private final String id;
 
-    public NationMember(Member member)
+
+    public NationMember(Member member, String id)
     {
         this.member = member;
-    }
-
-    public NationMember(String id)
-    {
         this.id = id;
     }
 
