@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * VoiceSystem.java is part of the TD-Bot
- * Last edit: 2020.6.3
+ * Last edit: 2020.6.7
  */
 
 package de.th3ph4nt0m.tdbot.core;
@@ -35,6 +35,12 @@ import java.util.List;
     public void createCompChannel(String game, Guild guild, Member member, VoiceChannel joined)
     {
         ChannelAction<VoiceChannel> temp = guild.createVoiceChannel("» Comp × " + game).setParent(joined.getParent()).setPosition(voiceChannels.size() + 1);
+        //set user limit for specific games
+        if (game.equalsIgnoreCase("Overwatch")) {
+            temp.setUserlimit(6).queue();
+        } else if (game.equalsIgnoreCase("Valorant") || game.equalsIgnoreCase("Rainbow Six Siege")) {
+            temp.setUserlimit(5).queue();
+        }
         VoiceChannel channel = temp.complete();
         voiceChannels.add(channel);
         member.getGuild().moveVoiceMember(member, channel).queue();
