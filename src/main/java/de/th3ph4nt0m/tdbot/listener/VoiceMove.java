@@ -2,7 +2,7 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * VoiceMove.java is part of the TD-Bot
- * Last edit: 2020.6.6
+ * Last edit: 2020.6.11
  */
 
 package de.th3ph4nt0m.tdbot.listener;
@@ -37,6 +37,10 @@ class VoiceMove extends ListenerAdapter
             } else {
                 event.getMember().getGuild().kickVoiceMember(event.getMember()).queue();
                 MessageCenter.getInstance().sendNoGame(event.getMember().getUser().openPrivateChannel());
+            }
+        } else if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
+            if (event.getChannelLeft().getMembers().size() <= 0) {
+                event.getChannelLeft().delete().queue();
             }
         }
     }
