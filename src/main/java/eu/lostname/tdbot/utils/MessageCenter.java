@@ -2,12 +2,12 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * MessageCenter.java is part of the TD-Bot
- * Last edit: 2020.6.3
+ * Last edit: 2020.6.13
  */
 
-package de.th3ph4nt0m.tdbot.utils;
+package eu.lostname.tdbot.utils;
 
-import de.th3ph4nt0m.tdbot.Bot;
+import eu.lostname.tdbot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
@@ -41,9 +41,9 @@ public class MessageCenter
         builder.setTitle(":scroll: Rules - :lock: privacy");
         builder.setDescription("To use the services of the TD-Nation Discord server, you need to accept the rules and agree with our privacy policy.\n" +
                 "\n" +
-                "**Rules**\n https://lostname.eu/partner/td-nation/rules.html\n" +
+                "**Rules**\n https://lostname.eu/p/td/rules\n" +
                 "\n" +
-                "**Privacy Policy**\n https://lostname.eu/partner/td-nation/privacy.html\n ")
+                "**Privacy Policy**\n https://lostname.eu/p/td/privacy\n ")
                 .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         assert channel != null;
         channel.sendMessage(builder.build()).queue(message -> message.addReaction("✅").queue());
@@ -51,7 +51,7 @@ public class MessageCenter
 
     private void autoPrint()
     {
-        printRulesAndPrivacy("713698879283003462");
+        printRulesAndPrivacy("721076836511121549");
     }
 
     public void sendPrivacyNotAccepted(RestAction<PrivateChannel> channel)

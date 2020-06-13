@@ -2,10 +2,10 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * CommandParser.java is part of the TD-Bot
- * Last edit: 2020.4.22
+ * Last edit: 2020.6.13
  */
 
-package de.th3ph4nt0m.tdbot.core;
+package eu.lostname.tdbot.core;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 

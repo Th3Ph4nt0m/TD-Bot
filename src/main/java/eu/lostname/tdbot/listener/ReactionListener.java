@@ -2,13 +2,13 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * ReactionListener.java is part of the TD-Bot
- * Last edit: 2020.6.6
+ * Last edit: 2020.6.13
  */
 
-package de.th3ph4nt0m.tdbot.listener;
+package eu.lostname.tdbot.listener;
 
-import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import eu.lostname.tdbot.Bot;
+import eu.lostname.tdbot.interfaces.NationMember;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -21,12 +21,12 @@ public class ReactionListener extends ListenerAdapter
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event)
     {
         if (!event.getUser().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("713698879283003462"))) {
+            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("721076836511121549"))) {
                 NationMember nationMember = new NationMember(event.getMember(), event.getMember().getId());
                 if (!nationMember.existsinDB()) {
                     nationMember.createInDB();
                 }
-                event.getMember().getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(Bot.getInstance().getJda().getRoleById("713424766052335678"))).queue();
+                event.getMember().getGuild().addRoleToMember(event.getMember(), Objects.requireNonNull(Bot.getInstance().getJda().getRoleById("721076810120429610"))).queue();
             }
         }
     }
@@ -39,7 +39,7 @@ public class ReactionListener extends ListenerAdapter
             if (nationMember.existsinDB()) {
                 nationMember.removeFromDB();
             }
-            event.getGuild().removeRoleFromMember(event.getUserId(), Objects.requireNonNull(event.getJDA().getRoleById("713424766052335678"))).queue();
+            event.getGuild().removeRoleFromMember(event.getUserId(), Objects.requireNonNull(event.getJDA().getRoleById("721076810120429610"))).queue();
         }
     }
 }

@@ -2,13 +2,13 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * Dominik_HGW.java is part of the TD-Bot
- * Last edit: 2020.5.29
+ * Last edit: 2020.6.13
  */
 
-package de.th3ph4nt0m.tdbot.commands;
+package eu.lostname.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import eu.lostname.tdbot.Bot;
+import eu.lostname.tdbot.interfaces.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

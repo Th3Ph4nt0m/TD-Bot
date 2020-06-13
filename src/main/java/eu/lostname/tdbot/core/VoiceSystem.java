@@ -2,10 +2,10 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * VoiceSystem.java is part of the TD-Bot
- * Last edit: 2020.6.7
+ * Last edit: 2020.6.13
  */
 
-package de.th3ph4nt0m.tdbot.core;
+package eu.lostname.tdbot.core;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -13,15 +13,19 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.requests.restaction.ChannelAction;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-@SuppressWarnings ("DuplicatedCode") public class VoiceSystem
+@SuppressWarnings ("DuplicatedCode")
+public class VoiceSystem
 {
     public final List<VoiceChannel> voiceChannels;
+    public HashMap joinTime;
 
     public VoiceSystem()
     {
         this.voiceChannels = new ArrayList<>();
+        joinTime = new HashMap<String, Long>();
     }
 
     public void createVoiceChannel(String game, Guild guild, Member member, VoiceChannel joined)
@@ -38,11 +42,13 @@ import java.util.List;
         //set user limit for specific games
         if (game.equalsIgnoreCase("Overwatch")) {
             temp.setUserlimit(6).queue();
-        } else if (game.equalsIgnoreCase("Valorant") || game.equalsIgnoreCase("Rainbow Six Siege")) {
+        } else if (game.equalsIgnoreCase("Valorant") || game.equalsIgnoreCase("Rainbow Six Siege") || game.equalsIgnoreCase("Counter-Strike: Global Offensive")) {
             temp.setUserlimit(5).queue();
         }
+        //create channel and register to the VoiceSystem
         VoiceChannel channel = temp.complete();
         voiceChannels.add(channel);
         member.getGuild().moveVoiceMember(member, channel).queue();
+
     }
 }

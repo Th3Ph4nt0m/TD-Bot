@@ -2,14 +2,14 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * NationMember.java is part of the TD-Bot
- * Last edit: 2020.6.6
+ * Last edit: 2020.6.13
  */
 
-package de.th3ph4nt0m.tdbot.interfaces;
+package eu.lostname.tdbot.interfaces;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import de.th3ph4nt0m.tdbot.Bot;
+import eu.lostname.tdbot.Bot;
 import net.dv8tion.jda.api.entities.Member;
 import org.bson.Document;
 
@@ -43,8 +43,16 @@ import org.bson.Document;
 
     public void createInDB()
     {
-        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
+        long l = 0;
+        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName()).append("timeConnected", l);
         users().insertOne(append);
+    }
+
+    public void updateOnlineTime(long toAdd)
+    {
+        Document doc = new Document();
+        long saved = getDocument().getLong("timeConnected");
+        doc.append("timeConnected", saved + toAdd);
     }
 
     public String getGame()

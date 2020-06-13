@@ -2,15 +2,15 @@
  * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
  *
  * Bot.java is part of the TD-Bot
- * Last edit: 2020.6.2
+ * Last edit: 2020.6.13
  */
 
-package de.th3ph4nt0m.tdbot;
+package eu.lostname.tdbot;
 
-import de.th3ph4nt0m.tdbot.core.VoiceSystem;
-import de.th3ph4nt0m.tdbot.listener.*;
-import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import de.th3ph4nt0m.tdbot.utils.MongoHandler;
+import eu.lostname.tdbot.core.VoiceSystem;
+import eu.lostname.tdbot.listener.*;
+import eu.lostname.tdbot.utils.MessageCenter;
+import eu.lostname.tdbot.utils.MongoHandler;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -19,8 +19,10 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 import javax.security.auth.login.LoginException;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.EventListener;
+import java.util.stream.Collectors;
 
 public
 class Bot implements EventListener
@@ -31,12 +33,17 @@ class Bot implements EventListener
     private MongoHandler mongoHandler;
     private VoiceSystem voiceSystem;
 
-    public
-    Bot()
+    public Bot()
     {
         instance = this;
         try {
-            this.jda = JDABuilder.createDefault("NzE2MDcwMjg3NzI4MzEyMzcy.XtGajA.wum_0T-ymhloL_31JzM7WdYfJXI").setAutoReconnect(true).setStatus(OnlineStatus.ONLINE).setActivity(Activity.watching("over TD-Nation")).enableIntents(GatewayIntent.GUILD_PRESENCES).enableCache(EnumSet.of(CacheFlag.ACTIVITY)).build();
+            this.jda = JDABuilder.createDefault("Njk5Mzc4NDM2OTA4Nzc3NTAz.XuPPCg.fEOSdu3woPva4ICKdd4GW-yAsIY")
+                    .setAutoReconnect(true)
+                    .setStatus(OnlineStatus.ONLINE)
+                    .setActivity(Activity.watching("over TD-Nation"))
+                    .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
+                    .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
+                    .build();
             this.mongoHandler = new MongoHandler();
             jda.addEventListener(new MessageReceive());
             jda.addEventListener(new VoiceConnect());
