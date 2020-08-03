@@ -5,7 +5,7 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.interfaces;
+package de.th3ph4nt0m.tdbot.interfaces;
 
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 

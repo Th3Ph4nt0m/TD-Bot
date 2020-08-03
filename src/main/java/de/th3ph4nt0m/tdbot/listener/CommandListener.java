@@ -5,10 +5,10 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.listener;
+package de.th3ph4nt0m.tdbot.listener;
 
-import eu.lostname.tdbot.core.CommandHandler;
-import eu.lostname.tdbot.core.CommandParser;
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.core.CommandParser;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

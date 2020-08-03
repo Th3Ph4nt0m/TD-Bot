@@ -5,7 +5,7 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.listener;
+package de.th3ph4nt0m.tdbot.listener;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;

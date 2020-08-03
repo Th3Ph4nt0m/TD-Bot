@@ -5,10 +5,10 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.listener;
+package de.th3ph4nt0m.tdbot.listener;
 
-import eu.lostname.tdbot.Bot;
-import eu.lostname.tdbot.interfaces.NationMember;
+import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

@@ -5,10 +5,10 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.commands;
+package de.th3ph4nt0m.tdbot.commands;
 
-import eu.lostname.tdbot.Bot;
-import eu.lostname.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

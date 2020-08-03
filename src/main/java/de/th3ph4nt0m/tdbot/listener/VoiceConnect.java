@@ -5,11 +5,11 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.listener;
+package de.th3ph4nt0m.tdbot.listener;
 
-import eu.lostname.tdbot.Bot;
-import eu.lostname.tdbot.interfaces.NationMember;
-import eu.lostname.tdbot.utils.MessageCenter;
+import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

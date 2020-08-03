@@ -5,12 +5,12 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot;
+package de.th3ph4nt0m.tdbot;
 
-import eu.lostname.tdbot.core.VoiceSystem;
-import eu.lostname.tdbot.listener.*;
-import eu.lostname.tdbot.utils.MessageCenter;
-import eu.lostname.tdbot.utils.MongoHandler;
+import de.th3ph4nt0m.tdbot.core.VoiceSystem;
+import de.th3ph4nt0m.tdbot.listener.*;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import de.th3ph4nt0m.tdbot.utils.MongoHandler;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;

@@ -5,9 +5,9 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.core;
+package de.th3ph4nt0m.tdbot.core;
 
-import eu.lostname.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
 import java.util.HashMap;
 

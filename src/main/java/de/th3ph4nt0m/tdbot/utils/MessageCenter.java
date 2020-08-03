@@ -5,9 +5,9 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.utils;
+package de.th3ph4nt0m.tdbot.utils;
 
-import eu.lostname.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;

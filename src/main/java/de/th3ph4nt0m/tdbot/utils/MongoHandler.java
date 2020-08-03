@@ -5,7 +5,7 @@
  * Last edit: 2020.6.13
  */
 
-package eu.lostname.tdbot.utils;
+package de.th3ph4nt0m.tdbot.utils;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
