@@ -13,6 +13,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import de.th3ph4nt0m.tdbot.Bot;
 import org.bson.Document;
 
 public
@@ -22,10 +23,9 @@ class MongoHandler
     private final MongoClient mongoClient;
     private final MongoDatabase mongoDatabase;
 
-    public MongoHandler()
-    {
-        this.mongoClient = new MongoClient(new ServerAddress("lostname.eu", 27017), MongoCredential.createCredential("henrik", "admin", "3Q062&vIXAoX5ljm7DGE99dz^1jraaW0$e0nk#1RhI7qLy0ctG4NM#pf7rjpShLp".toCharArray()), MongoClientOptions.builder().build());
-        this.mongoDatabase = mongoClient.getDatabase("Th3Ph4nt0m");
+    public MongoHandler() {
+        this.mongoClient = new MongoClient(new ServerAddress(Bot.getInstance().getProperty().get("db.host"), Integer.parseInt(Bot.getInstance().getProperty().get("db.port"))), MongoCredential.createCredential(Bot.getInstance().getProperty().get("db.username"), Bot.getInstance().getProperty().get("db.authDB"), Bot.getInstance().getProperty().get("db.password").toCharArray()), MongoClientOptions.builder().build());
+        this.mongoDatabase = mongoClient.getDatabase(Bot.getInstance().getProperty().get("db.useDB"));
     }
 
     public MongoCollection<Document> users()
