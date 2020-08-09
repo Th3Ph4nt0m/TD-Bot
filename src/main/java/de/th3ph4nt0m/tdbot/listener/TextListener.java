@@ -31,11 +31,12 @@ class TextListener extends ListenerAdapter
         }
         String[] args = new String[split.size() - 1];
         split.subList(1, split.size()).toArray(args);
-        // usable: raw, beheaded, splitBeheaded, invoke, args
+        // usable: event, raw, beheaded, splitBeheaded, invoke, args
 
         if (event.getMessage().getContentRaw().startsWith("!") /*&& invoke.equals("play")*/ && !event.getChannel().getId().equals("721076843771330662")) {
             MessageCenter.getInstance().sendWrongGroovyChannel(event.getMember().getUser().openPrivateChannel());
-            event.getMessage().delete();
+            event.getMessage().delete().queue();
+            event.getChannel().sendMessage("!leave").queue();
         }
     }
 }
