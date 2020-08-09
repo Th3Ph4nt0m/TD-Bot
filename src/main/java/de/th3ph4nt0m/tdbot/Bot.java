@@ -56,7 +56,7 @@ class Bot implements EventListener {
             this.voiceSystem = new VoiceSystem();
             jda.awaitReady();
             property.setDefaultProps();
-            new MessageCenter(true);
+            new MessageCenter(false);
 //            CommandHandler.commands.put("hgw", new Dominik_HGW());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
