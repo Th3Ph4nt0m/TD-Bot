@@ -44,7 +44,7 @@ public class MessageCenter
                 "**Rules**\n https://lostname.eu/p/td/rules\n" +
                 "\n" +
                 "**Privacy Policy**\n https://lostname.eu/p/td/privacy\n ")
-                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+                .setFooter("TD-Bot ©2020 TD-Devs");
         assert channel != null;
         channel.sendMessage(builder.build()).queue(message -> message.addReaction("✅").queue());
     }
@@ -70,7 +70,7 @@ public class MessageCenter
         builder.setColor(Color.ORANGE)
                 .setTitle("No game detected")
                 .setDescription("I could not detect a game in your rich presence\n\nFor creating a ``»Talk``, please join the ``Voice × Creator``\nFor creating a ``competitive channel``, please enable rich presence in ``User settings --> Game Activity --> Display currently running game as a status message.`` and join ''Comp × Creator`` again.")
-                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+                .setFooter("TD-Bot ©2020 TD-Devs");
         channel.complete().sendMessage(builder.build()).queue();
     }
 
@@ -80,7 +80,7 @@ public class MessageCenter
         builder.setColor(Color.ORANGE)
                 .setTitle("Wrong Groovy Channel")
                 .setDescription("Please use the appropriate channel for Groovy commands \n\nTo keep our text channels clean we´d like you to use the ``\uD83C\uDFB5-groovy``Channel.\nAlso note that wer´e currently only able to provide one music bot, so if its in use it cannot be moved in your Channel.")
-                .setFooter("TD-Bot ©2020 TDDominik");
+                .setFooter("TD-Bot ©2020 TD-Devs");
         channel.complete().sendMessage(builder.build()).queue();
     }
 }
