@@ -41,3 +41,4 @@ src/test
 .idea
 target
 TD-Bot.iml
+src/main/java/de/th3ph4nt0m/tdbot/interfaces/Credentials.java
