@@ -5,8 +5,8 @@ import java.util.Properties;
 
 public class Property {
 
-    public String get(String key) {
-        try (InputStream input = new FileInputStream("database.properties")) {
+    public String get(String file, String key) {
+        try (InputStream input = new FileInputStream(file + ".properties")) {
 
             Properties prop = new Properties();
 
@@ -35,6 +35,22 @@ public class Property {
             prop.setProperty("db.password", "root");
             prop.setProperty("db.authDB", "admin");
             prop.setProperty("db.useDB", "root");
+
+            // save properties to project root folder
+            prop.store(output, null);
+
+            // Java 8 , print key and values
+//            prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (OutputStream output = new FileOutputStream("bot.properties")) {
+
+            Properties prop = new Properties();
+
+            // set the properties value
+            prop.setProperty("bot.token", "token");
+            prop.setProperty("bot.autoprint", "1");
 
             // save properties to project root folder
             prop.store(output, null);

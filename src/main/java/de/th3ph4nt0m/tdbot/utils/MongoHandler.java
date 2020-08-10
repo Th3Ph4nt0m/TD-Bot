@@ -17,29 +17,25 @@ import de.th3ph4nt0m.tdbot.Bot;
 import org.bson.Document;
 
 public
-class MongoHandler
-{
+class MongoHandler {
 
     private final MongoClient mongoClient;
     private final MongoDatabase mongoDatabase;
 
     public MongoHandler() {
-        this.mongoClient = new MongoClient(new ServerAddress(Bot.getInstance().getProperty().get("db.host"), Integer.parseInt(Bot.getInstance().getProperty().get("db.port"))), MongoCredential.createCredential(Bot.getInstance().getProperty().get("db.username"), Bot.getInstance().getProperty().get("db.authDB"), Bot.getInstance().getProperty().get("db.password").toCharArray()), MongoClientOptions.builder().build());
-        this.mongoDatabase = mongoClient.getDatabase(Bot.getInstance().getProperty().get("db.useDB"));
+        this.mongoClient = new MongoClient(new ServerAddress(Bot.getInstance().getProperty().get("database", "db.host"), Integer.parseInt(Bot.getInstance().getProperty().get("database", "db.port"))), MongoCredential.createCredential(Bot.getInstance().getProperty().get("database", "db.username"), Bot.getInstance().getProperty().get("database", "db.authDB"), Bot.getInstance().getProperty().get("database", "db.password").toCharArray()), MongoClientOptions.builder().build());
+        this.mongoDatabase = mongoClient.getDatabase(Bot.getInstance().getProperty().get("database", "db.useDB"));
     }
 
-    public MongoCollection<Document> users()
-    {
+    public MongoCollection<Document> users() {
         return mongoDatabase.getCollection("users");
     }
 
-    public MongoClient getMongoClient()
-    {
+    public MongoClient getMongoClient() {
         return mongoClient;
     }
 
-    public MongoDatabase getMongoDatabase()
-    {
+    public MongoDatabase getMongoDatabase() {
         return mongoDatabase;
     }
 }

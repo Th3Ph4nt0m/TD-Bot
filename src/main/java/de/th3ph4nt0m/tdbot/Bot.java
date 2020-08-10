@@ -37,8 +37,8 @@ class Bot implements EventListener {
     public Bot() {
         instance = this;
         try {
-            this.jda = JDABuilder.createDefault("NzM5NTQ4MTc4MTY0MDg4ODgz.XycD6Q.-F3V9SSornVzfTDm_aOx_UL_UOo")
-                    .setAutoReconnect(true)
+            this.jda = JDABuilder.createDefault(property.get("bot", "bot.token"))
+                    .setAutoReconnect(Boolean.parseBoolean(property.get("bot", "bot.autoprint")))
                     .setStatus(OnlineStatus.ONLINE)
                     .setActivity(Activity.watching("over TD-Nation"))
                     .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
