@@ -7,6 +7,8 @@
 
 package de.th3ph4nt0m.tdbot.listener;
 
+import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -18,10 +20,9 @@ import java.util.TimerTask;
 
 
 public
-class MessageReceive extends ListenerAdapter
-{
-    @Override public void onMessageReceived(MessageReceivedEvent event)
-    {
+class MessageReceive extends ListenerAdapter {
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
         Message msg = event.getMessage();
         if (!msg.getAuthor().isBot()) {
             if (event.getChannel().getId().equals("721076834099265568")) {
@@ -33,10 +34,9 @@ class MessageReceive extends ListenerAdapter
                     event.getChannel().sendMessage(builder.build()).queue();
                 } else {
                     Timer timer = new Timer();
-                    timer.schedule(new TimerTask()
-                    {
-                        @Override public void run()
-                        {
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
                             msg.delete().queue();
                         }
                     }, 5000);
@@ -44,7 +44,21 @@ class MessageReceive extends ListenerAdapter
             }
         }
 
-/*        if (msg.getContentRaw().startsWith("-") || msg.getAuthor().getId().equals("234395307759108106")) {
+        if (!event.getMessage().getContentRaw().startsWith("+") || !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
+            if (event.getMessage().getContentRaw().startsWith("-")) {
+                if (!event.getChannel().getId().equals("656220001123958802")) {
+                    if (event.getMember().getVoiceState() != null) {
+                        MessageCenter.getInstance().sendWrongGroovyChannel(event.getChannel().getId());
+                        event.getMessage().delete().queue();
+                        if (event.getMessage().getContentRaw().contains("play") || event.getMessage().getContentRaw().contains("join")) {
+                            event.getChannel().sendMessage("!leave").queue();
+                        }
+                    }
+                }
+            }
+        }
+
+ /*       if (msg.getContentRaw().startsWith("-") || msg.getAuthor().getId().equals("234395307759108106")) {
             Message message = event.getMessage();
             MessageChannel channel = event.getChannel();
             if (!channel.getId().equals("656220001123958802")) {
