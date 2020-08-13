@@ -21,7 +21,7 @@ public class ReactionListener extends ListenerAdapter
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event)
     {
         if (!event.getUser().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("721076836511121549"))) {
+            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))) {
                 NationMember nationMember = new NationMember(event.getMember(), event.getMember().getId());
                 if (!nationMember.existsinDB()) {
                     nationMember.createInDB();
@@ -34,7 +34,7 @@ public class ReactionListener extends ListenerAdapter
     @Override
     public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event)
     {
-        if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById("713698879283003462"))) {
+        if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))) {
             NationMember nationMember = new NationMember(event.getMember(), event.getUserId());
             if (nationMember.existsinDB()) {
                 nationMember.removeFromDB();

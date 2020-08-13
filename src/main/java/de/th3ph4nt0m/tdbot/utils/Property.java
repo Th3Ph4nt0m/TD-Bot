@@ -1,5 +1,7 @@
 package de.th3ph4nt0m.tdbot.utils;
 
+import de.th3ph4nt0m.tdbot.Bot;
+
 import java.io.*;
 import java.util.Properties;
 

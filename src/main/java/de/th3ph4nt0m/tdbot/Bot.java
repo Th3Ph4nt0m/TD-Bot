@@ -51,7 +51,6 @@ class Bot implements EventListener {
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
             jda.addEventListener(new CommandListener());
-            jda.addEventListener(new TextListener());
             jda.addEventListener(new ReactionListener());
             this.voiceSystem = new VoiceSystem();
             jda.awaitReady();
