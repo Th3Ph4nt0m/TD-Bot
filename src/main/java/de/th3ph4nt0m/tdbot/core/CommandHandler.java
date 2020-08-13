@@ -15,7 +15,7 @@ public
 class CommandHandler
 {
 
-    public static final CommandParser parse = new CommandParser();
+   // public static final CommandParser parse = new CommandParser();
     public static HashMap <String, ICommand> commands = new HashMap <>();
 
     public static
