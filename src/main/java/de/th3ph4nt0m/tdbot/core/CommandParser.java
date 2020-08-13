@@ -10,7 +10,6 @@ package de.th3ph4nt0m.tdbot.core;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public
 class CommandParser
@@ -23,7 +22,9 @@ class CommandParser
         String[] splitBeheaded = beheaded.split(" ");
         String invoke = splitBeheaded[0];
         ArrayList <String> split = new ArrayList <>();
-        Collections.addAll(split, splitBeheaded);
+        for (String s : splitBeheaded) {
+            split.add(s);
+        }
         String[] args = new String[split.size() - 1];
         split.subList(1, split.size()).toArray(args);
         return new CommandContainer(raw, beheaded, splitBeheaded, invoke, args, event);
