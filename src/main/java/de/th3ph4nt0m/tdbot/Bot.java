@@ -37,6 +37,7 @@ class Bot implements EventListener {
     public Bot() {
         instance = this;
         try {
+            //JDA configuration
             this.jda = JDABuilder.createDefault(property.get("bot", "bot.token"))
                     .setAutoReconnect(Boolean.parseBoolean(property.get("bot", "bot.autoprint")))
                     .setStatus(OnlineStatus.ONLINE)
