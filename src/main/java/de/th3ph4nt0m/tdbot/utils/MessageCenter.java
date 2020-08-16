@@ -51,7 +51,7 @@ public class MessageCenter
 
     private void autoPrint()
     {
-        printRulesAndPrivacy("721076836511121549");
+        printRulesAndPrivacy(Bot.getInstance().getProperty().get("bot", "bot.rulesID"));
     }
 
     public void sendPrivacyNotAccepted(RestAction<PrivateChannel> channel)

@@ -24,7 +24,8 @@ class MessageReceive extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         Message msg = event.getMessage();
-        if (!msg.getAuthor().isBot()) {
+       /*
+       if (!msg.getAuthor().isBot()) {
             if (event.getChannel().getId().equals("721076834099265568")) {
                 if (!event.getAuthor().getId().equals("699378436908777503")) {
                     msg.delete().queue();
@@ -43,10 +44,11 @@ class MessageReceive extends ListenerAdapter {
                 }
             }
         }
+        */
 
         if (!event.getMessage().getContentRaw().startsWith("+") || !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
             if (event.getMessage().getContentRaw().startsWith("-")) {
-                if (!event.getChannel().getId().equals("656220001123958802")) {
+                if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyID"))) {
                     if (event.getMember().getVoiceState() != null) {
                         MessageCenter.getInstance().sendWrongGroovyChannel(event.getChannel().getId());
                         event.getMessage().delete().queue();
