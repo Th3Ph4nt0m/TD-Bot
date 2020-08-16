@@ -38,6 +38,8 @@ class Bot implements EventListener {
         instance = this;
         try {
             //JDA configuration
+            this.property = new Property();
+            property.setDefaultProps();
             this.jda = JDABuilder.createDefault(property.get("bot", "bot.token"))
                     .setAutoReconnect(Boolean.parseBoolean(property.get("bot", "bot.autoprint")))
                     .setStatus(OnlineStatus.ONLINE)
@@ -45,7 +47,6 @@ class Bot implements EventListener {
                     .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
                     .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
                     .build();
-            this.property = new Property();
             this.mongoHandler = new MongoHandler();
             jda.addEventListener(new MessageReceive());
             jda.addEventListener(new VoiceConnect());
@@ -55,7 +56,6 @@ class Bot implements EventListener {
             jda.addEventListener(new ReactionListener());
             this.voiceSystem = new VoiceSystem();
             jda.awaitReady();
-            property.setDefaultProps();
             new MessageCenter(false);
 //            CommandHandler.commands.put("hgw", new Dominik_HGW());
         } catch (LoginException | InterruptedException e) {
