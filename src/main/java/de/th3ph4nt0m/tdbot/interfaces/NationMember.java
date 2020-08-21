@@ -10,6 +10,7 @@ package de.th3ph4nt0m.tdbot.interfaces;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import de.th3ph4nt0m.tdbot.Bot;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
 import org.bson.Document;
 
@@ -53,21 +54,32 @@ import org.bson.Document;
         return name + ", " + id;
     }
 
-    public String getGame() {
+/*    public String getGame() {
         if (member.getActivities().size() >= 1) {
             return member.getActivities().get(0).getName();
         } else {
             return null;
         }
+    }*/
+
+    public String getGame() {
+        if (member.getActivities().size() >= 1) {
+            for (int i = 0; i < member.getActivities().size(); i++) {
+                if (member.getActivities().get(i).getType().equals(Activity.ActivityType.CUSTOM_STATUS)) {
+                    return null;
+                } else {
+                    return member.getActivities().get(i).getName();
+                }
+            }
+        }
+        return null;
     }
 
-    public void removeFromDB()
-    {
+    public void removeFromDB() {
         users().deleteOne(Filters.eq("_id", id));
     }
 
-    public String getNickname()
-    {
+    public String getNickname() {
         return member.getEffectiveName();
     }
 
