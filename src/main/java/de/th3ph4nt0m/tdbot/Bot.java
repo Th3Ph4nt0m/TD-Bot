@@ -1,8 +1,10 @@
 /*
- * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
+ * Copyright (c) 2020 Henrik Steffens
  *
- * Bot.java is part of the TD-Bot
- * Last edit: 2020.6.13
+ * Bot.java is part of a LostNameEU-System (TD-Bot)
+ * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
+ *
+ * Last edit: 2020/8/21
  */
 
 package de.th3ph4nt0m.tdbot;

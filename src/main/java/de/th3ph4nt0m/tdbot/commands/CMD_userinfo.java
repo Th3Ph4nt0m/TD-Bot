@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020 Henrik Steffens
+ *
+ * CMD_userinfo.java is part of a LostNameEU-System (TD-Bot)
+ * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
+ *
+ * Last edit: 2020/8/21
+ */
+
 package de.th3ph4nt0m.tdbot.commands;
 
 import de.th3ph4nt0m.tdbot.Bot;

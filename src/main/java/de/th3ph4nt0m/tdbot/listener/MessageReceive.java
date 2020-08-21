@@ -1,22 +1,19 @@
 /*
- * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
+ * Copyright (c) 2020 Henrik Steffens
  *
- * MessageReceive.java is part of the TD-Bot
- * Last edit: 2020.6.13
+ * MessageReceive.java is part of a LostNameEU-System (TD-Bot)
+ * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
+ *
+ * Last edit: 2020/8/21
  */
 
 package de.th3ph4nt0m.tdbot.listener;
 
 import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
-import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public

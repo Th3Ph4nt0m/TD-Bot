@@ -1,8 +1,10 @@
 /*
- * Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
+ * Copyright (c) 2020 Henrik Steffens
  *
- * MessageCenter.java is part of the TD-Bot
- * Last edit: 2020.6.13
+ * MessageCenter.java is part of a LostNameEU-System (TD-Bot)
+ * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
+ *
+ * Last edit: 2020/8/21
  */
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -44,7 +46,7 @@ public class MessageCenter
                 "**Rules**\n https://lostname.eu/p/td/rules\n" +
                 "\n" +
                 "**Privacy Policy**\n https://lostname.eu/p/td/privacy\n ")
-                .setFooter("TD-Bot ©2020 TD-Devs");
+                .setFooter("TD-Bot ©2020 LostNameEU");
         assert channel != null;
         channel.sendMessage(builder.build()).queue(message -> message.addReaction("✅").queue());
     }
@@ -60,7 +62,7 @@ public class MessageCenter
         builder.setTitle("Authentication Error!")
                 .setColor(Color.RED)
                 .setDescription("you need to accept our Privacy Policy to use this service\n")
-                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+                .setFooter("TD-Bot ©2020 LostNameEU");
         channel.complete().sendMessage(builder.build()).queue();
     }
 
@@ -70,7 +72,7 @@ public class MessageCenter
         builder.setColor(Color.ORANGE)
                 .setTitle("No game detected")
                 .setDescription("I could not detect a game in your rich presence\n\nFor creating a ``»Talk``, please join the ``Voice × Creator``\nFor creating a ``competitive channel``, please enable rich presence in ``User settings --> Game Activity --> Display currently running game as a status message.`` and join ''Comp × Creator`` again.")
-                .setFooter("TD-Bot ©2020 TD-Devs");
+                .setFooter("TD-Bot ©2020 LostNameEU");
         channel.complete().sendMessage(builder.build()).queue();
     }
 
@@ -80,7 +82,7 @@ public class MessageCenter
         builder.setColor(Color.ORANGE)
                 .setTitle("Wrong Groovy Channel")
                 .setDescription("Please use the appropriate channel for Groovy commands \n\nTo keep our text channels clean we´d like you to use the ``\uD83C\uDFB5-groovy``Channel.\nAlso note that wer´e currently only able to provide one music bot, so if its in use it cannot be moved in your Channel.")
-                .setFooter("TD-Bot ©2020 TD-Devs");
+                .setFooter("TD-Bot ©2020 LostNameEU");
         channel.sendMessage(builder.build()).queue();
     }
 
@@ -90,7 +92,7 @@ public class MessageCenter
         builder.setColor(Color.RED)
                 .setTitle("Limited Access")
                 .setDescription("You need to own the OP role to execute this command. \n\nPlease note that this command can only be executed in admin channels")
-                .setFooter("TD-Bot ©2020 TD-Devs");
+                .setFooter("TD-Bot ©2020 LostNameEU");
         channel.sendMessage(builder.build()).queue();
 
     }

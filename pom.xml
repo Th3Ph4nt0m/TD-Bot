@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
+  ~ Copyright (c) 2020 Henrik Steffens
   ~
-  ~ pom.xml is part of the TD-Bot
-  ~ Last edit: 2020.6.13
+  ~ pom.xml is part of a LostNameEU-System (TD-Bot)
+  ~ You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
+  ~
+  ~ Last edit: 2020/8/21
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
