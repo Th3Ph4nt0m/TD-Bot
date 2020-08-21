@@ -1,14 +1,12 @@
 package de.th3ph4nt0m.tdbot.utils;
 
-import de.th3ph4nt0m.tdbot.Bot;
-
 import java.io.*;
 import java.util.Properties;
 
 public class Property {
 
     public String get(String file, String key) {
-        try (InputStream input = new FileInputStream(file + ".properties")) {
+        try (InputStream input = new FileInputStream("cfg/" + file + ".properties")) {
 
             Properties prop = new Properties();
 
@@ -26,41 +24,46 @@ public class Property {
     }
 
     public void setDefaultProps() {
-        try (OutputStream output = new FileOutputStream("database.properties")) {
+        File dir = new File("cfg");
+        if (!dir.exists()) {
+            dir.mkdirs();
+            try (OutputStream output = new FileOutputStream("cfg/database.properties")) {
 
-            Properties prop = new Properties();
+                Properties prop = new Properties();
 
-            // set the properties value
-            prop.setProperty("db.port", "27017");
-            prop.setProperty("db.host", "localhost");
-            prop.setProperty("db.username", "root");
-            prop.setProperty("db.password", "root");
-            prop.setProperty("db.authDB", "admin");
-            prop.setProperty("db.useDB", "root");
+                // set the properties value
+                prop.setProperty("db.port", "27017");
+                prop.setProperty("db.host", "localhost");
+                prop.setProperty("db.username", "root");
+                prop.setProperty("db.password", "root");
+                prop.setProperty("db.authDB", "admin");
+                prop.setProperty("db.useDB", "root");
 
-            // save properties to project root folder
-            prop.store(output, null);
+                // save properties to project root folder
+                prop.store(output, null);
 
-            // Java 8 , print key and values
-//            prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (OutputStream output = new FileOutputStream("bot.properties")) {
+                // Java 8 , print key and values
+                //  prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            Properties prop = new Properties();
+            try (OutputStream output = new FileOutputStream("cfg/bot.properties")) {
 
-            // set the properties value
-            prop.setProperty("bot.token", "token");
-            prop.setProperty("bot.autoprint", "1");
+                Properties prop = new Properties();
 
-            // save properties to project root folder
-            prop.store(output, null);
+                // set the properties value
+                prop.setProperty("bot.token", "token");
+                prop.setProperty("bot.autoprint", "1");
 
-            // Java 8 , print key and values
-//            prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
-        } catch (IOException e) {
-            e.printStackTrace();
+                // save properties to project root folder
+                prop.store(output, null);
+
+                // Java 8 , print key and values
+                // prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
