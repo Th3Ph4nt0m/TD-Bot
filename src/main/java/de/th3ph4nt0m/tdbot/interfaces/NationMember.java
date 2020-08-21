@@ -41,15 +41,19 @@ import org.bson.Document;
         return getDocument() != null;
     }
 
-    public void createInDB()
-    {
+    public void createInDB() {
         long l = 0;
         Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
         users().insertOne(append);
     }
 
-    public String getGame()
-    {
+    public String getInfo() {
+        String name = getDocument().getString("nick");
+        String id = getDocument().getString("_id");
+        return name + ", " + id;
+    }
+
+    public String getGame() {
         if (member.getActivities().size() >= 1) {
             return member.getActivities().get(0).getName();
         } else {

@@ -83,4 +83,15 @@ public class MessageCenter
                 .setFooter("TD-Bot ©2020 TD-Devs");
         channel.sendMessage(builder.build()).queue();
     }
+
+    public void sendNoAccess(String channelID) {
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(channelID);
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.RED)
+                .setTitle("Limited Access")
+                .setDescription("You need to own the OP role to execute this command. \n\nPlease note that this command can only be executed in admin channels")
+                .setFooter("TD-Bot ©2020 TD-Devs");
+        channel.sendMessage(builder.build()).queue();
+
+    }
 }
