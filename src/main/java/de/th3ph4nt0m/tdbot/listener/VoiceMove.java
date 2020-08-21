@@ -40,10 +40,7 @@ class VoiceMove extends ListenerAdapter
         } else if (!event.getChannelJoined().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.afkID"))) {
             long current = System.currentTimeMillis();
             Bot.getInstance().getVoiceSystem().joinTime.put(event.getMember().getId(), current);
-        }/* else if (event.getChannelJoined().getId().equals("713424778630791220")) {
-            long saved = (long) Bot.getInstance().getVoiceSystem().joinTime.get(event.getMember().getId());
-
-        }*/
+        }
 
         if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
             if (event.getChannelLeft().getMembers().size() <= 0) {

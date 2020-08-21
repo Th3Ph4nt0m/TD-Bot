@@ -44,15 +44,8 @@ import org.bson.Document;
     public void createInDB()
     {
         long l = 0;
-        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName()).append("timeConnected", l);
+        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
         users().insertOne(append);
-    }
-
-    public void updateOnlineTime(long toAdd)
-    {
-        Document doc = new Document();
-        long saved = getDocument().getLong("timeConnected");
-        doc.append("timeConnected", saved + toAdd);
     }
 
     public String getGame()
