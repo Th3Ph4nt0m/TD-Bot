@@ -4,7 +4,7 @@
  * Bot.java is part of a LostNameEU-System (TD-Bot)
  * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
  *
- * Last edit: 2020/8/21
+ * Last edit: 2020/8/22
  */
 
 package de.th3ph4nt0m.tdbot;
@@ -43,7 +43,7 @@ class Bot implements EventListener {
             this.property = new Property();
             property.setDefaultProps();
             this.jda = JDABuilder.createDefault(property.get("bot", "bot.token"))
-                    .setAutoReconnect(Boolean.parseBoolean(property.get("bot", "bot.autoprint")))
+                    .setAutoReconnect(true)
                     .setStatus(OnlineStatus.ONLINE)
                     .setActivity(Activity.watching("over TD-Nation"))
                     .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
@@ -58,7 +58,7 @@ class Bot implements EventListener {
             jda.addEventListener(new ReactionListener());
             this.voiceSystem = new VoiceSystem();
             jda.awaitReady();
-            new MessageCenter(false);
+            new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
 //            CommandHandler.commands.put("hgw", new Dominik_HGW());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
