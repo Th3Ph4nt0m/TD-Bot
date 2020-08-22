@@ -6,7 +6,7 @@ pipeline {
   }
   environment {
     NAME = readMavenPom().getName();
-    VERSION = '1.0.1';
+    VERSION = '1.1';
   }
   options {
     buildDiscarder logRotator(numToKeepStr: '10')

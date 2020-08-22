@@ -4,7 +4,7 @@
  * MessageCenter.java is part of a LostNameEU-System (TD-Bot)
  * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
  *
- * Last edit: 2020/8/21
+ * Last edit: 2020/8/22
  */
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -43,9 +43,9 @@ public class MessageCenter
         builder.setTitle(":scroll: Rules - :lock: privacy");
         builder.setDescription("To use the services of the TD-Nation Discord server, you need to accept the rules and agree with our privacy policy.\n" +
                 "\n" +
-                "**Rules**\n https://lostname.eu/p/td/rules\n" +
+                "**Rules**\n https://lostname.eu/public/partner/td/rules.html\n" +
                 "\n" +
-                "**Privacy Policy**\n https://lostname.eu/p/td/privacy\n ")
+                "**Privacy Policy**\n https://lostname.eu/public/partner/td/privacy.html\n ")
                 .setFooter("TD-Bot ©2020 LostNameEU");
         assert channel != null;
         channel.sendMessage(builder.build()).queue(message -> message.addReaction("✅").queue());

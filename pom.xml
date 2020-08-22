@@ -5,7 +5,7 @@
   ~ pom.xml is part of a LostNameEU-System (TD-Bot)
   ~ You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
   ~
-  ~ Last edit: 2020/8/21
+  ~ Last edit: 2020/8/22
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -15,7 +15,7 @@
 
     <groupId>eu.lostname</groupId>
     <artifactId>TD-Bot</artifactId>
-    <version>1.0.1</version>
+    <version>1.1</version>
 
     <repositories>
         <repository>
