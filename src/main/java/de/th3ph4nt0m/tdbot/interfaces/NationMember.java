@@ -51,9 +51,8 @@ import org.bson.Document;
     }
 
     public String getInfo() {
-        String name = getDocument().getString("nick");
-        String id = getDocument().getString("_id");
-        return name + ", " + id;
+
+        return getDocument().toJson();
     }
 
 /*    public String getGame() {

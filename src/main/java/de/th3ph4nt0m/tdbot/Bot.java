@@ -9,6 +9,8 @@
 
 package de.th3ph4nt0m.tdbot;
 
+import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
 import de.th3ph4nt0m.tdbot.listener.*;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
@@ -60,6 +62,7 @@ class Bot implements EventListener {
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
 //            CommandHandler.commands.put("hgw", new Dominik_HGW());
+            CommandHandler.commands.put("info", new CMD_userinfo());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
