@@ -40,15 +40,15 @@ public class VoiceSystem
 
     public void createCompChannel(String game, Guild guild, Member member, VoiceChannel joined)
     {
-        ChannelAction<VoiceChannel> temp = guild.createVoiceChannel("» Comp × " + game).setParent(joined.getParent()).setPosition(voiceChannels.size() + 1);
+        int limit = 0;
         //set user limit for specific games
         if (game.equalsIgnoreCase("Overwatch")) {
-            temp.setUserlimit(6).queue();
+            limit = 6;
         } else if (game.equalsIgnoreCase("Valorant") || game.equalsIgnoreCase("Rainbow Six Siege") || game.equalsIgnoreCase("Counter-Strike: Global Offensive")) {
-            temp.setUserlimit(5).queue();
+            limit = 5;
         }
         //create channel and register to the VoiceSystem
-        VoiceChannel channel = temp.complete();
+        VoiceChannel channel = guild.createVoiceChannel("» Comp × " + game).setParent(joined.getParent()).setPosition(voiceChannels.size() + 1).setUserlimit(limit).complete();
         voiceChannels.add(channel);
         member.getGuild().moveVoiceMember(member, channel).queue();
 
