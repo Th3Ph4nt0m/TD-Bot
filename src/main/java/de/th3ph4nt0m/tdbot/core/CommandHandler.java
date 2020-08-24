@@ -28,10 +28,8 @@ class CommandHandler
 
             if (!safe) {
                 commands.get(cmd.invoke).action(cmd.args, cmd.event);
-                commands.get(cmd.invoke).excecuted(safe, cmd.event);
-            } else {
-                commands.get(cmd.invoke).excecuted(safe, cmd.event);
             }
+            commands.get(cmd.invoke).excecuted(safe, cmd.event);
         }
     }
 }
