@@ -16,31 +16,27 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
 import org.bson.Document;
 
-@SuppressWarnings ({"SpellCheckingInspection", "ConstantConditions"}) public class NationMember
-{
+@SuppressWarnings({"SpellCheckingInspection", "ConstantConditions"})
+public class NationMember {
     private final Member member;
     private final String id;
 
 
-    public NationMember(Member member, String id)
-    {
+    public NationMember(Member member, String id) {
         this.member = member;
         this.id = id;
     }
 
-    private MongoCollection<Document> users()
-    {
+    private MongoCollection<Document> users() {
         return Bot.getInstance().getMongoHandler().users();
     }
 
-    public Document getDocument()
-    {
+    public Document getDocument() {
         return users().find(Filters.eq("_id", id)).first();
     }
 
 
-    public boolean existsinDB()
-    {
+    public boolean existsinDB() {
         return getDocument() != null;
     }
 
@@ -54,14 +50,6 @@ import org.bson.Document;
 
         return getDocument().toJson();
     }
-
-/*    public String getGame() {
-        if (member.getActivities().size() >= 1) {
-            return member.getActivities().get(0).getName();
-        } else {
-            return null;
-        }
-    }*/
 
     public String getGame() {
         if (member.getActivities().size() >= 1) {
@@ -84,8 +72,7 @@ import org.bson.Document;
         return member.getEffectiveName();
     }
 
-    public String asTag()
-    {
+    public String asTag() {
         return member.getAsMention();
     }
 }
