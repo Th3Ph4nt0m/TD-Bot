@@ -61,7 +61,6 @@ class Bot implements EventListener {
             this.voiceSystem = new VoiceSystem();
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
-//            CommandHandler.commands.put("hgw", new Dominik_HGW());
             CommandHandler.commands.put("info", new CMD_userinfo());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
