@@ -1,4 +1,4 @@
-pipeline {
+ipeline {
   agent any
   tools {
         maven 'Maven3'

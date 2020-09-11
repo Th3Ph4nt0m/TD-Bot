@@ -11,7 +11,6 @@ package de.th3ph4nt0m.tdbot.interfaces;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import de.th3ph4nt0m.tdbot.Bot;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
 import org.bson.Document;

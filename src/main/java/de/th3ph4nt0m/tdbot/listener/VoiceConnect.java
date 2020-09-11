@@ -9,7 +9,6 @@
 
 package de.th3ph4nt0m.tdbot.listener;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;

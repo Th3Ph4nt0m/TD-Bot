@@ -9,7 +9,6 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;

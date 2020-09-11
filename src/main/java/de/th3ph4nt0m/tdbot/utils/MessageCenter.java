@@ -9,7 +9,6 @@
 
 package de.th3ph4nt0m.tdbot.utils;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
