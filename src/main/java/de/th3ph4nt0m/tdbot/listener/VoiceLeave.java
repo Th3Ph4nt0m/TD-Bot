@@ -9,6 +9,7 @@
 
 package de.th3ph4nt0m.tdbot.listener;
 
+import de.th3ph4nt0m.tdbot.Bot;
 import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 

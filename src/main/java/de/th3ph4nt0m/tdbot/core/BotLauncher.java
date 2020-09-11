@@ -9,6 +9,8 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
+import de.th3ph4nt0m.tdbot.Bot;
+
 public
 class BotLauncher
 {
