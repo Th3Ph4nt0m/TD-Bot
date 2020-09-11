@@ -15,19 +15,16 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.requests.restaction.ChannelAction;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @SuppressWarnings ("DuplicatedCode")
 public class VoiceSystem
 {
     public final List<VoiceChannel> voiceChannels;
-    public HashMap joinTime;
 
     public VoiceSystem()
     {
         this.voiceChannels = new ArrayList<>();
-        joinTime = new HashMap<String, Long>();
     }
 
     public void createVoiceChannel(String game, Guild guild, Member member, VoiceChannel joined)

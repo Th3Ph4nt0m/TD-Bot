@@ -11,6 +11,7 @@ package de.th3ph4nt0m.tdbot;
 
 import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.core.LevelSystem;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
 import de.th3ph4nt0m.tdbot.listener.*;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
@@ -37,6 +38,7 @@ class Bot implements EventListener {
     private MongoHandler mongoHandler;
     private VoiceSystem voiceSystem;
     private Property property;
+    private LevelSystem levelSystem;
 
     public Bot() {
         instance = this;
@@ -87,5 +89,8 @@ class Bot implements EventListener {
         return property;
     }
 
+    public LevelSystem getLevelSystem() {
+        return levelSystem;
+    }
 
 }

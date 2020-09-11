@@ -39,11 +39,15 @@ class VoiceMove extends ListenerAdapter
                 event.getMember().getGuild().kickVoiceMember(event.getMember()).queue();
                 MessageCenter.getInstance().sendNoGame(event.getMember().getUser().openPrivateChannel());
             }
-        } else if (!event.getChannelJoined().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.afkID"))) {
-            long current = System.currentTimeMillis();
-            Bot.getInstance().getVoiceSystem().joinTime.put(event.getMember().getId(), current);
         }
-
+        if (!event.getChannelJoined().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.afkID"))) {
+            long current = System.currentTimeMillis();
+            Bot.getInstance().getLevelSystem().join(event.getMember(), current);
+        }
+        else {
+            long current = System.currentTimeMillis();
+            Bot.getInstance().getLevelSystem().leave(event.getMember(), current);
+        }
         if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
             if (event.getChannelLeft().getMembers().size() <= 0) {
                 event.getChannelLeft().delete().queue();
