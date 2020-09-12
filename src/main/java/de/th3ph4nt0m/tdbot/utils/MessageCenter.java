@@ -16,6 +16,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.RestAction;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class MessageCenter
 {
@@ -83,7 +84,7 @@ public class MessageCenter
                 .setTitle("Wrong Groovy Channel")
                 .setDescription("Please use the appropriate channel for Groovy commands \n\nTo keep our text channels clean we´d like you to use the ``\uD83C\uDFB5-groovy``Channel.\nAlso note that wer´e currently only able to provide one music bot, so if its in use it cannot be moved in your Channel.")
                 .setFooter("TD-Bot ©2020 LostNameEU");
-        channel.sendMessage(builder.build()).queue();
+        Objects.requireNonNull(channel).sendMessage(builder.build()).queue();
     }
 
     public void sendNoAccess(String channelID) {
@@ -93,7 +94,7 @@ public class MessageCenter
                 .setTitle("Limited Access")
                 .setDescription("You need to own the OP role to execute this command. \n\nPlease note that this command can only be executed in admin channels")
                 .setFooter("TD-Bot ©2020 LostNameEU");
-        channel.sendMessage(builder.build()).queue();
+        Objects.requireNonNull(channel).sendMessage(builder.build()).queue();
 
     }
 }
