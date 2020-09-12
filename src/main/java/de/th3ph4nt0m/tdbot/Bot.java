@@ -61,6 +61,7 @@ class Bot implements EventListener {
             jda.addEventListener(new CommandListener());
             jda.addEventListener(new ReactionListener());
             this.voiceSystem = new VoiceSystem();
+            this.levelSystem = new LevelSystem();
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
             CommandHandler.commands.put("info", new CMD_userinfo());
