@@ -42,7 +42,7 @@ public class NationMember {
 
     public void createInDB() {
         long l = 0;
-        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName()).append("participationTime",(long)0);
+        Document append = new Document("_id", member.getId()).append("nick", getNickname()).append("participationTime",(long)0);
         users().insertOne(append);
     }
 
@@ -54,9 +54,7 @@ public class NationMember {
     public String getGame() {
         if (member.getActivities().size() >= 1) {
             for (int i = 0; i < member.getActivities().size(); i++) {
-                if (member.getActivities().get(i).getType().equals(Activity.ActivityType.CUSTOM_STATUS)) {
-                    return null;
-                } else {
+                if (!member.getActivities().get(i).getType().equals(Activity.ActivityType.CUSTOM_STATUS)) {
                     return member.getActivities().get(i).getName();
                 }
             }
