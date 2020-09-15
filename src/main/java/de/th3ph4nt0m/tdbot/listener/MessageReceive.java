@@ -15,6 +15,8 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.concurrent.TimeUnit;
+
 
 public
 class MessageReceive extends ListenerAdapter {
@@ -50,7 +52,7 @@ class MessageReceive extends ListenerAdapter {
                         MessageCenter.getInstance().sendWrongGroovyChannel(event.getChannel().getId());
                         event.getMessage().delete().queue();
                         if (event.getMessage().getContentRaw().contains("play") || event.getMessage().getContentRaw().contains("join")) {
-                            event.getChannel().sendMessage("!leave").queue();
+                            event.getChannel().sendMessage("!leave").queueAfter(1, TimeUnit.SECONDS);
                         }
                     }
                 }
