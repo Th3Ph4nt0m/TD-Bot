@@ -41,7 +41,6 @@ public class NationMember {
     }
 
     public void createInDB() {
-        long l = 0;
         Document append = new Document("_id", member.getId()).append("nick", getNickname()).append("participationTime",(long)0);
         users().insertOne(append);
     }
