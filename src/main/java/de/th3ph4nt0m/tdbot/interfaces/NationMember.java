@@ -63,6 +63,9 @@ public class NationMember {
     }
 
     public void addParticipationTime(long deltaTime) {
+        if(!getDocument().containsKey("participationTime")) {
+            getDocument().append("participationTime",(long)0);
+        }
       long current = getDocument().getLong("participationTime");
       getDocument().put("participationTime",current + deltaTime);
     }
