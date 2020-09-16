@@ -20,7 +20,7 @@
     <repositories>
         <repository>
             <id>lostname-repo</id>
-            <url>https://lostname.eu:8079/repository/maven-tdnation/</url>
+            <url>https://lostname.eu:8079/repository/maven-central/</url>
         </repository>
 
     </repositories>
