@@ -20,7 +20,7 @@
     <repositories>
         <repository>
             <id>lostname-repo</id>
-            <url>https://lostname.eu:8079/repository/maven-central/</url>
+            <url>https://lostname.eu:8079/repository/maven-tdnation/</url>
         </repository>
 
     </repositories>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>jda</artifactId>
-            <version>4.2.0_194</version>
+            <version>4.2.0_204</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
