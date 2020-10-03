@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2020 Henrik Steffens
+  ~ Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
   ~
-  ~ pom.xml is part of a LostNameEU-System (TD-Bot)
-  ~ You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
-  ~
-  ~ Last edit: 2020/8/22
+  ~ pom.xml is part of the TD-Bot
+  ~ Last edit: 2020.6.13
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -15,21 +13,21 @@
 
     <groupId>eu.lostname</groupId>
     <artifactId>TD-Bot</artifactId>
-    <version>1.1.1</version>
+    <version>1.0.1</version>
 
     <repositories>
         <repository>
-            <id>lostname-repo</id>
-            <url>https://lostname.eu:8079/repository/maven-central/</url>
+            <id>jcenter</id>
+            <name>jcenter-bintray</name>
+            <url>https://jcenter.bintray.com</url>
         </repository>
-
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>net.dv8tion</groupId>
-            <artifactId>jda</artifactId>
-            <version>4.2.0_204</version>
+            <artifactId>JDA</artifactId>
+            <version>4.2.0_207</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
