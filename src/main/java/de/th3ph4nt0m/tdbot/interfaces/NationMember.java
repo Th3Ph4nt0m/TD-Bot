@@ -62,11 +62,13 @@ public class NationMember {
     }
 
     public void addParticipationTime(long deltaTime) {
-        if(!getDocument().containsKey("participationTime")) {
-            getDocument().append("participationTime",(long)0);
+        Document doc = getDocument();
+        if(!doc.containsKey("participationTime")) {
+            doc.append("participationTime",(long)0);
         }
-      long current = getDocument().getLong("participationTime");
-      getDocument().put("participationTime",current + deltaTime);
+      long current = doc.getLong("participationTime");
+      doc.put("participationTime",current + deltaTime);
+      users().findOneAndReplace(users().find(Filters.eq("_id", id)).first(),doc);
     }
 
     public long getParticipationTime(){return getDocument().getLong("participationTime");}
