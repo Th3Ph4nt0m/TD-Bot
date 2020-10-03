@@ -42,6 +42,7 @@ class VoiceMove extends ListenerAdapter
         }
         if (!event.getChannelJoined().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.afkID"))) {
             long current = System.currentTimeMillis();
+            Bot.getInstance().getLevelSystem().leave(event.getMember(), current);
             Bot.getInstance().getLevelSystem().join(event.getMember(), current);
         }
         else {
