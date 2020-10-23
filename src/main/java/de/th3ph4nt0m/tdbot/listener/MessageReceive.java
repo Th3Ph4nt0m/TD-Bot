@@ -52,7 +52,7 @@ class MessageReceive extends ListenerAdapter {
                         MessageCenter.getInstance().sendWrongGroovyChannel(event.getChannel().getId());
                         event.getMessage().delete().queue();
                         if (event.getMessage().getContentRaw().contains("play") || event.getMessage().getContentRaw().contains("join")) {
-                            event.getChannel().sendMessage("!leave").queueAfter(1, TimeUnit.SECONDS);
+                            event.getChannel().sendMessage("-leave").queueAfter(1, TimeUnit.SECONDS);
                         }
                     }
                 }
