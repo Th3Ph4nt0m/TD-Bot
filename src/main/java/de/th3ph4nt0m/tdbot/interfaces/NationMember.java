@@ -41,7 +41,7 @@ public class NationMember {
     }
 
     public void createInDB() {
-        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName()).append("participationTime",(long)0);
+        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
         users().insertOne(append);
     }
 
@@ -61,15 +61,6 @@ public class NationMember {
         return null;
     }
 
-    public void addParticipationTime(long deltaTime) {
-        if(!getDocument().containsKey("participationTime")) {
-            getDocument().append("participationTime",(long)0);
-        }
-      long current = getDocument().getLong("participationTime");
-      getDocument().put("participationTime",current + deltaTime);
-    }
-
-    public long getParticipationTime(){return getDocument().getLong("participationTime");}
 
     public void removeFromDB() {
         users().deleteOne(Filters.eq("_id", id));

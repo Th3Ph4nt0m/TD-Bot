@@ -40,9 +40,5 @@ class VoiceConnect extends ListenerAdapter
                 MessageCenter.getInstance().sendNoGame(event.getMember().getUser().openPrivateChannel());
             }
         }
-        if (!event.getChannelJoined().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.afkID"))) {
-            long current = System.currentTimeMillis();
-            Bot.getInstance().getLevelSystem().join(event.getMember(), current);
-        }
     }
 }

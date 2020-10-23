@@ -25,10 +25,6 @@ class VoiceLeave extends ListenerAdapter
                 Bot.getInstance().getVoiceSystem().voiceChannels.remove(event.getChannelLeft());
             }
         }
-        if (!event.getChannelLeft().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.afkID"))) {
-            long current = System.currentTimeMillis();
-            Bot.getInstance().getLevelSystem().leave(event.getMember(), current);
 
-        }
     }
 }
