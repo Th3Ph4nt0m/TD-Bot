@@ -1,11 +1,13 @@
-/*
- * Copyright (c) 2020 Henrik Steffens
- *
- * CommandParser.java is part of a LostNameEU-System (TD-Bot)
- * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
- *
- * Last edit: 2020/8/21
- */
+/*******************************************************************************
+ Copyright (c) 2020 lostname.eu*
+
+ CommandParser.java is a part of the TD-Bot project.
+ You are not allowed to copy, change or reproduce without the permission of lostname.eu.
+
+ * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
+
+ Last edit: 2020/10/24
+ ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.core;
 

@@ -1,20 +1,24 @@
-/*
- * Copyright (c) 2020 Henrik Steffens
- *
- * Property.java is part of a LostNameEU-System (TD-Bot)
- * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
- *
- * Last edit: 2020/8/21
- */
+/*******************************************************************************
+ Copyright (c) 2020 lostname.eu*
+
+ Property.java is a part of the TD-Bot project.
+ You are not allowed to copy, change or reproduce without the permission of lostname.eu.
+
+ * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
+
+ Last edit: 2020/10/24
+ ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
 
 import java.io.*;
 import java.util.Properties;
 
-public class Property {
+public class Property
+{
 
-    public String get(String file, String key) {
+    public String get(String file, String key)
+    {
         try (InputStream input = new FileInputStream("cfg/" + file + ".properties")) {
 
             Properties prop = new Properties();
@@ -32,7 +36,10 @@ public class Property {
         return null;
     }
 
-    public void setDefaultProps() {
+    //create the default properties-file
+    public void setDefaultProps()
+    {
+        //create the file if not exists
         File dir = new File("cfg");
         if (!dir.exists()) {
             dir.mkdirs();
@@ -48,11 +55,8 @@ public class Property {
                 prop.setProperty("db.authDB", "admin");
                 prop.setProperty("db.useDB", "root");
 
-                // save properties to project root folder
+                // save properties to project folder
                 prop.store(output, null);
-
-                // Java 8 , print key and values
-                //  prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -72,11 +76,8 @@ public class Property {
                 prop.setProperty("bot.highestRole","HighestRoleID");
                 prop.setProperty("bot.adminChannelID","AdminChannelID");
 
-                // save properties to project root folder
+                // save properties to project folder
                 prop.store(output, null);
-
-                // Java 8 , print key and values
-                // prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
             } catch (IOException e) {
                 e.printStackTrace();
             }

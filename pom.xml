@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  ~ Copyright (c) 2020 Henrik Steffens aka Th3Ph4nt0m
-  ~
-  ~ pom.xml is part of the TD-Bot
-  ~ Last edit: 2020.6.13
-  -->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Copyright (c) 2020 lostname.eu*
+
+  pom.xml is a part of the TD-Bot project.
+  You are not allowed to copy, change or reproduce without the permission of lostname.eu.
+
+  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
+
+  Last edit: 2020/10/24
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

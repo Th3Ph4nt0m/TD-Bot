@@ -1,11 +1,13 @@
-/*
- * Copyright (c) 2020 Henrik Steffens
- *
- * CMD_userinfo.java is part of a LostNameEU-System (TD-Bot)
- * You are not allowed to copy, change or reproduce without the permission of the LostNameEU-Management
- *
- * Last edit: 2020/8/21
- */
+/*******************************************************************************
+ Copyright (c) 2020 lostname.eu*
+
+ CMD_userinfo.java is a part of the TD-Bot project.
+ You are not allowed to copy, change or reproduce without the permission of lostname.eu.
+
+ * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
+
+ Last edit: 2020/10/24
+ ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.commands;
 
@@ -24,7 +26,6 @@ public class CMD_userinfo implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        String[] contentRaw = event.getMessage().getContentRaw().split(" ");
         Member m = event.getMessage().getMentionedMembers().get(0);
         NationMember nationMember = new NationMember(m, m.getId());
         if (event.getMember().getRoles().contains(Bot.getInstance().getJda().getRoleById(Bot.getInstance().getProperty().get("bot", "bot.highestRole"))) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
