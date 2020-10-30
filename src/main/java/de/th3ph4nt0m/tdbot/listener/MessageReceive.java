@@ -49,13 +49,11 @@ class MessageReceive extends ListenerAdapter {
 
         if (!event.getMessage().getContentRaw().startsWith("+") && !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
             if (event.getMessage().getContentRaw().startsWith("-")) {
-                if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyID"))) {
-                    if (event.getMember().getVoiceState() != null) {
-                        MessageCenter.getInstance().sendWrongGroovyChannel(event.getChannel().getId());
-                        event.getMessage().delete().queue();
-                        if (event.getMessage().getContentRaw().contains("play") || event.getMessage().getContentRaw().contains("join")) {
-                            event.getChannel().sendMessage("-leave").queueAfter(1, TimeUnit.SECONDS);
-                        }
+                if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyChannelID"))) {
+                    MessageCenter.getInstance().sendWrongGroovyChannel(event.getChannel().getId());
+                    event.getMessage().delete().queue();
+                    if (event.getMessage().getContentRaw().contains("play") || event.getMessage().getContentRaw().contains("join")) {
+                        event.getGuild().getMemberById(Bot.getInstance().getProperty().get("bot", "bot.groovyID"));
                     }
                 }
             }
