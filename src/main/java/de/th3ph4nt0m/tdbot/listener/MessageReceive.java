@@ -47,7 +47,7 @@ class MessageReceive extends ListenerAdapter {
         }
         */
 
-        if (!event.getMessage().getContentRaw().startsWith("+") || !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
+        if (!event.getMessage().getContentRaw().startsWith("+") && !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
             if (event.getMessage().getContentRaw().startsWith("-")) {
                 if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyID"))) {
                     if (event.getMember().getVoiceState() != null) {
