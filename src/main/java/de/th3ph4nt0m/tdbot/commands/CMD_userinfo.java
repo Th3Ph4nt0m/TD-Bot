@@ -16,7 +16,6 @@ import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_userinfo implements ICommand {
@@ -27,12 +26,11 @@ public class CMD_userinfo implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        Role admin = event.getGuild().getRoles().stream().filter(role-> role.getPosition() == 1).findAny().orElse(null);
         Member m = event.getMessage().getMentionedMembers().get(0);
         NationMember nationMember = new NationMember(m, m.getId());
-        if (event.getMember().getRoles().contains(admin) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
+        if (event.getMember().getRoles().contains(Bot.getInstance().getJda().getRoleById(Bot.getInstance().getProperty().get("bot", "bot.highestRole"))) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
             event.getChannel().sendMessage(nationMember.getInfo()).queue();
-
+        } else {
             MessageCenter.getInstance().sendNoAccess(event.getChannel().getId());
         }
     }

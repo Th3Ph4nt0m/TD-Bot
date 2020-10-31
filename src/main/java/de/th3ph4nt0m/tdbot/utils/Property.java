@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/24
+ Last edit: 2020/10/31
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -69,12 +69,12 @@ public class Property
                 prop.setProperty("bot.token", "token");
                 prop.setProperty("bot.autoprint", "0");
                 prop.setProperty("bot.rulesID", "RuleChannelID");
-                prop.setProperty("bot.ruleReactionID", "RuleReactionID");
                 prop.setProperty("bot.groovyChannelID","GroovyChannelID");
                 prop.setProperty("bot.afkID","AFKChannelID");
                 prop.setProperty("bot.createID","CreateChannelID");
-                prop.setProperty("bot.compID","CompCreateChannelID");
-                prop.setProperty("bot.adminChannelID","AdminChannelID");
+                prop.setProperty("bot.compID", "CompCreateChannelID");
+                prop.setProperty("bot.highestRole", "HighestRoleID");
+                prop.setProperty("bot.adminChannelID", "AdminChannelID");
 
                 // save properties to project folder
                 prop.store(output, null);
