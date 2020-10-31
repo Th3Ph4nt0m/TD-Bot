@@ -69,11 +69,11 @@ public class Property
                 prop.setProperty("bot.token", "token");
                 prop.setProperty("bot.autoprint", "0");
                 prop.setProperty("bot.rulesID", "RuleChannelID");
+                prop.setProperty("bot.ruleReactionID", "RuleReactionID");
                 prop.setProperty("bot.groovyChannelID","GroovyChannelID");
                 prop.setProperty("bot.afkID","AFKChannelID");
                 prop.setProperty("bot.createID","CreateChannelID");
                 prop.setProperty("bot.compID","CompCreateChannelID");
-                prop.setProperty("bot.highestRole","HighestRoleID");
                 prop.setProperty("bot.adminChannelID","AdminChannelID");
 
                 // save properties to project folder
