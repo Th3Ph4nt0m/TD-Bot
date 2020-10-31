@@ -70,7 +70,6 @@ public class Property
                 prop.setProperty("bot.autoprint", "0");
                 prop.setProperty("bot.rulesID", "RuleChannelID");
                 prop.setProperty("bot.groovyChannelID","GroovyChannelID");
-                prop.setProperty("bot.groovyID","GroovyID");
                 prop.setProperty("bot.afkID","AFKChannelID");
                 prop.setProperty("bot.createID","CreateChannelID");
                 prop.setProperty("bot.compID","CompCreateChannelID");
