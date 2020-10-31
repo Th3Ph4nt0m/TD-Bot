@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/24
+ Last edit: 2020/10/30
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -76,16 +76,6 @@ public class MessageCenter
                 .setDescription("I could not detect a game in your rich presence\n\nFor creating a ``»Talk``, please join the ``Voice × Creator``\nFor creating a ``competitive channel``, please enable rich presence in ``User settings --> Game Activity --> Display currently running game as a status message.`` and join ''Comp × Creator`` again.")
                 .setFooter("TD-Bot ©2020 LostNameEU");
         channel.complete().sendMessage(builder.build()).queue();
-    }
-
-    public void sendWrongGroovyChannel(String channelID) {
-        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(channelID);
-        EmbedBuilder builder = new EmbedBuilder();
-        builder.setColor(Color.ORANGE)
-                .setTitle("Wrong Groovy Channel")
-                .setDescription("Please use the appropriate channel for Groovy commands \n\nTo keep our text channels clean we´d like you to use the ``\uD83C\uDFB5-groovy``Channel.\nAlso note that wer´e currently only able to provide one music bot, so if its in use it cannot be moved in your Channel.")
-                .setFooter("TD-Bot ©2020 LostNameEU");
-        channel.sendMessage(builder.build()).queue();
     }
 
     public void sendNoAccess(String channelID) {

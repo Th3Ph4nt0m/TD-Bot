@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/24
+ Last edit: 2020/10/31
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot;
@@ -32,7 +32,8 @@ import java.util.EventListener;
 import java.util.stream.Collectors;
 
 public
-class Bot implements EventListener {
+class Bot implements EventListener
+{
 
     private JDA jda;
     private static Bot instance;
@@ -41,7 +42,8 @@ class Bot implements EventListener {
     private Property property;
 
 
-    public Bot() {
+    public Bot()
+    {
         instance = this;
         try {
             //JDA configuration
@@ -70,23 +72,28 @@ class Bot implements EventListener {
         }
     }
 
-    public static Bot getInstance() {
+    public static Bot getInstance()
+    {
         return instance;
     }
 
-    public JDA getJda() {
+    public JDA getJda()
+    {
         return jda;
     }
 
-    public MongoHandler getMongoHandler() {
+    public MongoHandler getMongoHandler()
+    {
         return mongoHandler;
     }
 
-    public VoiceSystem getVoiceSystem() {
+    public VoiceSystem getVoiceSystem()
+    {
         return voiceSystem;
     }
 
-    public Property getProperty() {
+    public Property getProperty()
+    {
         return property;
     }
 

@@ -7,7 +7,7 @@
 
   * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
-  Last edit: 2020/10/24
+  Last edit: 2020/10/31
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <version>4.2.0_207</version>
+            <version>LATEST</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

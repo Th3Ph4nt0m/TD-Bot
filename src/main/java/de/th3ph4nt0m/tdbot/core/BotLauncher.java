@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/24
+ Last edit: 2020/10/31
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.core;
@@ -17,8 +17,7 @@ public
 class BotLauncher
 {
 
-    public static
-    void main(String[] args)
+    public static void main(String[] args)
     {
         new Bot();
     }
