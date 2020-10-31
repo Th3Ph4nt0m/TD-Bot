@@ -28,6 +28,7 @@ public class CMD_userinfo implements ICommand {
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         Role admin = event.getGuild().getRoles().stream().filter(role-> role.getPosition() == 1).findAny().orElse(null);
+        // Role admin = event.getGuild().getRolesByName("OP",false) ;
         Member m = event.getMessage().getMentionedMembers().get(0);
         NationMember nationMember = new NationMember(m, m.getId());
         if (event.getMember().getRoles().contains(admin) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
