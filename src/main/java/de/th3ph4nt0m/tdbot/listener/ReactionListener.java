@@ -21,19 +21,11 @@ import java.util.Objects;
 
 public class ReactionListener extends ListenerAdapter
 {
-    /**
-     * Users that react in the rules and privacy channel get added to the database
-     * @param event currently added reaction
-     */
     @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event)
     {
         if (!event.getUser().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            if (
-                event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))
-                && event.getReactionEmote().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.ruleReactionID"))
-            )
-            {
+            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))) {
                 NationMember nationMember = new NationMember(event.getMember(), event.getMember().getId());
                 if (!nationMember.existsinDB()) {
                     nationMember.createInDB();
@@ -42,18 +34,11 @@ public class ReactionListener extends ListenerAdapter
             }
         }
     }
-    /**
-     * Users that remove their reaction in the rules and privacy channel get removed from the database
-     * @param event currently added reaction
-     */
+
     @Override
     public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event)
     {
-        if (
-            event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))
-            && event.getReactionEmote().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.ruleReactionID"))
-        )
-        {
+        if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))) {
             NationMember nationMember = new NationMember(event.getMember(), event.getUserId());
             if (nationMember.existsinDB()) {
                 nationMember.removeFromDB();

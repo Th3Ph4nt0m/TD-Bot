@@ -18,24 +18,24 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
+
+
 public
 class MessageReceive extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
-        groovyCommandDelete(event);
-    }
-
-    /**
-     * Deletes Groovy Commands in Channels that are not used for those.
-     * @param event current MessageReceivedEvent
-     */
-    private void groovyCommandDelete(MessageReceivedEvent event)
-    {
         Message msg = event.getMessage();
+
+        /*
+         * Groovy Command delete.
+         */
         if (event.getMessage().getContentRaw().startsWith("-") && !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
             if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyChannelID"))) {
                 msg.delete().queue();
             }
         }
+
     }
 }
