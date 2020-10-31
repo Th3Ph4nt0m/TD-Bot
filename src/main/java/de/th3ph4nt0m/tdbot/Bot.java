@@ -57,7 +57,6 @@ class Bot implements EventListener
                     .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
                     .build();
             this.mongoHandler = new MongoHandler();
-            jda.addEventListener(new MessageReceive());
             jda.addEventListener(new VoiceConnect());
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
