@@ -1,12 +1,23 @@
 /*******************************************************************************
- Copyright (c) 2020 lostname.eu*
+ ReactionListener.java is part of the TD-Bot project
 
- ReactionListener.java is a part of the TD-Bot project.
- You are not allowed to copy, change or reproduce without the permission of lostname.eu.
+ TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
+ Copyright (C) 2020 Henrik Steffens
 
- * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as published
+ by the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
- Last edit: 2020/10/24
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.listener;
@@ -24,8 +35,10 @@ public class ReactionListener extends ListenerAdapter
     @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event)
     {
+        //listener for accepting rules and privacy by reaction
         if (!event.getUser().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))) {
+            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))
+                    && event.getReactionEmote().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.ruleReactionID"))) {
                 NationMember nationMember = new NationMember(event.getMember(), event.getMember().getId());
                 if (!nationMember.existsinDB()) {
                     nationMember.createInDB();
@@ -38,7 +51,9 @@ public class ReactionListener extends ListenerAdapter
     @Override
     public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event)
     {
-        if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))) {
+        //listener for declining rules and privacy by reaction
+        if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))
+                && event.getReactionEmote().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.ruleReactionID"))) {
             NationMember nationMember = new NationMember(event.getMember(), event.getUserId());
             if (nationMember.existsinDB()) {
                 nationMember.removeFromDB();

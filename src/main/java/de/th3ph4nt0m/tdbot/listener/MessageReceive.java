@@ -1,5 +1,5 @@
 /*******************************************************************************
- CommandListener.java is part of the TD-Bot project
+ MessageReceive.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -22,21 +22,24 @@
 
 package de.th3ph4nt0m.tdbot.listener;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
-import de.th3ph4nt0m.tdbot.core.CommandParser;
+import de.th3ph4nt0m.tdbot.Bot;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+
 public
-class CommandListener extends ListenerAdapter
-{
-    /**
-     * Listener for command handling
-     */
-    public void onMessageReceived(MessageReceivedEvent event)
-    {
-        if (event.getMessage().getContentRaw().startsWith("+") && !event.getMessage().getId().equals(event.getJDA().getSelfUser().getId())) {
-            CommandHandler.handleCommand(CommandParser.parser(event.getMessage().getContentRaw(), event));
+class MessageReceive extends ListenerAdapter {
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
+        Message msg = event.getMessage();
+
+        //delete commands for @Groovy in unsupported channels
+        if (event.getMessage().getContentRaw().startsWith("-") && !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
+            if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyChannelID"))) {
+                msg.delete().queue();
+            }
         }
+
     }
 }

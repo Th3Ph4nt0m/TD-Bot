@@ -1,12 +1,23 @@
 /*******************************************************************************
- Copyright (c) 2020 lostname.eu*
+ VoiceSystem.java is part of the TD-Bot project
 
- VoiceSystem.java is a part of the TD-Bot project.
- You are not allowed to copy, change or reproduce without the permission of lostname.eu.
+ TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
+ Copyright (C) 2020 Henrik Steffens
 
- * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as published
+ by the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
- Last edit: 2020/10/24
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.core;
@@ -19,16 +30,24 @@ import net.dv8tion.jda.api.requests.restaction.ChannelAction;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings ("DuplicatedCode")
+@SuppressWarnings("DuplicatedCode")
 public class VoiceSystem
 {
-    public final List<VoiceChannel> voiceChannels;
+    public final List<VoiceChannel> voiceChannels; //list of existing custom voice channels
 
     public VoiceSystem()
     {
         this.voiceChannels = new ArrayList<>();
     }
 
+    /**
+     * create a custom voice channel
+     *
+     * @param game   name of the user's current game
+     * @param guild  Discord Guild to create channel
+     * @param member user that creates the channel
+     * @param joined channel the user connected to to get the category
+     */
     public void createVoiceChannel(String game, Guild guild, Member member, VoiceChannel joined)
     {
         ChannelAction<VoiceChannel> temp = guild.createVoiceChannel("» " + game).setParent(joined.getParent()).setPosition(voiceChannels.size() + 1);
@@ -37,6 +56,14 @@ public class VoiceSystem
         member.getGuild().moveVoiceMember(member, channel).queue();
     }
 
+    /**
+     * create a custom competitive voice channel
+     *
+     * @param game   name of the user's current game
+     * @param guild  Discord Guild to create channel
+     * @param member user that creates the channel
+     * @param joined channel the user connected to to get the category
+     */
     public void createCompChannel(String game, Guild guild, Member member, VoiceChannel joined)
     {
         int limit = 0;
