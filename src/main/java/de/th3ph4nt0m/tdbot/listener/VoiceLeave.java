@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/24
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.listener;
@@ -21,6 +21,7 @@ class VoiceLeave extends ListenerAdapter
 
     @Override public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
     {
+        //delete custom channel as soon as empty
         if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
             if (event.getChannelLeft().getMembers().size() <= 0) {
                 event.getChannelLeft().delete().queue();

@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/31
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -17,6 +17,11 @@ import java.util.Properties;
 public class Property
 {
 
+    /**
+     * @param file name of the file
+     * @param key  the key to look for in the config
+     * @return value of the given key
+     */
     public String get(String file, String key)
     {
         try (InputStream input = new FileInputStream("cfg/" + file + ".properties")) {
@@ -36,7 +41,9 @@ public class Property
         return null;
     }
 
-    //create the default properties-file
+    /**
+     * create the default properties-file
+     */
     public void setDefaultProps()
     {
         //create the file if not exists
@@ -69,9 +76,9 @@ public class Property
                 prop.setProperty("bot.token", "token");
                 prop.setProperty("bot.autoprint", "0");
                 prop.setProperty("bot.rulesID", "RuleChannelID");
-                prop.setProperty("bot.groovyChannelID","GroovyChannelID");
-                prop.setProperty("bot.afkID","AFKChannelID");
-                prop.setProperty("bot.createID","CreateChannelID");
+                prop.setProperty("bot.groovyChannelID", "GroovyChannelID");
+                prop.setProperty("bot.afkID", "AFKChannelID");
+                prop.setProperty("bot.createID", "CreateChannelID");
                 prop.setProperty("bot.compID", "CompCreateChannelID");
                 prop.setProperty("bot.highestRole", "HighestRoleID");
                 prop.setProperty("bot.adminChannelID", "AdminChannelID");

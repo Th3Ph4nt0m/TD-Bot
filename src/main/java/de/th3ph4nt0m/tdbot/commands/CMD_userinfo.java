@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/31
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.commands;
@@ -26,8 +26,10 @@ public class CMD_userinfo implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
+        //initialising a NationMember to access the DB
         Member m = event.getMessage().getMentionedMembers().get(0);
         NationMember nationMember = new NationMember(m, m.getId());
+        //check if user is allowed to access the information
         if (event.getMember().getRoles().contains(Bot.getInstance().getJda().getRoleById(Bot.getInstance().getProperty().get("bot", "bot.highestRole"))) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
             event.getChannel().sendMessage(nationMember.getInfo()).queue();
         } else {
