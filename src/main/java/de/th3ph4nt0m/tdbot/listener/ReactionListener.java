@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/24
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.listener;
@@ -24,8 +24,10 @@ public class ReactionListener extends ListenerAdapter
     @Override
     public void onGuildMessageReactionAdd(GuildMessageReactionAddEvent event)
     {
+        //listener for accepting rules and privacy by reaction
         if (!event.getUser().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))) {
+            if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))
+                    && event.getReactionEmote().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.ruleReactionID"))) {
                 NationMember nationMember = new NationMember(event.getMember(), event.getMember().getId());
                 if (!nationMember.existsinDB()) {
                     nationMember.createInDB();
@@ -38,7 +40,9 @@ public class ReactionListener extends ListenerAdapter
     @Override
     public void onGuildMessageReactionRemove(GuildMessageReactionRemoveEvent event)
     {
-        if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))) {
+        //listener for declining rules and privacy by reaction
+        if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))
+                && event.getReactionEmote().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.ruleReactionID"))) {
             NationMember nationMember = new NationMember(event.getMember(), event.getUserId());
             if (nationMember.existsinDB()) {
                 nationMember.removeFromDB();

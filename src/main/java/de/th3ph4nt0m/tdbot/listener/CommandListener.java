@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/24
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.listener;
@@ -19,8 +19,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public
 class CommandListener extends ListenerAdapter
 {
-    public
-    void onMessageReceived(MessageReceivedEvent event)
+    /**
+     * Listener for command handling
+     */
+    public void onMessageReceived(MessageReceivedEvent event)
     {
         if (event.getMessage().getContentRaw().startsWith("+") && !event.getMessage().getId().equals(event.getJDA().getSelfUser().getId())) {
             CommandHandler.handleCommand(CommandParser.parser(event.getMessage().getContentRaw(), event));

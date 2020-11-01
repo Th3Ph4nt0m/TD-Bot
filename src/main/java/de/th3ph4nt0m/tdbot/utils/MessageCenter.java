@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/30
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -24,6 +24,9 @@ public class MessageCenter
 
     private static MessageCenter instance;
 
+    /**
+     * @param autoPrint variable to decide if messages are printed at startup
+     */
     public MessageCenter(boolean autoPrint)
     {
         instance = this;
@@ -37,6 +40,11 @@ public class MessageCenter
         return instance;
     }
 
+    /**
+     * create and send an embed message
+     *
+     * @param channelID ID of the channel to send the message to
+     */
     public void printRulesAndPrivacy(String channelID)
     {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(channelID);
@@ -53,11 +61,19 @@ public class MessageCenter
         channel.sendMessage(builder.build()).queue(message -> message.addReaction("✅").queue());
     }
 
+    /**
+     * automatically send messages on startup
+     */
     private void autoPrint()
     {
         printRulesAndPrivacy(Bot.getInstance().getProperty().get("bot", "bot.rulesID"));
     }
 
+    /**
+     * create and send an embed message
+     *
+     * @param channel private message Channel
+     */
     public void sendPrivacyNotAccepted(RestAction<PrivateChannel> channel)
     {
         EmbedBuilder builder = new EmbedBuilder();
@@ -68,6 +84,11 @@ public class MessageCenter
         channel.complete().sendMessage(builder.build()).queue();
     }
 
+    /**
+     * create and send an embed message
+     *
+     * @param channel private message channel
+     */
     public void sendNoGame(RestAction<PrivateChannel> channel)
     {
         EmbedBuilder builder = new EmbedBuilder();
@@ -78,7 +99,13 @@ public class MessageCenter
         channel.complete().sendMessage(builder.build()).queue();
     }
 
-    public void sendNoAccess(String channelID) {
+    /**
+     * create and send an embed message
+     *
+     * @param channelID ID of the channel to send the message to
+     */
+    public void sendNoAccess(String channelID)
+    {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(channelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.RED)

@@ -6,7 +6,7 @@
 
  * lostname.eu is a project of Henrik Steffens. He owns all rights to "LostNameEU systems".
 
- Last edit: 2020/10/24
+ Last edit: 2020/11/1
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.core;
@@ -19,13 +19,19 @@ public
 class CommandParser
 {
 
-    public static
-    CommandContainer parser(String raw, MessageReceivedEvent event)
+    /**
+     * Parser of command system
+     *
+     * @param raw   raw String of received message
+     * @param event event in what the message was received
+     * @return CommandContainer
+     */
+    public static CommandContainer parser(String raw, MessageReceivedEvent event)
     {
         String beheaded = raw.replaceFirst("\\+", "");
         String[] splitBeheaded = beheaded.split(" ");
         String invoke = splitBeheaded[0];
-        ArrayList <String> split = new ArrayList <>();
+        ArrayList<String> split = new ArrayList<>();
         for (String s : splitBeheaded) {
             split.add(s);
         }
