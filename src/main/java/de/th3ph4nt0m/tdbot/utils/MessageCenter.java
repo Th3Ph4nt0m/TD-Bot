@@ -41,9 +41,9 @@ public class MessageCenter
     public MessageCenter(boolean autoPrint)
     {
         instance = this;
-        if (autoPrint) {
+//        if (autoPrint) {
             autoPrint();
-        }
+//        }
     }
 
     public static MessageCenter getInstance()
@@ -64,12 +64,14 @@ public class MessageCenter
         builder.setTitle(":scroll: Rules - :lock: privacy");
         builder.setDescription("To use the services of the TD-Nation Discord server, you need to accept the rules and agree with our privacy policy.\n" +
                 "\n" +
-                "**Rules**\n https://lostname.eu/public/partner/td/rules.html\n" +
-                "\n" +
-                "**Privacy Policy**\n https://lostname.eu/public/partner/td/privacy.html\n ")
+                "[RULES](https://www.lostname.eu/public/partner/td/rules.html/)" +
+                "\n\n" +
+                "[Privacy Policies](https://www.lostname.eu/public/partner/td/privacy.html/)")
                 .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         assert channel != null;
-        channel.sendMessage(builder.build()).queue(message -> message.addReaction("✅").queue());
+        channel.sendMessage(builder.build()).queue(message -> {
+            message.editMessage(builder.build()).queue();
+        });
     }
 
     /**
