@@ -67,7 +67,7 @@ public class MessageCenter
                 "**Rules**\n https://lostname.eu/public/partner/td/rules.html\n" +
                 "\n" +
                 "**Privacy Policy**\n https://lostname.eu/public/partner/td/privacy.html\n ")
-                .setFooter("TD-Bot ©2020 LostNameEU");
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         assert channel != null;
         channel.sendMessage(builder.build()).queue(message -> message.addReaction("✅").queue());
     }
@@ -91,7 +91,7 @@ public class MessageCenter
         builder.setTitle("Authentication Error!")
                 .setColor(Color.RED)
                 .setDescription("you need to accept our Privacy Policy to use this service\n")
-                .setFooter("TD-Bot ©2020 LostNameEU");
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         channel.complete().sendMessage(builder.build()).queue();
     }
 
@@ -106,7 +106,7 @@ public class MessageCenter
         builder.setColor(Color.ORANGE)
                 .setTitle("No game detected")
                 .setDescription("I could not detect a game in your rich presence\n\nFor creating a ``»Talk``, please join the ``Voice × Creator``\nFor creating a ``competitive channel``, please enable rich presence in ``User settings --> Game Activity --> Display currently running game as a status message.`` and join ''Comp × Creator`` again.")
-                .setFooter("TD-Bot ©2020 LostNameEU");
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         channel.complete().sendMessage(builder.build()).queue();
     }
 
@@ -122,7 +122,7 @@ public class MessageCenter
         builder.setColor(Color.RED)
                 .setTitle("Limited Access")
                 .setDescription("You need to own the OP role to execute this command. \n\nPlease note that this command can only be executed in admin channels")
-                .setFooter("TD-Bot ©2020 LostNameEU");
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         channel.sendMessage(builder.build()).queue();
 
     }
