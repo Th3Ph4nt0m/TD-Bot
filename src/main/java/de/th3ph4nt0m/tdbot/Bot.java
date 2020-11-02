@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/2
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot;
@@ -25,7 +25,7 @@ package de.th3ph4nt0m.tdbot;
 import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
-import de.th3ph4nt0m.tdbot.listener.*;
+import de.th3ph4nt0m.tdbot.event.*;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import de.th3ph4nt0m.tdbot.utils.MongoHandler;
 import de.th3ph4nt0m.tdbot.utils.Property;

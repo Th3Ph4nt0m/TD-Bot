@@ -1,5 +1,5 @@
 /*******************************************************************************
- MessageReceive.java is part of the TD-Bot project
+ VoiceLeave.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,27 +17,26 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/2
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.listener;
+package de.th3ph4nt0m.tdbot.event;
 
 import de.th3ph4nt0m.tdbot.Bot;
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-
 public
-class MessageReceive extends ListenerAdapter {
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        Message msg = event.getMessage();
+class VoiceLeave extends ListenerAdapter
+{
 
-        //delete commands for @Groovy in unsupported channels
-        if (event.getMessage().getContentRaw().startsWith("-") && !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyChannelID"))) {
-                msg.delete().queue();
+    @Override public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
+    {
+        //delete custom channel as soon as empty
+        if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
+            if (event.getChannelLeft().getMembers().size() <= 0) {
+                event.getChannelLeft().delete().queue();
+                Bot.getInstance().getVoiceSystem().voiceChannels.remove(event.getChannelLeft());
             }
         }
 
