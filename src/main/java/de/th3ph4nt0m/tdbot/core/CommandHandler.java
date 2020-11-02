@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/2
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.core;
@@ -30,7 +30,6 @@ public
 class CommandHandler
 {
 
-    public static final CommandParser parse = new CommandParser();
     public static HashMap <String, ICommand> commands = new HashMap <>();
 
     public static
@@ -42,7 +41,6 @@ class CommandHandler
             if (!safe) {
                 commands.get(cmd.invoke).action(cmd.args, cmd.event);
             }
-            commands.get(cmd.invoke).excecuted(safe, cmd.event);
         }
     }
 }

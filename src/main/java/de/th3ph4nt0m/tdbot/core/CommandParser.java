@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/2
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.core;
@@ -62,8 +62,7 @@ class CommandParser
         public final MessageReceivedEvent event;
 
 
-        public
-        CommandContainer(String raw, String beheaded, String[] splitBeheaded, String invoke, String[] args, MessageReceivedEvent event)
+        public CommandContainer(String raw, String beheaded, String[] splitBeheaded, String invoke, String[] args, MessageReceivedEvent event)
         {
             this.raw = raw;
             this.beheaded = beheaded;
