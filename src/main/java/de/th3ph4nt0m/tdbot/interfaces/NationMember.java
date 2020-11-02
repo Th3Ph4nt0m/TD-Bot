@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/2
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.interfaces;
@@ -25,6 +25,7 @@ package de.th3ph4nt0m.tdbot.interfaces;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
 import org.bson.Document;
@@ -99,6 +100,24 @@ public class NationMember
             }
         }
         return null;
+    }
+
+    public DiscordRank getRank()
+    {
+        switch (member.getRoles().get(0).getName()) {
+            case "OP":
+                return DiscordRank.OP;
+            case "Bot":
+                return DiscordRank.BOT;
+            case "Team":
+                return DiscordRank.TEAM;
+            case "VIP":
+                return DiscordRank.VIP;
+            case "The Nation":
+                return DiscordRank.THE_NATION;
+            default:
+                return DiscordRank.UNVERIFIED;
+        }
     }
 
     /**
