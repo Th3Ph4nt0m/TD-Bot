@@ -22,6 +22,7 @@
 
 package de.th3ph4nt0m.tdbot;
 
+import de.th3ph4nt0m.tdbot.commands.CMD_repo;
 import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
 import de.th3ph4nt0m.tdbot.commands.CMD_version;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
@@ -79,6 +80,7 @@ class Bot implements EventListener
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
             CommandHandler.commands.put("info", new CMD_userinfo());
             CommandHandler.commands.put("version", new CMD_version());
+            CommandHandler.commands.put("repo", new CMD_repo());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
