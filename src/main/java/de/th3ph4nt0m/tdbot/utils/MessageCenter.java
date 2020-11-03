@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/2
+ Last edit: 2020/11/3
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -72,6 +72,17 @@ public class MessageCenter
         channel.sendMessage(builder.build()).queue(message -> {
             message.editMessage(builder.build()).queue();
         });
+    }
+
+    public void printError(String pErrorName, Color pEmbedColor, String pChannelID)
+    {
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(pEmbedColor);
+        builder.setTitle(pErrorName);
+        builder.setDescription("Your query could not be completed.")
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+        channel.sendMessage(builder.build()).queue();
     }
 
     /**
