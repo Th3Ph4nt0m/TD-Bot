@@ -17,12 +17,13 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/2
+ Last edit: 2020/11/3
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot;
 
 import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
+import de.th3ph4nt0m.tdbot.commands.CMD_version;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
 import de.th3ph4nt0m.tdbot.event.*;
@@ -77,6 +78,7 @@ class Bot implements EventListener
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
             CommandHandler.commands.put("info", new CMD_userinfo());
+            CommandHandler.commands.put("version", new CMD_version());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }

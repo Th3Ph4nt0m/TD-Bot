@@ -27,8 +27,14 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.RestAction;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class MessageCenter
 {
@@ -74,15 +80,42 @@ public class MessageCenter
         });
     }
 
+    /**
+     * create and send an embed message
+     *
+     * @param pErrorName  name of the error | embed title
+     * @param pEmbedColor color of the embed
+     * @param pChannelID  ID of the channel to send the message to
+     */
     public void printError(String pErrorName, Color pEmbedColor, String pChannelID)
     {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(pEmbedColor);
         builder.setTitle(pErrorName);
-        builder.setDescription("Your query could not be completed.")
+        builder.setDescription("Your query could not be completed.\n\nPlease try again or [report a bug][https://github.com/Th3Ph4nt0m/TD-Bot/issues].")
                 .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         channel.sendMessage(builder.build()).queue();
+    }
+
+    public void printVersion(String pChannelID)
+    {
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        Model model;
+        if ((new File("pom.xml")).exists()) {
+            try {
+                model = reader.read(new FileReader("pom.xml"));
+                EmbedBuilder builder = new EmbedBuilder();
+                builder.setColor(Color.blue);
+                builder.setDescription("My current version is ``" + model.getVersion() + "``.");
+                assert channel != null;
+                channel.sendMessage(builder.build()).queue();
+            } catch (IOException | XmlPullParserException e) {
+                e.printStackTrace();
+                printError("Unexpected Error", Color.RED, pChannelID);
+            }
+        }
     }
 
     /**
