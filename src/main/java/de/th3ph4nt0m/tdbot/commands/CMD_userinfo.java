@@ -25,6 +25,7 @@ package de.th3ph4nt0m.tdbot.commands;
 import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -40,8 +41,10 @@ public class CMD_userinfo implements ICommand {
         //initialising a NationMember to access the DB
         Member m = event.getMessage().getMentionedMembers().get(0);
         NationMember nationMember = new NationMember(m, m.getId());
+        Member author = event.getMember();
+        NationMember authorMember = new NationMember(author,author.getId());
         //check if user is allowed to access the information
-        if (event.getMember().getRoles().contains(Bot.getInstance().getJda().getRoleById(Bot.getInstance().getProperty().get("bot", "bot.highestRole"))) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
+        if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
             event.getChannel().sendMessage(nationMember.getInfo()).queue();
         } else {
             MessageCenter.getInstance().sendNoAccess(event.getChannel().getId());
