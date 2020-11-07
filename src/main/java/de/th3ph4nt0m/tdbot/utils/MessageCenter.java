@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/3
+ Last edit: 2020/11/6
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -27,14 +27,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.RestAction;
-import org.apache.maven.model.Model;
-import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class MessageCenter
 {
@@ -98,24 +92,19 @@ public class MessageCenter
         channel.sendMessage(builder.build()).queue();
     }
 
+    /**
+     * Prints the latest release from the github repo
+     *
+     * @param pChannelID ID of the channel to send the message to
+     */
     public void printVersion(String pChannelID)
     {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
-        MavenXpp3Reader reader = new MavenXpp3Reader();
-        Model model;
-        if ((new File("pom.xml")).exists()) {
-            try {
-                model = reader.read(new FileReader("pom.xml"));
-                EmbedBuilder builder = new EmbedBuilder();
-                builder.setColor(Color.blue);
-                builder.setDescription("My current version is ``" + model.getVersion() + "``.");
-                assert channel != null;
-                channel.sendMessage(builder.build()).queue();
-            } catch (IOException | XmlPullParserException e) {
-                e.printStackTrace();
-                printError("Unexpected Error", Color.RED, pChannelID);
-            }
-        }
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.blue);
+        builder.setDescription("My current version is ``" + Bot.getInstance().getGhLoader().getLatestTagName() + "``.");
+        assert channel != null;
+        channel.sendMessage(builder.build()).queue();
     }
 
     /**

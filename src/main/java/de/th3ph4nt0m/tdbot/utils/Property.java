@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/6
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -94,6 +94,7 @@ public class Property
                 prop.setProperty("bot.compID", "CompCreateChannelID");
                 prop.setProperty("bot.highestRole", "HighestRoleID");
                 prop.setProperty("bot.adminChannelID", "AdminChannelID");
+                prop.setProperty("github.toekn", "token");
 
                 // save properties to project folder
                 prop.store(output, null);

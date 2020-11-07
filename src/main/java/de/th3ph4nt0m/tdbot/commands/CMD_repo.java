@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/3
+ Last edit: 2020/11/4
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.commands;
@@ -42,7 +42,7 @@ public class CMD_repo implements ICommand
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.BLUE);
         builder.setTitle("Repository Information");
-        builder.setDescription("The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github][https://github.com/Th3Ph4nt0m/TD-Bot/]");
+        builder.setDescription("The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github](https://github.com/Th3Ph4nt0m/TD-Bot/)");
         builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         event.getChannel().sendMessage(builder.build()).queue();
     }
