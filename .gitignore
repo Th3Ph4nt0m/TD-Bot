@@ -40,5 +40,5 @@ buildNumber.properties
 src/test
 .idea
 target
-TD-Bot.iml
+tdbot.iml
 
