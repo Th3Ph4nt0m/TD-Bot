@@ -25,6 +25,7 @@ package de.th3ph4nt0m.tdbot.core;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
 import java.util.HashMap;
+import java.util.List;
 
 public
 class CommandHandler
@@ -41,5 +42,15 @@ class CommandHandler
                 commands.get(cmd.invoke).action(cmd.args, cmd.event);
             }
         }
+    }
+    public List<String> listAdminCommands()
+    {
+        List<String> list = null;
+        return list;
+    }
+    public List<String> listCommands()
+    {
+        List<String> list = null;
+        return list;
     }
 }
