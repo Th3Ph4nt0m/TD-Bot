@@ -36,9 +36,9 @@ class CommandHandler
     void handleCommand(CommandParser.CommandContainer cmd)
     {
         if (commands.containsKey(cmd.invoke)) {
-            boolean safe = commands.get(cmd.invoke).called(cmd.args, cmd.event);
+            boolean unsafe = commands.get(cmd.invoke).called(cmd.args, cmd.event);
 
-            if (!safe) {
+            if (!unsafe) {
                 commands.get(cmd.invoke).action(cmd.args, cmd.event);
             }
         }

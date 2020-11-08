@@ -22,6 +22,7 @@
 
 package de.th3ph4nt0m.tdbot;
 
+import de.th3ph4nt0m.tdbot.commands.CMD_flipcoin;
 import de.th3ph4nt0m.tdbot.commands.CMD_repo;
 import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
 import de.th3ph4nt0m.tdbot.commands.CMD_version;
@@ -84,6 +85,7 @@ class Bot implements EventListener
             CommandHandler.commands.put("info", new CMD_userinfo());
             CommandHandler.commands.put("version", new CMD_version());
             CommandHandler.commands.put("repo", new CMD_repo());
+            CommandHandler.commands.put("flipCoin", new CMD_flipcoin());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }

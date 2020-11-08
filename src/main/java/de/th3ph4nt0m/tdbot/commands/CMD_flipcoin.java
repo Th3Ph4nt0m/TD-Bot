@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_userinfo.java is part of the TD-Bot project
+ CMD_repo.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,38 +17,30 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/2
+ Last edit: 2020/11/4
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
-import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_userinfo implements ICommand {
+public class CMD_flipcoin implements ICommand {
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        Member author = event.getMember();
-        NationMember authorMember = new NationMember(author,author.getId());
-        //check if user is allowed to access the information
-        if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
-            return false;
-        }
-        MessageCenter.getInstance().sendNoAccess(event.getChannel().getId());
-        return true;
+        return false;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        //initialising a NationMember to access the DB
-        Member m = event.getMessage().getMentionedMembers().get(0);
-        NationMember nationMember = new NationMember(m, m.getId());
-        //sending information to the channel
-        event.getChannel().sendMessage(nationMember.getInfo()).queue();
+        if (Math.random() < 0.5) {
+            MessageCenter.getInstance().printCoinToss(event.getChannel().getId(),true);
+        }
+        else{
+            MessageCenter.getInstance().printCoinToss(event.getChannel().getId(),false);
+        }
     }
 }
+
+
