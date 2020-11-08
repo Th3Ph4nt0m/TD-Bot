@@ -69,9 +69,26 @@ public class MessageCenter
                 "[Privacy Policies](https://www.lostname.eu/public/partner/td/privacy.html/)")
                 .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         assert channel != null;
-        channel.sendMessage(builder.build()).queue(message -> {
-            message.editMessage(builder.build()).queue();
-        });
+        channel.sendMessage(builder.build()).queue(message -> message.editMessage(builder.build()).queue());
+    }
+
+    public void printCoinToss(String pChannelID, boolean head)
+    {
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.blue);
+        if(head)
+        {
+            builder.setTitle("Head");
+            builder.setDescription("You got Head.\n :CoinHeads:");
+        }
+        else
+        {
+            builder.setTitle("Tails");
+            builder.setDescription("You got Tails.\n :CoinTails:");
+        }
+        assert channel != null;
+        channel.sendMessage(builder.build()).queue();
     }
 
     /**
@@ -89,6 +106,7 @@ public class MessageCenter
         builder.setTitle(pErrorName);
         builder.setDescription("Your query could not be completed.\n\nPlease try again or [report a bug][https://github.com/Th3Ph4nt0m/TD-Bot/issues].")
                 .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+        assert channel != null;
         channel.sendMessage(builder.build()).queue();
     }
 
@@ -158,6 +176,7 @@ public class MessageCenter
                 .setTitle("Limited Access")
                 .setDescription("You need to own the OP role to execute this command. \n\nPlease note that this command can only be executed in admin channels")
                 .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+        assert channel != null;
         channel.sendMessage(builder.build()).queue();
 
     }
