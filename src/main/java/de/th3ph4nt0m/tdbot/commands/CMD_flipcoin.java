@@ -34,12 +34,7 @@ public class CMD_flipcoin implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        if (Math.random() < 0.5) {
-            MessageCenter.getInstance().printCoinToss(event.getChannel().getId(),true);
-        }
-        else{
-            MessageCenter.getInstance().printCoinToss(event.getChannel().getId(),false);
-        }
+        MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
     }
 }
 
