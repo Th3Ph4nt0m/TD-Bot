@@ -30,10 +30,9 @@ public
 class CommandHandler
 {
 
-    public static HashMap <String, ICommand> commands = new HashMap <>();
+    public HashMap <String, ICommand> commands = new HashMap <>();
 
-    public static
-    void handleCommand(CommandParser.CommandContainer cmd)
+    public void handleCommand(CommandParser.CommandContainer cmd)
     {
         if (commands.containsKey(cmd.invoke)) {
             boolean unsafe = commands.get(cmd.invoke).called(cmd.args, cmd.event);

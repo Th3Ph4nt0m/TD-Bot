@@ -22,6 +22,7 @@
 
 package de.th3ph4nt0m.tdbot.event;
 
+import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.CommandParser;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -36,7 +37,7 @@ class CommandListener extends ListenerAdapter
     public void onMessageReceived(MessageReceivedEvent event)
     {
         if (event.getMessage().getContentRaw().startsWith("+") && !event.getMessage().getId().equals(event.getJDA().getSelfUser().getId())) {
-            CommandHandler.handleCommand(CommandParser.parser(event.getMessage().getContentRaw(), event));
+            Bot.getInstance().getCommandHandler().handleCommand(CommandParser.parser(event.getMessage().getContentRaw(), event));
         }
     }
 }
