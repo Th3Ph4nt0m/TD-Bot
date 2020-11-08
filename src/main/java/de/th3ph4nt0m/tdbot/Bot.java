@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/3
+ Last edit: 2020/11/6
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot;
@@ -28,6 +28,7 @@ import de.th3ph4nt0m.tdbot.commands.CMD_version;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
 import de.th3ph4nt0m.tdbot.event.*;
+import de.th3ph4nt0m.tdbot.loader.GitHubLoader;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import de.th3ph4nt0m.tdbot.utils.MongoHandler;
 import de.th3ph4nt0m.tdbot.utils.Property;
@@ -53,6 +54,7 @@ class Bot implements EventListener
     private MongoHandler mongoHandler;
     private VoiceSystem voiceSystem;
     private Property property;
+    private GitHubLoader ghLoader;
 
 
     public Bot()
@@ -70,6 +72,7 @@ class Bot implements EventListener
                     .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
                     .build();
             this.mongoHandler = new MongoHandler();
+            this.ghLoader = new GitHubLoader();
             jda.addEventListener(new VoiceConnect());
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
@@ -104,6 +107,11 @@ class Bot implements EventListener
     public VoiceSystem getVoiceSystem()
     {
         return voiceSystem;
+    }
+
+    public GitHubLoader getGhLoader()
+    {
+        return ghLoader;
     }
 
     public Property getProperty()
