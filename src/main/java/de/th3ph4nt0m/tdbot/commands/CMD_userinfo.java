@@ -33,7 +33,14 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class CMD_userinfo implements ICommand {
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
-        return false;
+        Member author = event.getMember();
+        NationMember authorMember = new NationMember(author,author.getId());
+        //check if user is allowed to access the information
+        if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
+            return false;
+        }
+        MessageCenter.getInstance().sendNoAccess(event.getChannel().getId());
+        return true;
     }
 
     @Override
@@ -41,13 +48,7 @@ public class CMD_userinfo implements ICommand {
         //initialising a NationMember to access the DB
         Member m = event.getMessage().getMentionedMembers().get(0);
         NationMember nationMember = new NationMember(m, m.getId());
-        Member author = event.getMember();
-        NationMember authorMember = new NationMember(author,author.getId());
-        //check if user is allowed to access the information
-        if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
-            event.getChannel().sendMessage(nationMember.getInfo()).queue();
-        } else {
-            MessageCenter.getInstance().sendNoAccess(event.getChannel().getId());
-        }
+        //sending information to the channel
+        event.getChannel().sendMessage(nationMember.getInfo()).queue();
     }
 }
