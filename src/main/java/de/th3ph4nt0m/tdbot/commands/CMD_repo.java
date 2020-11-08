@@ -30,6 +30,9 @@ import java.awt.*;
 
 public class CMD_repo implements ICommand
 {
+    String description = "description";
+    boolean adminCommand = false;
+
     @Override
     public boolean called(String[] args, MessageReceivedEvent event)
     {
@@ -45,5 +48,15 @@ public class CMD_repo implements ICommand
         builder.setDescription("The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github](https://github.com/Th3Ph4nt0m/TD-Bot/)");
         builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         event.getChannel().sendMessage(builder.build()).queue();
+    }
+
+    @Override
+    public boolean adminCommandOnly() {
+        return this.adminCommand;
+    }
+
+    @Override
+    public String description() {
+        return this.description;
     }
 }

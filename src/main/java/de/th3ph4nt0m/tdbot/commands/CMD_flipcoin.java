@@ -27,6 +27,10 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_flipcoin implements ICommand {
+
+    String description = "description";
+    boolean adminCommand = false;
+
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         return false;
@@ -36,6 +40,17 @@ public class CMD_flipcoin implements ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
     }
+
+    @Override
+    public boolean adminCommandOnly() {
+        return this.adminCommand;
+    }
+
+    @Override
+    public String description() {
+        return this.description;
+    }
+
 }
 
 

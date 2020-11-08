@@ -28,6 +28,10 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_version implements ICommand
 {
+
+    String description = "description";
+    boolean adminCommand = false;
+
     @Override
     public boolean called(String[] args, MessageReceivedEvent event)
     {
@@ -38,5 +42,15 @@ public class CMD_version implements ICommand
     public void action(String[] args, MessageReceivedEvent event)
     {
         MessageCenter.getInstance().printVersion(event.getChannel().getId());
+    }
+
+    @Override
+    public boolean adminCommandOnly() {
+        return this.adminCommand;
+    }
+
+    @Override
+    public String description() {
+        return this.description;
     }
 }

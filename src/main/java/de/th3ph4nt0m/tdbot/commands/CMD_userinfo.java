@@ -31,6 +31,10 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_userinfo implements ICommand {
+
+    String description = "description";
+    boolean adminCommand = true;
+
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
         Member author = event.getMember();
@@ -50,5 +54,15 @@ public class CMD_userinfo implements ICommand {
         NationMember nationMember = new NationMember(m, m.getId());
         //sending information to the channel
         event.getChannel().sendMessage(nationMember.getInfo()).queue();
+    }
+
+    @Override
+    public boolean adminCommandOnly() {
+        return this.adminCommand;
+    }
+
+    @Override
+    public String description() {
+        return this.description;
     }
 }
