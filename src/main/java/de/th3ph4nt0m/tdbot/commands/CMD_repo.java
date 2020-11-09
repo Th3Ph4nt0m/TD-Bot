@@ -22,6 +22,7 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -30,10 +31,11 @@ import java.awt.*;
 
 public class CMD_repo implements ICommand
 {
-
-    String name = "repo";
-    String description = "description";
-    boolean adminCommand = false;
+    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "repo",
+            false,
+            "Repo gives you information about the current open source bot repository."
+    );
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event)
@@ -53,15 +55,8 @@ public class CMD_repo implements ICommand
     }
 
     @Override
-    public String name() { return this.name; }
-
-    @Override
-    public boolean adminCommandOnly() {
-        return this.adminCommand;
+    public CommandHandler.CommandInfo getInfo() {
+        return commandInfo;
     }
 
-    @Override
-    public String description() {
-        return this.description;
-    }
 }

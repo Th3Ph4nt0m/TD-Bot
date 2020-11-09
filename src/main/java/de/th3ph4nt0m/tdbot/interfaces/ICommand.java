@@ -22,6 +22,7 @@
 
 package de.th3ph4nt0m.tdbot.interfaces;
 
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public
@@ -31,10 +32,8 @@ interface ICommand
 
     void action(String[] args, MessageReceivedEvent event);
 
-    String name();
+    CommandHandler.CommandInfo getInfo();
 
-    boolean adminCommandOnly();
 
-    String description();
 
 }

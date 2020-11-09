@@ -22,16 +22,18 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_version implements ICommand
 {
-
-    String name = "version";
-    String description = "description";
-    boolean adminCommand = false;
+    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "version",
+            false,
+            "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
+    );
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event)
@@ -46,15 +48,8 @@ public class CMD_version implements ICommand
     }
 
     @Override
-    public String name() { return this.name; }
-
-    @Override
-    public boolean adminCommandOnly() {
-        return this.adminCommand;
+    public CommandHandler.CommandInfo getInfo() {
+        return commandInfo;
     }
 
-    @Override
-    public String description() {
-        return this.description;
-    }
 }

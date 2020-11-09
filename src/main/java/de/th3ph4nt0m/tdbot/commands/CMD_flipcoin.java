@@ -22,15 +22,18 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_flipcoin implements ICommand {
-
-    String name = "flipCoin";
-    String description = "description";
-    boolean adminCommand = false;
+public class CMD_flipcoin implements ICommand
+{
+    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "flipCoin",
+            false,
+            "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
+    );
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -41,19 +44,9 @@ public class CMD_flipcoin implements ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
     }
-    @Override
-    public String name() { return this.name; }
 
     @Override
-    public boolean adminCommandOnly() {
-        return this.adminCommand;
-    }
-
-    @Override
-    public String description() {
-        return this.description;
-    }
-
+    public CommandHandler.CommandInfo getInfo() { return commandInfo; }
 }
 
 

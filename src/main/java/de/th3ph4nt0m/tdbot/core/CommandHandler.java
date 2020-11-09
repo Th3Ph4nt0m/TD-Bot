@@ -59,16 +59,15 @@ class CommandHandler
 
     public void addCommand(ICommand command)
     {
-        commands.put(command.name(),command);
+        commands.put(command.getInfo().name,command);
     }
 
     public List<CommandInfo> listCommands()
     {
         List<CommandInfo> list = new ArrayList<>();
-        Collection<ICommand> commandContent = commands.values();
-        for(ICommand command:commandContent)
+        for(ICommand command:commands.values())
         {
-            list.add(new CommandInfo(command.name(), command.adminCommandOnly(), command.description()));
+            list.add(new CommandInfo(command.getInfo().name, command.getInfo().adminCommand, command.getInfo().description));
         }
         return list;
     }

@@ -23,6 +23,7 @@
 package de.th3ph4nt0m.tdbot.commands;
 
 import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
@@ -30,11 +31,13 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_userinfo implements ICommand {
-
-    String name = "info";
-    String description = "description";
-    boolean adminCommand = true;
+public class CMD_userinfo implements ICommand
+{
+    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "info",
+            true,
+            "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine."
+    );
 
     @Override
     public boolean called(String[] args, MessageReceivedEvent event) {
@@ -58,15 +61,8 @@ public class CMD_userinfo implements ICommand {
     }
 
     @Override
-    public String name() { return this.name; }
-
-    @Override
-    public boolean adminCommandOnly() {
-        return this.adminCommand;
+    public CommandHandler.CommandInfo getInfo() {
+        return commandInfo;
     }
 
-    @Override
-    public String description() {
-        return this.description;
-    }
 }
