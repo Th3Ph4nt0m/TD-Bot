@@ -22,14 +22,27 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
+import de.th3ph4nt0m.tdbot.commands.CMD_flipcoin;
+import de.th3ph4nt0m.tdbot.commands.CMD_repo;
+import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
+import de.th3ph4nt0m.tdbot.commands.CMD_version;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 public
 class CommandHandler
 {
+    public CommandHandler()
+    {
+        addCommand(new CMD_flipcoin());
+        addCommand(new CMD_repo());
+        addCommand(new CMD_userinfo());
+        addCommand(new CMD_version());
+    }
 
     public HashMap <String, ICommand> commands = new HashMap <>();
 
@@ -43,14 +56,34 @@ class CommandHandler
             }
         }
     }
-    public List<String> listAdminCommands()
+
+    public void addCommand(ICommand command)
     {
-        List<String> list = null;
+        commands.put(command.name(),command);
+    }
+
+    public List<CommandInfo> listCommands()
+    {
+        List<CommandInfo> list = new ArrayList<>();
+        Collection<ICommand> commandContent = commands.values();
+        for(ICommand command:commandContent)
+        {
+            list.add(new CommandInfo("", command.adminCommandOnly(), command.description()));
+        }
         return list;
     }
-    public List<String> listCommands()
+
+
+    public static class CommandInfo
     {
-        List<String> list = null;
-        return list;
+        public final String name;
+        public final boolean adminCommand;
+        public final String description;
+        public CommandInfo(String name, boolean adminCommand, String description)
+        {
+            this.name = name;
+            this.adminCommand = adminCommand;
+            this.description = description;
+        }
     }
 }

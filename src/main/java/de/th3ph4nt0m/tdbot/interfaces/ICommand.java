@@ -30,7 +30,9 @@ interface ICommand
     boolean called(String[] args, MessageReceivedEvent event);
 
     void action(String[] args, MessageReceivedEvent event);
-    
+
+    String name();
+
     boolean adminCommandOnly();
 
     String description();

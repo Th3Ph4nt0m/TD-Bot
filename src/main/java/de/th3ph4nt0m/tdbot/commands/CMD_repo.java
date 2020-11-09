@@ -30,6 +30,8 @@ import java.awt.*;
 
 public class CMD_repo implements ICommand
 {
+
+    String name = "repo";
     String description = "description";
     boolean adminCommand = false;
 
@@ -49,6 +51,9 @@ public class CMD_repo implements ICommand
         builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         event.getChannel().sendMessage(builder.build()).queue();
     }
+
+    @Override
+    public String name() { return this.name; }
 
     @Override
     public boolean adminCommandOnly() {

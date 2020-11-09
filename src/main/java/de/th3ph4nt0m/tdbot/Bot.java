@@ -22,10 +22,6 @@
 
 package de.th3ph4nt0m.tdbot;
 
-import de.th3ph4nt0m.tdbot.commands.CMD_flipcoin;
-import de.th3ph4nt0m.tdbot.commands.CMD_repo;
-import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
-import de.th3ph4nt0m.tdbot.commands.CMD_version;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
 import de.th3ph4nt0m.tdbot.event.*;
@@ -83,7 +79,6 @@ class Bot implements EventListener
             jda.addEventListener(new CommandListener());
             jda.addEventListener(new ReactionListener());
             jda.awaitReady();
-            initCommands();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
@@ -123,14 +118,6 @@ class Bot implements EventListener
     public Property getProperty()
     {
         return property;
-    }
-
-    public void initCommands()
-    {
-        commandHandler.commands.put("info", new CMD_userinfo());
-        commandHandler.commands.put("version", new CMD_version());
-        commandHandler.commands.put("repo", new CMD_repo());
-        commandHandler.commands.put("flipCoin", new CMD_flipcoin());
     }
 
 

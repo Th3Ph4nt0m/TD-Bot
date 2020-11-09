@@ -28,6 +28,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_flipcoin implements ICommand {
 
+    String name = "flipCoin";
     String description = "description";
     boolean adminCommand = false;
 
@@ -40,6 +41,8 @@ public class CMD_flipcoin implements ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
     }
+    @Override
+    public String name() { return this.name; }
 
     @Override
     public boolean adminCommandOnly() {

@@ -32,6 +32,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_userinfo implements ICommand {
 
+    String name = "info";
     String description = "description";
     boolean adminCommand = true;
 
@@ -55,6 +56,9 @@ public class CMD_userinfo implements ICommand {
         //sending information to the channel
         event.getChannel().sendMessage(nationMember.getInfo()).queue();
     }
+
+    @Override
+    public String name() { return this.name; }
 
     @Override
     public boolean adminCommandOnly() {

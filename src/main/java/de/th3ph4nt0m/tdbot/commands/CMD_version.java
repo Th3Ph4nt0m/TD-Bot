@@ -29,6 +29,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class CMD_version implements ICommand
 {
 
+    String name = "version";
     String description = "description";
     boolean adminCommand = false;
 
@@ -43,6 +44,9 @@ public class CMD_version implements ICommand
     {
         MessageCenter.getInstance().printVersion(event.getChannel().getId());
     }
+
+    @Override
+    public String name() { return this.name; }
 
     @Override
     public boolean adminCommandOnly() {
