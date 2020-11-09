@@ -75,6 +75,12 @@ public class MessageCenter
         channel.sendMessage(builder.build()).queue(message -> message.editMessage(builder.build()).queue());
     }
 
+    /**
+     * Shows the outcome of the coin toss command
+     *
+     * @param pChannelID ID of the channel to send the message to
+     * @param head Outcome of the coin toss
+     */
     public void printCoinToss(String pChannelID, boolean head)
     {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
@@ -98,6 +104,12 @@ public class MessageCenter
         channel.sendMessage(builder.build()).queue();
     }
 
+    /**
+     * Prints the given commands as help
+     *
+     * @param pChannelID ID of the channel to send the message to
+     * @param commands Commands to be listed in help
+     */
     public void printHelp(String pChannelID, ArrayList<CommandHandler.CommandInfo> commands)
     {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
