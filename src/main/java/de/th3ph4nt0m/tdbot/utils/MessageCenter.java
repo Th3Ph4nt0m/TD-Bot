@@ -25,6 +25,7 @@ package de.th3ph4nt0m.tdbot.utils;
 import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.RestAction;
@@ -79,16 +80,20 @@ public class MessageCenter
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.blue);
+        Emote emote;
         if(head)
         {
+            emote = Bot.getInstance().getJda().getEmotesByName("CoinHeads", false).get(0);
             builder.setTitle("Head");
-            builder.setDescription("You got Head.\n <:CoinHeads:>");
+            builder.setDescription("You got Head.");
         }
         else
         {
+            emote = Bot.getInstance().getJda().getEmotesByName("CoinTails", false).get(0);
             builder.setTitle("Tails");
-            builder.setDescription("You got Tails.\n <:CoinTails:>");
+            builder.setDescription("You got Tails.");
         }
+        builder.setImage(emote.getImageUrl());
         assert channel != null;
         channel.sendMessage(builder.build()).queue();
     }
