@@ -82,12 +82,12 @@ public class MessageCenter
         if(head)
         {
             builder.setTitle("Head");
-            builder.setDescription("You got Head.\n :CoinHeads:");
+            builder.setDescription("You got Head.\n <:CoinHeads:>");
         }
         else
         {
             builder.setTitle("Tails");
-            builder.setDescription("You got Tails.\n :CoinTails:");
+            builder.setDescription("You got Tails.\n <:CoinTails:>");
         }
         assert channel != null;
         channel.sendMessage(builder.build()).queue();
