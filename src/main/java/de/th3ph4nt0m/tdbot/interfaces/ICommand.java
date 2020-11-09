@@ -28,8 +28,9 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public
 interface ICommand
 {
-    boolean called(String[] args, MessageReceivedEvent event);
-
+    //returns true when command is unsafe to run in current conditions
+    boolean unsafe(String[] args, MessageReceivedEvent event);
+    //calls the command
     void action(String[] args, MessageReceivedEvent event);
 
     CommandHandler.CommandInfo getInfo();

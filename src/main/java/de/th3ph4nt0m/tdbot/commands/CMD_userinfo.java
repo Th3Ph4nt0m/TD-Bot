@@ -40,7 +40,7 @@ public class CMD_userinfo implements ICommand
     );
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean unsafe(String[] args, MessageReceivedEvent event) {
         Member author = event.getMember();
         NationMember authorMember = new NationMember(author,author.getId());
         //check if user is allowed to access the information

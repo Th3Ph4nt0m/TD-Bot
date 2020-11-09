@@ -36,7 +36,7 @@ public class CMD_flipcoin implements ICommand
     );
 
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean unsafe(String[] args, MessageReceivedEvent event) {
         return false;
     }
 
