@@ -68,7 +68,7 @@ class CommandHandler
         Collection<ICommand> commandContent = commands.values();
         for(ICommand command:commandContent)
         {
-            list.add(new CommandInfo("", command.adminCommandOnly(), command.description()));
+            list.add(new CommandInfo(command.name(), command.adminCommandOnly(), command.description()));
         }
         return list;
     }
