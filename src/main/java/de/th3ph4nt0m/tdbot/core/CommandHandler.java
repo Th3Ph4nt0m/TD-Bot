@@ -22,15 +22,11 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
-import de.th3ph4nt0m.tdbot.commands.CMD_flipcoin;
-import de.th3ph4nt0m.tdbot.commands.CMD_repo;
-import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
-import de.th3ph4nt0m.tdbot.commands.CMD_version;
+import de.th3ph4nt0m.tdbot.commands.*;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public
 class CommandHandler
@@ -41,6 +37,7 @@ class CommandHandler
         addCommand(new CMD_repo());
         addCommand(new CMD_userinfo());
         addCommand(new CMD_version());
+        addCommand(new CMD_help());
     }
 
     public HashMap <String, ICommand> commands = new HashMap <>();
@@ -61,9 +58,9 @@ class CommandHandler
         commands.put(command.getInfo().name,command);
     }
 
-    public List<CommandInfo> listCommands()
+    public ArrayList<CommandInfo> listCommands()
     {
-        List<CommandInfo> list = new ArrayList<>();
+        ArrayList<CommandInfo> list = new ArrayList<>();
         for(ICommand command:commands.values())
         {
             list.add(new CommandInfo(command.getInfo().name, command.getInfo().adminCommand, command.getInfo().description));

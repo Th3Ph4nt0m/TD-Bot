@@ -33,7 +33,4 @@ interface ICommand
     void action(String[] args, MessageReceivedEvent event);
 
     CommandHandler.CommandInfo getInfo();
-
-
-
 }
