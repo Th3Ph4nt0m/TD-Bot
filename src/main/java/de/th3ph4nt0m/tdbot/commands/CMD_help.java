@@ -51,7 +51,7 @@ public class CMD_help implements ICommand
         Member author = event.getMember();
         NationMember authorMember = new NationMember(author,author.getId());
         //check if user gets admin commands
-        if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
+        if (authorMember.getRank().isAtLeast(DiscordRank.OP)) {
             MessageCenter.getInstance().printHelp(event.getChannel().getId(),Bot.getInstance().getCommandHandler().listCommands());
         }
         else {
