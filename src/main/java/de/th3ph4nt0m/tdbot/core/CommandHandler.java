@@ -29,7 +29,6 @@ import de.th3ph4nt0m.tdbot.commands.CMD_version;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
