@@ -22,9 +22,14 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
+import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.commands.*;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
+
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -53,10 +58,7 @@ class CommandHandler
         }
     }
 
-    public void addCommand(ICommand command)
-    {
-        commands.put(command.getInfo().name,command);
-    }
+
 
     public ArrayList<CommandInfo> listCommands()
     {
@@ -66,6 +68,11 @@ class CommandHandler
             list.add(new CommandInfo(command.getInfo().name, command.getInfo().adminCommand, command.getInfo().description));
         }
         return list;
+    }
+
+    public void addCommand(ICommand command)
+    {
+        Bot.getInstance().getCommandHandler().commands.put(command.getInfo().name,command);
     }
 
 
@@ -81,4 +88,30 @@ class CommandHandler
             this.description = description;
         }
     }
+/*
+    public void addCommands(){
+        ClassLoader classLoader = this.getClass().getClassLoader();
+        File f = new File("/de/th3ph4nt0m/tdbot/commands");
+        Path dir = f.toPath();
+        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
+            for (Path file: stream) {
+                // Load the target class using its binary name
+                Class<?> loadedClass = classLoader.loadClass(file.toFile().getName());
+                Class<?>[] interfaces = loadedClass.getInterfaces();
+
+                for (Class<?> anInterface : interfaces) {
+                    if(anInterface.getName().equals(ICommand.class.getName()))
+                    {
+                        Constructor<?> clsConst = loadedClass.getConstructor();
+                        addCommand((ICommand) clsConst.newInstance());
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
++/
+ */
 }
