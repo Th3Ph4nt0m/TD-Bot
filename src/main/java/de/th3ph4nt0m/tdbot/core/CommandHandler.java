@@ -34,10 +34,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public
-class CommandHandler
-{
-    public CommandHandler()
-    {
+class CommandHandler {
+    public CommandHandler() {
         addCommand(new CMD_flipcoin());
         addCommand(new CMD_repo());
         addCommand(new CMD_userinfo());
@@ -45,10 +43,9 @@ class CommandHandler
         addCommand(new CMD_help());
     }
 
-    public HashMap <String, ICommand> commands = new HashMap <>();
+    public HashMap<String, ICommand> commands = new HashMap<>();
 
-    public void handleCommand(CommandParser.CommandContainer cmd)
-    {
+    public void handleCommand(CommandParser.CommandContainer cmd) {
         if (commands.containsKey(cmd.invoke)) {
             boolean unsafe = commands.get(cmd.invoke).unsafe(cmd.args, cmd.event);
 
@@ -59,49 +56,44 @@ class CommandHandler
     }
 
 
-
-    public ArrayList<CommandInfo> listCommands()
-    {
+    public ArrayList<CommandInfo> listCommands() {
         ArrayList<CommandInfo> list = new ArrayList<>();
-        for(ICommand command:commands.values())
-        {
+        for (ICommand command : commands.values()) {
             list.add(new CommandInfo(command.getInfo().name, command.getInfo().adminCommand, command.getInfo().description));
         }
         return list;
     }
 
-    public void addCommand(ICommand command)
-    {
-        Bot.getInstance().getCommandHandler().commands.put(command.getInfo().name,command);
+    public void addCommand(ICommand command) {
+        Bot.getInstance().getCommandHandler().commands.put(command.getInfo().name, command);
     }
 
 
-    public static class CommandInfo
-    {
+    public static class CommandInfo {
         public final String name;
         public final boolean adminCommand;
         public final String description;
-        public CommandInfo(String name, boolean adminCommand, String description)
-        {
+
+        public CommandInfo(String name, boolean adminCommand, String description) {
             this.name = name;
             this.adminCommand = adminCommand;
             this.description = description;
         }
     }
+
 /*
-    public void addCommands(){
+    public void addCommands() {
         ClassLoader classLoader = this.getClass().getClassLoader();
         File f = new File("/de/th3ph4nt0m/tdbot/commands");
-        Path dir = f.toPath();
+        Path dir = Paths.get(f.getAbsolutePath());
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-            for (Path file: stream) {
+            for (Path file : stream) {
                 // Load the target class using its binary name
                 Class<?> loadedClass = classLoader.loadClass(file.toFile().getName());
                 Class<?>[] interfaces = loadedClass.getInterfaces();
 
                 for (Class<?> anInterface : interfaces) {
-                    if(anInterface.getName().equals(ICommand.class.getName()))
-                    {
+                    if (anInterface.getName().equals(ICommand.class.getName())) {
                         Constructor<?> clsConst = loadedClass.getConstructor();
                         addCommand((ICommand) clsConst.newInstance());
                     }
@@ -112,6 +104,5 @@ class CommandHandler
             e.printStackTrace();
         }
     }
-+/
  */
 }
