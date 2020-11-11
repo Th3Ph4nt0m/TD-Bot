@@ -22,7 +22,7 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
-import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.commands.*; //don't remove since unsure if maven will still load it without reference
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
 import java.io.File;
@@ -54,7 +54,7 @@ class CommandHandler
 
 	public void addCommand(ICommand command) {
 		boolean commandFound = commands.containsKey(command.getInfo().name);
-		if (commandFound) throw new IllegalArgumentException("Command with Name "+command.getInfo().name+"already existing");
+		if (commandFound) throw new IllegalArgumentException("Command with Name "+command.getInfo().name+" already existing");
 
 		commands.put(command.getInfo().name, command);
 	}
