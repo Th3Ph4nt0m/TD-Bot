@@ -90,12 +90,6 @@ class CommandHandler
 		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		for(CommandInfo info:listCommands())
-		{
-			System.out.println("Name: "+info.name);
-			System.out.println("Description: "+info.description);
-			System.out.println("AdminCommand: "+info.adminCommand);
-		}
 	}
 
 	public ArrayList<CommandInfo> listCommands() {
