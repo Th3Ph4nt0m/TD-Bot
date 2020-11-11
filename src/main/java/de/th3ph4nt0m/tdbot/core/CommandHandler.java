@@ -23,24 +23,18 @@
 package de.th3ph4nt0m.tdbot.core;
 
 import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.commands.*;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
-
 import java.io.File;
-import java.lang.reflect.Constructor;
-import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.util.*;
 
 public
 class CommandHandler {
     public CommandHandler() {
-        addCommand(new CMD_flipcoin());
-        addCommand(new CMD_repo());
-        addCommand(new CMD_userinfo());
-        addCommand(new CMD_version());
-        addCommand(new CMD_help());
+        addCommands();
     }
 
     public HashMap<String, ICommand> commands = new HashMap<>();
@@ -59,7 +53,7 @@ class CommandHandler {
     public ArrayList<CommandInfo> listCommands() {
         ArrayList<CommandInfo> list = new ArrayList<>();
         for (ICommand command : commands.values()) {
-            list.add(new CommandInfo(command.getInfo().name, command.getInfo().adminCommand, command.getInfo().description));
+            list.add(command.getInfo());
         }
         return list;
     }
@@ -81,28 +75,37 @@ class CommandHandler {
         }
     }
 
-/*
+
     public void addCommands() {
-        ClassLoader classLoader = this.getClass().getClassLoader();
-        File f = new File("/de/th3ph4nt0m/tdbot/commands");
-        Path dir = Paths.get(f.getAbsolutePath());
-        try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
-            for (Path file : stream) {
-                // Load the target class using its binary name
-                Class<?> loadedClass = classLoader.loadClass(file.toFile().getName());
-                Class<?>[] interfaces = loadedClass.getInterfaces();
+        String commandFolderName = "commands";
 
-                for (Class<?> anInterface : interfaces) {
-                    if (anInterface.getName().equals(ICommand.class.getName())) {
-                        Constructor<?> clsConst = loadedClass.getConstructor();
-                        addCommand((ICommand) clsConst.newInstance());
-                    }
-                }
-
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        try {
+            ArrayList<File> list = new ArrayList<>();
+            Enumeration<URL> urls = Thread.currentThread().getContextClassLoader()
+                    .getResources(commandFolderName);
+            while (urls.hasMoreElements()) {
+                URL url = urls.nextElement();
+                File dir = new File(url.getFile());
+                Collections.addAll(list, Objects.requireNonNull(dir.listFiles()));
             }
-        } catch (Exception e) {
+            for (File file : list) {
+                if (!file.isFile() || !file.canExecute()) continue;
+
+                String path = commandFolderName + "." + file.getName();
+                path = path.replaceAll(".class", "");
+                Class<?> command = classLoader.loadClass(path);
+                if (!Arrays.stream(command.getInterfaces()).findFirst().isPresent()) continue;
+                if (!Arrays.stream(command.getInterfaces()).findFirst().get().equals(ICommand.class)) continue;
+
+                ICommand cmd = (ICommand) command.getDeclaredConstructor().newInstance();
+                addCommand(cmd);
+            }
+
+
+        } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
- */
+
 }
