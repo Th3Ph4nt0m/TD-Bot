@@ -32,8 +32,11 @@ import java.net.URL;
 import java.util.*;
 
 public
-class CommandHandler {
-    public CommandHandler() {
+class CommandHandler
+{
+
+    public CommandHandler()
+	{
         addCommands();
     }
 
@@ -49,32 +52,9 @@ class CommandHandler {
         }
     }
 
-
-    public ArrayList<CommandInfo> listCommands() {
-        ArrayList<CommandInfo> list = new ArrayList<>();
-        for (ICommand command : commands.values()) {
-            list.add(command.getInfo());
-        }
-        return list;
-    }
-
     public void addCommand(ICommand command) {
         Bot.getInstance().getCommandHandler().commands.put(command.getInfo().name, command);
     }
-
-
-    public static class CommandInfo {
-        public final String name;
-        public final boolean adminCommand;
-        public final String description;
-
-        public CommandInfo(String name, boolean adminCommand, String description) {
-            this.name = name;
-            this.adminCommand = adminCommand;
-            this.description = description;
-        }
-    }
-
 
     public void addCommands() {
         String commandFolderName = "commands";
@@ -107,5 +87,26 @@ class CommandHandler {
             e.printStackTrace();
         }
     }
+
+	public ArrayList<CommandInfo> listCommands() {
+		ArrayList<CommandInfo> list = new ArrayList<>();
+		for (ICommand command : commands.values()) {
+			list.add(command.getInfo());
+		}
+		return list;
+	}
+
+
+	public static class CommandInfo {
+		public final String name;
+		public final boolean adminCommand;
+		public final String description;
+
+		public CommandInfo(String name, boolean adminCommand, String description) {
+			this.name = name;
+			this.adminCommand = adminCommand;
+			this.description = description;
+		}
+	}
 
 }
