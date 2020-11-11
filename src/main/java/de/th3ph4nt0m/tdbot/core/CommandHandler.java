@@ -52,41 +52,51 @@ class CommandHandler
         }
     }
 
-    public void addCommand(ICommand command) {
-        Bot.getInstance().getCommandHandler().commands.put(command.getInfo().name, command);
-    }
+	public void addCommand(ICommand command) {
+		boolean commandFound = commands.containsKey(command.getInfo().name);
+		if (commandFound) throw new IllegalArgumentException("Command with Name "+command.getInfo().name+"already existing");
 
-    public void addCommands() {
-        String commandFolderName = "commands";
+		commands.put(command.getInfo().name, command);
+	}
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        try {
-            ArrayList<File> list = new ArrayList<>();
-            Enumeration<URL> urls = Thread.currentThread().getContextClassLoader()
-                    .getResources(commandFolderName);
-            while (urls.hasMoreElements()) {
-                URL url = urls.nextElement();
-                File dir = new File(url.getFile());
-                Collections.addAll(list, Objects.requireNonNull(dir.listFiles()));
-            }
-            for (File file : list) {
-                if (!file.isFile() || !file.canExecute()) continue;
+	public void addCommands() {
+		String commandFolderName = "commands";
 
-                String path = commandFolderName + "." + file.getName();
-                path = path.replaceAll(".class", "");
-                Class<?> command = classLoader.loadClass(path);
-                if (!Arrays.stream(command.getInterfaces()).findFirst().isPresent()) continue;
-                if (!Arrays.stream(command.getInterfaces()).findFirst().get().equals(ICommand.class)) continue;
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		try {
+			ArrayList<File> list = new ArrayList<>();
+			Enumeration<URL> urls = Thread.currentThread().getContextClassLoader()
+					.getResources(commandFolderName);
+			while (urls.hasMoreElements()) {
+				URL url = urls.nextElement();
+				File dir = new File(url.getFile());
+				Collections.addAll(list, Objects.requireNonNull(dir.listFiles()));
+			}
+			for (File file : list) {
+				if (!file.isFile() || !file.canExecute() || !file.getName().endsWith(".class")) continue;
 
-                ICommand cmd = (ICommand) command.getDeclaredConstructor().newInstance();
-                addCommand(cmd);
-            }
+				String path = commandFolderName + "." + file.getName();
+				path = path.replaceAll(".class", "");
+
+				Class<?> command = classLoader.loadClass(path);
+				if (!Arrays.stream(command.getInterfaces()).findFirst().isPresent()) continue;
+				if (!Arrays.stream(command.getInterfaces()).findFirst().get().equals(ICommand.class)) continue;
+
+				ICommand cmd = (ICommand) command.getDeclaredConstructor().newInstance();
+				addCommand(cmd);
+			}
 
 
-        } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		for(CommandInfo info:listCommands())
+		{
+			System.out.println("Name: "+info.name);
+			System.out.println("Description: "+info.description);
+			System.out.println("AdminCommand: "+info.adminCommand);
+		}
+	}
 
 	public ArrayList<CommandInfo> listCommands() {
 		ArrayList<CommandInfo> list = new ArrayList<>();
