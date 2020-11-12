@@ -32,6 +32,7 @@ import java.awt.*;
 public class CMD_repo implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "Repo",
             "repo",
             false,
             "Repo gives you information about the current open source bot repository."

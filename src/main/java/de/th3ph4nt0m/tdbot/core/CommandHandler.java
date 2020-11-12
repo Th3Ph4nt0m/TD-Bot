@@ -1,4 +1,4 @@
-/*******************************************************************************
+package de.th3ph4nt0m.tdbot.core; /*******************************************************************************
  CommandHandler.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
@@ -20,9 +20,11 @@
  Last edit: 2020/11/2
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.core;
 
-import de.th3ph4nt0m.tdbot.commands.*; //don't remove since unsure if maven will still load it without reference
+
+
+
+
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
 import java.io.File;
@@ -35,29 +37,28 @@ public
 class CommandHandler
 {
 
-    public CommandHandler()
-	{
-        addCommands();
-    }
+	public CommandHandler() { addCommands(); }
 
-    public HashMap<String, ICommand> commands = new HashMap<>();
+	public ArrayList <ICommand> commands = new ArrayList<>();
 
-    public void handleCommand(CommandParser.CommandContainer cmd) {
-        if (commands.containsKey(cmd.invoke)) {
-            boolean unsafe = commands.get(cmd.invoke).unsafe(cmd.args, cmd.event);
+	public void handleCommand(CommandParser.CommandContainer cmd) {
+		for(ICommand command: commands) {
+			if(Arrays.stream(command.getInfo().invokes).anyMatch(i -> i.equalsIgnoreCase(cmd.invoke))) {
+				boolean unsafe = command.unsafe(cmd.args, cmd.event);
 
-            if (!unsafe) {
-                commands.get(cmd.invoke).action(cmd.args, cmd.event);
-            }
-        }
-    }
+				if (!unsafe) {
+					command.action(cmd.args, cmd.event);
+				}
+			}
+		}
+
+	}
 
 	public void addCommand(ICommand command) {
-		boolean commandFound = commands.containsKey(command.getInfo().name);
-		if (commandFound) throw new IllegalArgumentException("Command with Name "+command.getInfo().name+" already existing");
-
-		commands.put(command.getInfo().name, command);
+		if(commands.contains(command)) return;
+		commands.add(command);
 	}
+
 
 	public void addCommands() {
 		String commandFolderName = "commands";
@@ -94,7 +95,7 @@ class CommandHandler
 
 	public ArrayList<CommandInfo> listCommands() {
 		ArrayList<CommandInfo> list = new ArrayList<>();
-		for (ICommand command : commands.values()) {
+		for (ICommand command : commands) {
 			list.add(command.getInfo());
 		}
 		return list;
@@ -103,11 +104,13 @@ class CommandHandler
 
 	public static class CommandInfo {
 		public final String name;
+		public final String[] invokes;
 		public final boolean adminCommand;
 		public final String description;
 
-		public CommandInfo(String name, boolean adminCommand, String description) {
+		public CommandInfo(String name, String invokes, boolean adminCommand, String description) {
 			this.name = name;
+			this.invokes = invokes.split(",");
 			this.adminCommand = adminCommand;
 			this.description = description;
 		}

@@ -30,6 +30,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class CMD_flipcoin implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "FlipCoin",
             "flipCoin",
             false,
             "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"

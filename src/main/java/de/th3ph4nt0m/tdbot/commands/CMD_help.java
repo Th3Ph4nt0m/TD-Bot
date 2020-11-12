@@ -36,6 +36,7 @@ import java.util.ArrayList;
 public class CMD_help implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "name",
             "help",
             false,
             "Help show you all available commands for your rank"

@@ -34,7 +34,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class CMD_userinfo implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
-            "info",
+            "Info",
+            "info,userinfo",
             true,
             "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine."
     );

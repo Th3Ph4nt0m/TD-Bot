@@ -30,6 +30,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class CMD_version implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "Version",
             "version",
             false,
             "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
