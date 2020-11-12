@@ -31,7 +31,7 @@ public class CMD_flipcoin implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
             "FlipCoin",
-            "flipCoin",
+            "FlipCoin,CoinFlip,Flip,Coin,CoinToss,TossCoin,Toss",
             false,
             "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
     );

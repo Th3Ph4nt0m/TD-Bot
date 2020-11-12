@@ -37,7 +37,7 @@ public class CMD_help implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
             "name",
-            "help",
+            "Help,BotInfo,CommandInfo,Command",
             false,
             "Help show you all available commands for your rank"
     );

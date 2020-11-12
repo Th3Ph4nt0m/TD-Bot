@@ -35,7 +35,7 @@ public class CMD_userinfo implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
             "Info",
-            "info,userinfo",
+            "Info",
             true,
             "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine."
     );

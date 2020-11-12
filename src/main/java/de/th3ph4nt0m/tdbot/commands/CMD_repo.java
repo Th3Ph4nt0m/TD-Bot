@@ -33,7 +33,7 @@ public class CMD_repo implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
             "Repo",
-            "repo",
+            "Repo,Repository",
             false,
             "Repo gives you information about the current open source bot repository."
     );
