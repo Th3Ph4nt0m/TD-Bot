@@ -43,6 +43,7 @@ public class CMD_userinfo implements ICommand
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
         Member author = event.getMember();
+        assert author != null;
         NationMember authorMember = new NationMember(author,author.getId());
         //check if user is allowed to access the information
         if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {

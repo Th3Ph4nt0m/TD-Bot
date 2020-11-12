@@ -50,6 +50,7 @@ public class CMD_help implements ICommand
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         Member author = event.getMember();
+        assert author != null;
         NationMember authorMember = new NationMember(author,author.getId());
         //check if user gets admin commands
         if (authorMember.getRank().isAtLeast(DiscordRank.OP)) {
