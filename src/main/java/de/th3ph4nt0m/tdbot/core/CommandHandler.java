@@ -25,6 +25,7 @@ package de.th3ph4nt0m.tdbot.core; /*********************************************
 
 
 
+import de.th3ph4nt0m.tdbot.commands.*;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
 import java.io.File;
@@ -37,7 +38,14 @@ public
 class CommandHandler
 {
 
-	public CommandHandler() { addCommands(); }
+	public CommandHandler() {
+		addCommand(new CMD_flipcoin());
+		addCommand(new CMD_help());
+		addCommand(new CMD_repo());
+		addCommand(new CMD_userinfo());
+		addCommand(new CMD_version());
+		//addCommands();
+	}
 
 	public ArrayList <ICommand> commands = new ArrayList<>();
 
