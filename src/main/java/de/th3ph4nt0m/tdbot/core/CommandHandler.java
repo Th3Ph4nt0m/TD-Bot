@@ -1,4 +1,5 @@
-package de.th3ph4nt0m.tdbot.core; /*******************************************************************************
+package de.th3ph4nt0m.tdbot.core;
+/*******************************************************************************
  CommandHandler.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
@@ -21,17 +22,8 @@ package de.th3ph4nt0m.tdbot.core; /*********************************************
  ******************************************************************************/
 
 
-
-
-
-
 import de.th3ph4nt0m.tdbot.commands.*;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
 import java.util.*;
 
 public
@@ -44,11 +36,14 @@ class CommandHandler
 		addCommand(new CMD_repo());
 		addCommand(new CMD_userinfo());
 		addCommand(new CMD_version());
-		//addCommands();
 	}
 
 	public ArrayList <ICommand> commands = new ArrayList<>();
 
+	/**
+	 * Handels a command
+	 * @param cmd CommandContainer from CommandParser
+	 */
 	public void handleCommand(CommandParser.CommandContainer cmd) {
 		for(ICommand command: commands) {
 			if(Arrays.stream(command.getInfo().invokes).anyMatch(i -> i.equalsIgnoreCase(cmd.invoke))) {
@@ -62,53 +57,24 @@ class CommandHandler
 
 	}
 
+	/**
+	 * Adds a command to the current command list
+	 * @param command ICommand to be added
+	 */
 	public void addCommand(ICommand command) {
 		if(commands.contains(command)) return;
 		commands.add(command);
 	}
 
-
-	public void addCommands() {
-		String commandFolderName = "commands";
-
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-		try {
-			ArrayList<File> list = new ArrayList<>();
-			Enumeration<URL> urls = Thread.currentThread().getContextClassLoader()
-					.getResources(commandFolderName);
-			while (urls.hasMoreElements()) {
-				URL url = urls.nextElement();
-				File dir = new File(url.getFile());
-				Collections.addAll(list, Objects.requireNonNull(dir.listFiles()));
-			}
-			for (File file : list) {
-				if (!file.isFile() || !file.canExecute() || !file.getName().endsWith(".class")) continue;
-
-				String path = commandFolderName + "." + file.getName();
-				path = path.replaceAll(".class", "");
-
-				Class<?> command = classLoader.loadClass(path);
-				if (!Arrays.stream(command.getInterfaces()).findFirst().isPresent()) continue;
-				if (!Arrays.stream(command.getInterfaces()).findFirst().get().equals(ICommand.class)) continue;
-
-				ICommand cmd = (ICommand) command.getDeclaredConstructor().newInstance();
-				addCommand(cmd);
-			}
-
-
-		} catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-			e.printStackTrace();
-		}
-	}
-
+	/**
+	 * Lists the CommandInfo of the current Command liSt
+	 * @return List of CommandInfos
+	 */
 	public ArrayList<CommandInfo> listCommands() {
 		ArrayList<CommandInfo> list = new ArrayList<>();
-		for (ICommand command : commands) {
-			list.add(command.getInfo());
-		}
+		commands.forEach(iCommand -> list.add(iCommand.getInfo()));
 		return list;
 	}
-
 
 	public static class CommandInfo {
 		public final String name;

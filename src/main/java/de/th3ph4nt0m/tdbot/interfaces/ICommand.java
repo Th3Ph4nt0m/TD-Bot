@@ -25,13 +25,28 @@ package de.th3ph4nt0m.tdbot.interfaces;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+
 public
 interface ICommand
 {
-    //returns true when command is unsafe to run in current conditions
+    /**
+     * The unsafe-Method is called before the action-Method
+     * @param args  args from CommandParser
+     * @param event MessageReceivedEvent form CommandParser
+     * @return true when unsafe under current conditions
+     */
     boolean unsafe(String[] args, MessageReceivedEvent event);
-    //calls the command
+
+    /**
+     * The action-Method is called after unsafe returned false
+     * @param args from CommandParser
+     * @param event MessageReceivedEvent form CommandParser
+     */
     void action(String[] args, MessageReceivedEvent event);
 
+    /**
+     * Returns information about the command
+     * @return command information
+     */
     CommandHandler.CommandInfo getInfo();
 }
