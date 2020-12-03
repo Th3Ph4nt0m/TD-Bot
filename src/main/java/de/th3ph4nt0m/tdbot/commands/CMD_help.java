@@ -22,18 +22,24 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
+import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_flipcoin implements ICommand
+import java.util.ArrayList;
+
+public class CMD_help implements ICommand
 {
     CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
-            "FlipCoin",
-            "FlipCoin,CoinFlip,Flip,Coin,CoinToss,TossCoin,Toss",
+            "Help",
+            "Help,BotInfo,CommandInfo,Command",
             false,
-            "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
+            "Help show you all available commands for your rank"
     );
 
     @Override
@@ -43,7 +49,23 @@ public class CMD_flipcoin implements ICommand
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
+        Member author = event.getMember();
+        assert author != null;
+        NationMember authorMember = new NationMember(author,author.getId());
+        //check if user gets admin commands
+        if (authorMember.getRank().isAtLeast(DiscordRank.OP)) {
+            MessageCenter.getInstance().printHelp(event.getChannel().getId(),Bot.getInstance().getCommandHandler().listCommands());
+        }
+        else {
+            ArrayList<CommandHandler.CommandInfo>  notOpCommands = new ArrayList<>();
+
+            for (CommandHandler.CommandInfo info : Bot.getInstance().getCommandHandler().listCommands()) {
+                if (!info.adminCommand) {
+                    notOpCommands.add(info);
+                }
+            }
+            MessageCenter.getInstance().printHelp(event.getChannel().getId(), notOpCommands);
+        }
     }
 
     @Override

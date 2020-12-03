@@ -22,10 +22,6 @@
 
 package de.th3ph4nt0m.tdbot;
 
-import de.th3ph4nt0m.tdbot.commands.CMD_flipcoin;
-import de.th3ph4nt0m.tdbot.commands.CMD_repo;
-import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
-import de.th3ph4nt0m.tdbot.commands.CMD_version;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
 import de.th3ph4nt0m.tdbot.event.*;
@@ -56,6 +52,7 @@ class Bot implements EventListener
     private VoiceSystem voiceSystem;
     private Property property;
     private GitHubLoader ghLoader;
+    private CommandHandler commandHandler;
 
 
     public Bot()
@@ -74,18 +71,15 @@ class Bot implements EventListener
                     .build();
             this.mongoHandler = new MongoHandler();
             this.ghLoader = new GitHubLoader();
+            this.voiceSystem = new VoiceSystem();
+            this.commandHandler = new CommandHandler();
             jda.addEventListener(new VoiceConnect());
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
             jda.addEventListener(new CommandListener());
             jda.addEventListener(new ReactionListener());
-            this.voiceSystem = new VoiceSystem();
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
-            CommandHandler.commands.put("info", new CMD_userinfo());
-            CommandHandler.commands.put("version", new CMD_version());
-            CommandHandler.commands.put("repo", new CMD_repo());
-            CommandHandler.commands.put("flipCoin", new CMD_flipcoin());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -99,6 +93,11 @@ class Bot implements EventListener
     public JDA getJda()
     {
         return jda;
+    }
+
+    public CommandHandler getCommandHandler()
+    {
+        return commandHandler;
     }
 
     public MongoHandler getMongoHandler()

@@ -23,6 +23,7 @@
 package de.th3ph4nt0m.tdbot.commands;
 
 import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
@@ -30,10 +31,19 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_userinfo implements ICommand {
+public class CMD_userinfo implements ICommand
+{
+    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "Info",
+            "Info",
+            true,
+            "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine."
+    );
+
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event) {
+    public boolean unsafe(String[] args, MessageReceivedEvent event) {
         Member author = event.getMember();
+        assert author != null;
         NationMember authorMember = new NationMember(author,author.getId());
         //check if user is allowed to access the information
         if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
@@ -51,4 +61,10 @@ public class CMD_userinfo implements ICommand {
         //sending information to the channel
         event.getChannel().sendMessage(nationMember.getInfo()).queue();
     }
+
+    @Override
+    public CommandHandler.CommandInfo getInfo() {
+        return commandInfo;
+    }
+
 }

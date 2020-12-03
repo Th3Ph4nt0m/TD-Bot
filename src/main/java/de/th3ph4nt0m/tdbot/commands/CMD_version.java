@@ -22,14 +22,22 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_version implements ICommand
 {
+    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "Version",
+            "Version,BotVersion",
+            false,
+            "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
+    );
+
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event)
+    public boolean unsafe(String[] args, MessageReceivedEvent event)
     {
         return false;
     }
@@ -39,4 +47,10 @@ public class CMD_version implements ICommand
     {
         MessageCenter.getInstance().printVersion(event.getChannel().getId());
     }
+
+    @Override
+    public CommandHandler.CommandInfo getInfo() {
+        return commandInfo;
+    }
+
 }

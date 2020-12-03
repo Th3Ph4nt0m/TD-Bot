@@ -23,12 +23,15 @@
 package de.th3ph4nt0m.tdbot.utils;
 
 import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.PrivateChannel;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.RestAction;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MessageCenter
 {
@@ -72,23 +75,56 @@ public class MessageCenter
         channel.sendMessage(builder.build()).queue(message -> message.editMessage(builder.build()).queue());
     }
 
+    /**
+     * Shows the outcome of the coin toss command
+     *
+     * @param pChannelID ID of the channel to send the message to
+     * @param head Outcome of the coin toss
+     */
     public void printCoinToss(String pChannelID, boolean head)
     {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.blue);
+        Emote emote;
         if(head)
         {
+            emote = Bot.getInstance().getJda().getEmotesByName("CoinHeads", false).get(0);
             builder.setTitle("Head");
-            builder.setDescription("You got Head.\n :CoinHeads:");
+            builder.setDescription("You got Head.");
         }
         else
         {
+            emote = Bot.getInstance().getJda().getEmotesByName("CoinTails", false).get(0);
             builder.setTitle("Tails");
-            builder.setDescription("You got Tails.\n :CoinTails:");
+            builder.setDescription("You got Tails.");
         }
+        builder.setImage(emote.getImageUrl());
         assert channel != null;
         channel.sendMessage(builder.build()).queue();
+    }
+
+    /**
+     * Prints the given commands as help
+     *
+     * @param pChannelID ID of the channel to send the message to
+     * @param commands Commands to be listed in help
+     */
+    public void printHelp(String pChannelID, ArrayList<CommandHandler.CommandInfo> commands)
+    {
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.pink);
+        builder.setTitle("Help");
+        builder.setDescription("Following commands are accessible to you.");
+        for(CommandHandler.CommandInfo info:commands)
+        {
+            builder.addField(info.name,info.description,false);
+        }
+        builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+        assert channel != null;
+        channel.sendMessage(builder.build()).queue();
+
     }
 
     /**

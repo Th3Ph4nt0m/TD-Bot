@@ -22,6 +22,7 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
+import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -30,8 +31,15 @@ import java.awt.*;
 
 public class CMD_repo implements ICommand
 {
+    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+            "Repo",
+            "Repo,Repository",
+            false,
+            "Repo gives you information about the current open source bot repository."
+    );
+
     @Override
-    public boolean called(String[] args, MessageReceivedEvent event)
+    public boolean unsafe(String[] args, MessageReceivedEvent event)
     {
         return false;
     }
@@ -46,4 +54,10 @@ public class CMD_repo implements ICommand
         builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         event.getChannel().sendMessage(builder.build()).queue();
     }
+
+    @Override
+    public CommandHandler.CommandInfo getInfo() {
+        return commandInfo;
+    }
+
 }
