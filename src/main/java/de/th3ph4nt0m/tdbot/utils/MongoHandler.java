@@ -22,23 +22,32 @@
 
 package de.th3ph4nt0m.tdbot.utils;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
+import com.mongodb.*;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import de.th3ph4nt0m.tdbot.Bot;
 import org.bson.Document;
 
+import java.util.Arrays;
+
 public
 class MongoHandler {
 
-    private final MongoClient mongoClient;
+    private final com.mongodb.client.MongoClient mongoClient;
     private final MongoDatabase mongoDatabase;
 
     public MongoHandler() {
-        this.mongoClient = new MongoClient(new ServerAddress(Bot.getInstance().getProperty().get("database", "db.host"), Integer.parseInt(Bot.getInstance().getProperty().get("database", "db.port"))), MongoCredential.createCredential(Bot.getInstance().getProperty().get("database", "db.username"), Bot.getInstance().getProperty().get("database", "db.authDB"), Bot.getInstance().getProperty().get("database", "db.password").toCharArray()), MongoClientOptions.builder().build());
+       // this.mongoDatabase = mongoClient.getDatabase(Bot.getInstance().getProperty().get("database", "db.useDB"));
+        MongoCredential credential = MongoCredential.createCredential(Bot.getInstance().getProperty().get("database", "db.username"), Bot.getInstance().getProperty().get("database", "db.authDB"), Bot.getInstance().getProperty().get("database", "db.password").toCharArray());
+
+      this.mongoClient =  MongoClients.create(
+                MongoClientSettings.builder()
+                        .applyToClusterSettings(builder ->
+                                builder.hosts(Arrays.asList(new ServerAddress(Bot.getInstance().getProperty().get("database", "db.host"), Integer.parseInt(Bot.getInstance().getProperty().get("database", "db.port"))))))
+                        .credential(credential)
+                        .build()
+        );
         this.mongoDatabase = mongoClient.getDatabase(Bot.getInstance().getProperty().get("database", "db.useDB"));
     }
 
@@ -46,7 +55,7 @@ class MongoHandler {
         return mongoDatabase.getCollection("users");
     }
 
-    public MongoClient getMongoClient() {
+    public  com.mongodb.client.MongoClient getMongoClient() {
         return mongoClient;
     }
 
