@@ -92,7 +92,6 @@ public class Property
                 prop.setProperty("bot.afkID", "AFKChannelID");
                 prop.setProperty("bot.createID", "CreateChannelID");
                 prop.setProperty("bot.compID", "CompCreateChannelID");
-                prop.setProperty("bot.highestRole", "HighestRoleID");
                 prop.setProperty("bot.adminChannelID", "AdminChannelID");
 
                 // save properties to project folder
