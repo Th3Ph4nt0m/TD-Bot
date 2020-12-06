@@ -94,7 +94,6 @@ public class Property
                 prop.setProperty("bot.compID", "CompCreateChannelID");
                 prop.setProperty("bot.highestRole", "HighestRoleID");
                 prop.setProperty("bot.adminChannelID", "AdminChannelID");
-                prop.setProperty("github.token", "token");
 
                 // save properties to project folder
                 prop.store(output, null);
