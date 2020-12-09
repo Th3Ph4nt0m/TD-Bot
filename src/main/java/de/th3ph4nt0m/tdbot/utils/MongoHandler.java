@@ -42,7 +42,6 @@ public
 class MongoHandler
 {
     private static MongoDatabase database;
-    private static MongoHandler instance;
 
     public MongoHandler() {
         final String username = Bot.getInstance().getProperty().get("database", "db.username");
@@ -54,13 +53,6 @@ class MongoHandler
         ConnectionString connectionString = new ConnectionString("mongodb://"+username+":"+pwd+"@"+host+":"+port+"/?authSource="+auth+"&readPreference=primary&ssl=false");
         MongoClient mongoClient = MongoClients.create(connectionString);
         database = mongoClient.getDatabase(Bot.getInstance().getProperty().get("database", "db.useDB"));
-
-        instance = this;
-    }
-
-    public static MongoHandler getInstance()
-    {
-        return instance;
     }
 
     public Document getDocumentFromUsersCollection(String fieldName, String value)
