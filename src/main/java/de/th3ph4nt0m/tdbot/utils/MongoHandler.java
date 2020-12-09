@@ -22,35 +22,71 @@
 
 package de.th3ph4nt0m.tdbot.utils;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.*;
+import com.mongodb.reactivestreams.client.MongoClient;
+import com.mongodb.reactivestreams.client.MongoClients;
+import com.mongodb.reactivestreams.client.MongoCollection;
+import com.mongodb.reactivestreams.client.MongoDatabase;
 import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.utils.Subscribers.ObservableSubscriber;
+import de.th3ph4nt0m.tdbot.utils.Subscribers.OperationSubscriber;
 import org.bson.Document;
 
-public
-class MongoHandler {
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
-    private final MongoClient mongoClient;
-    private final MongoDatabase mongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
+
+public
+class MongoHandler
+{
+    private static MongoDatabase database;
+    private static MongoHandler instance;
 
     public MongoHandler() {
-        this.mongoClient = new MongoClient(new ServerAddress(Bot.getInstance().getProperty().get("database", "db.host"), Integer.parseInt(Bot.getInstance().getProperty().get("database", "db.port"))), MongoCredential.createCredential(Bot.getInstance().getProperty().get("database", "db.username"), Bot.getInstance().getProperty().get("database", "db.authDB"), Bot.getInstance().getProperty().get("database", "db.password").toCharArray()), MongoClientOptions.builder().build());
-        this.mongoDatabase = mongoClient.getDatabase(Bot.getInstance().getProperty().get("database", "db.useDB"));
+        final String username = Bot.getInstance().getProperty().get("database", "db.username");
+        final String pwd = URLEncoder.encode(Bot.getInstance().getProperty().get("database", "db.password"), StandardCharsets.UTF_8);
+        final String host = Bot.getInstance().getProperty().get("database", "db.host");
+        final String port = Bot.getInstance().getProperty().get("database", "db.port");
+        final String auth = Bot.getInstance().getProperty().get("database", "db.authDB");
+
+        ConnectionString connectionString = new ConnectionString("mongodb://"+username+":"+pwd+"@"+host+":"+port+"/?authSource="+auth+"&readPreference=primary&ssl=false");
+        MongoClient mongoClient = MongoClients.create(connectionString);
+        database = mongoClient.getDatabase(Bot.getInstance().getProperty().get("database", "db.useDB"));
+
+        instance = this;
     }
 
-    public MongoCollection<Document> users() {
-        return mongoDatabase.getCollection("users");
+    public static MongoHandler getInstance()
+    {
+        return instance;
     }
 
-    public MongoClient getMongoClient() {
-        return mongoClient;
+    public Document getDocumentFromUsersCollection(String fieldName, String value)
+    {
+        MongoCollection<Document> userCollection = database.getCollection("users");
+        ObservableSubscriber<Document> subscriber;
+        subscriber = new ObservableSubscriber<>();
+        userCollection.find(eq(fieldName, value)).first().subscribe(subscriber);
+        try {
+            subscriber.await();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        List<Document> received = subscriber.getReceived();
+        return received.get(0);
     }
 
-    public MongoDatabase getMongoDatabase() {
-        return mongoDatabase;
+    public void deleteDocumentFromUsersCollection(String fieldName, String value)
+    {
+        MongoCollection<Document> userCollection = database.getCollection("users");
+        userCollection.deleteOne(eq(fieldName, value)).subscribe(new OperationSubscriber<>());
+    }
+
+    public void addDocumentToUsersCollection(Document doc)
+    {
+        MongoCollection<Document> userCollection = database.getCollection("users");
+        userCollection.insertOne(doc).subscribe(new OperationSubscriber<>());
     }
 }

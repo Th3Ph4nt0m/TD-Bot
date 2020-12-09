@@ -22,8 +22,6 @@
 
 package de.th3ph4nt0m.tdbot.interfaces;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
 import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.entities.Activity;
@@ -47,17 +45,16 @@ public class NationMember
         this.id = id;
     }
 
-    private MongoCollection<Document> users()
-    {
-        return Bot.getInstance().getMongoHandler().users();
-    }
-
     /**
      * @return user specific document from DB
      */
-    public Document getDocument()
-    {
-        return users().find(Filters.eq("_id", id)).first();
+    public Document getDocument() {
+        try {
+            return Bot.getInstance().getMongoHandler().getDocumentFromUsersCollection("_id", id);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -75,7 +72,7 @@ public class NationMember
     public void createInDB()
     {
         Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
-        users().insertOne(append);
+        Bot.getInstance().getMongoHandler().addDocumentToUsersCollection(append);
     }
 
     /**
@@ -125,7 +122,7 @@ public class NationMember
      */
     public void removeFromDB()
     {
-        users().deleteOne(Filters.eq("_id", id));
+        Bot.getInstance().getMongoHandler().deleteDocumentFromUsersCollection("_id", id);
     }
 
     /**
