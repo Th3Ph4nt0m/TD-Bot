@@ -17,9 +17,9 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/12/9
  ******************************************************************************/
-package de.th3ph4nt0m.tdbot.utils.Subscribers;
+package de.th3ph4nt0m.tdbot.utils.subscribers;
 
 import org.reactivestreams.Subscription;
 

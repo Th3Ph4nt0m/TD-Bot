@@ -17,31 +17,31 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/12/9
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
 
 import com.mongodb.*;
+import com.mongodb.client.model.Filters;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
 import com.mongodb.reactivestreams.client.MongoCollection;
 import com.mongodb.reactivestreams.client.MongoDatabase;
 import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.utils.Subscribers.ObservableSubscriber;
-import de.th3ph4nt0m.tdbot.utils.Subscribers.OperationSubscriber;
+import de.th3ph4nt0m.tdbot.utils.subscribers.ObservableSubscriber;
+import de.th3ph4nt0m.tdbot.utils.subscribers.OperationSubscriber;
 import org.bson.Document;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
 
 public
 class MongoHandler
 {
-    private static MongoDatabase database;
+    private final MongoDatabase database;
 
     public MongoHandler() {
         final String username = Bot.getInstance().getProperty().get("database", "db.username");
@@ -55,12 +55,12 @@ class MongoHandler
         database = mongoClient.getDatabase(Bot.getInstance().getProperty().get("database", "db.useDB"));
     }
 
-    public Document getDocumentFromUsersCollection(String fieldName, String value)
+    public Document getUserData(String fieldName, String value)
     {
         MongoCollection<Document> userCollection = database.getCollection("users");
         ObservableSubscriber<Document> subscriber;
         subscriber = new ObservableSubscriber<>();
-        userCollection.find(eq(fieldName, value)).first().subscribe(subscriber);
+        userCollection.find(Filters.eq(fieldName, value)).first().subscribe(subscriber);
         try {
             subscriber.await();
         } catch (Throwable throwable) {
@@ -70,13 +70,13 @@ class MongoHandler
         return received.get(0);
     }
 
-    public void deleteDocumentFromUsersCollection(String fieldName, String value)
+    public void deleteUserData(String fieldName, String value)
     {
         MongoCollection<Document> userCollection = database.getCollection("users");
-        userCollection.deleteOne(eq(fieldName, value)).subscribe(new OperationSubscriber<>());
+        userCollection.deleteOne(Filters.eq(fieldName, value)).subscribe(new OperationSubscriber<>());
     }
 
-    public void addDocumentToUsersCollection(Document doc)
+    public void addUserData(Document doc)
     {
         MongoCollection<Document> userCollection = database.getCollection("users");
         userCollection.insertOne(doc).subscribe(new OperationSubscriber<>());

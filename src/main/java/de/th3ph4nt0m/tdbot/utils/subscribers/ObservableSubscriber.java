@@ -19,7 +19,7 @@
 
  Last edit: 2020/11/1
  ******************************************************************************/
-package de.th3ph4nt0m.tdbot.utils.Subscribers;
+package de.th3ph4nt0m.tdbot.utils.subscribers;
 
 import com.mongodb.MongoTimeoutException;
 import org.reactivestreams.Subscriber;
@@ -31,7 +31,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A Subscriber that stores the publishers results and provides a latch so can block on completion.
+ * A Subscriber that stores the publishers results and provides a latch so a blocking and non blocking context is possibel.
  *
  * @param <T> The publishers result type
  */

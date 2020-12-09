@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/2
+ Last edit: 2020/12/9
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.interfaces;
@@ -50,7 +50,7 @@ public class NationMember
      */
     public Document getDocument() {
         try {
-            return Bot.getInstance().getMongoHandler().getDocumentFromUsersCollection("_id", id);
+            return Bot.getInstance().getMongoHandler().getUserData("_id", id);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -72,7 +72,7 @@ public class NationMember
     public void createInDB()
     {
         Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
-        Bot.getInstance().getMongoHandler().addDocumentToUsersCollection(append);
+        Bot.getInstance().getMongoHandler().addUserData(append);
     }
 
     /**
@@ -122,7 +122,7 @@ public class NationMember
      */
     public void removeFromDB()
     {
-        Bot.getInstance().getMongoHandler().deleteDocumentFromUsersCollection("_id", id);
+        Bot.getInstance().getMongoHandler().deleteUserData("_id", id);
     }
 
     /**
