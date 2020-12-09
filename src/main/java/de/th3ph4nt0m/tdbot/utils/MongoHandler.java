@@ -43,6 +43,9 @@ class MongoHandler
 {
     private final MongoDatabase database;
 
+    /**
+     * Establishing the connection to MongoDB
+     */
     public MongoHandler() {
         final String username = Bot.getInstance().getProperty().get("database", "db.username");
         final String pwd = URLEncoder.encode(Bot.getInstance().getProperty().get("database", "db.password"), StandardCharsets.UTF_8);
@@ -55,6 +58,12 @@ class MongoHandler
         database = mongoClient.getDatabase(Bot.getInstance().getProperty().get("database", "db.useDB"));
     }
 
+    /**
+     * Blocking implementation for getting a document from the TD-Nation.user Collection
+     * @param fieldName name of keyword field
+     * @param value value of keyword
+     * @return first document matching the keyword
+     */
     public Document getUserData(String fieldName, String value)
     {
         MongoCollection<Document> userCollection = database.getCollection("users");
@@ -70,12 +79,21 @@ class MongoHandler
         return received.get(0);
     }
 
+    /**
+     * Deletes a document from the TD-Nation.user Collection
+     * @param fieldName name of keyword field
+     * @param value value of keyword
+     */
     public void deleteUserData(String fieldName, String value)
     {
         MongoCollection<Document> userCollection = database.getCollection("users");
         userCollection.deleteOne(Filters.eq(fieldName, value)).subscribe(new OperationSubscriber<>());
     }
 
+    /**
+     * Adds a document to the TD-Nation.user Collection
+     * @param doc document to be appended
+     */
     public void addUserData(Document doc)
     {
         MongoCollection<Document> userCollection = database.getCollection("users");
