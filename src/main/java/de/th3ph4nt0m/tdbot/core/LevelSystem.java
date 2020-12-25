@@ -22,15 +22,18 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
+import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class LevelSystem
 {
-	public LevelSystem()
-	{
-		startTimer();
-	}
+	public final float pointLimit = 69420;
+	public final float upperBorderDiff = 2000;
+	public final float lowerBorderDiff = -2000;
+
+	public LevelSystem(){startTimer();}
 
 	public void startTimer()
 	{
@@ -48,5 +51,48 @@ public class LevelSystem
 	{
 		//TODO: Add System for ParticipationPoint addition and subtraction.
 		System.out.println("minute passed");
+	}
+
+	public void addRelPoints(NationMember member,float points) {
+		if (!member.existsinDB()) return;
+
+		float pps =  Float.parseFloat(member.getDocument().getString("PPs"));
+		pps += Math.abs(points) * (1 - (pps / (pointLimit + upperBorderDiff)));
+
+		if (pps > pointLimit) pps = pointLimit;
+		member.getDocument().put("PPs",pps);
+	}
+
+	public void subtractRelPoints(NationMember member,float points)
+	{
+		if (!member.existsinDB()) return;
+
+		float pps =  Float.parseFloat(member.getDocument().getString("PPs"));
+		pps -= Math.abs(points) * (-(1/(lowerBorderDiff-pointLimit))*pps+(pointLimit/(lowerBorderDiff-pointLimit))+1);
+		if (pps < 0) pps = 0;
+
+		member.getDocument().put("PPs",pps);
+	}
+
+	public void addPoints(NationMember member,float points)
+	{
+		if (!member.existsinDB()) return;
+
+		float pps =  Float.parseFloat(member.getDocument().getString("PPs"));
+		pps += Math.abs(points);
+		if (pps > pointLimit) pps = pointLimit;
+
+		member.getDocument().put("PPs",pps);
+	}
+
+	public void subtractPoints(NationMember member,float points)
+	{
+		if (!member.existsinDB()) return;
+
+		float pps = Float.parseFloat(member.getDocument().getString("PPs"));
+		pps -= Math.abs(points);
+		if (pps < 0) pps = 0;
+
+		member.getDocument().put("PPs",pps);
 	}
 }

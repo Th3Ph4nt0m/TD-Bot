@@ -23,6 +23,7 @@
 package de.th3ph4nt0m.tdbot;
 
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.core.LevelSystem;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
 import de.th3ph4nt0m.tdbot.event.*;
 import de.th3ph4nt0m.tdbot.loader.GitHubLoader;
@@ -50,6 +51,7 @@ class Bot implements EventListener
     private static Bot instance;
     private MongoHandler mongoHandler;
     private VoiceSystem voiceSystem;
+    private LevelSystem levelSystem;
     private Property property;
     private GitHubLoader ghLoader;
     private CommandHandler commandHandler;
@@ -72,6 +74,7 @@ class Bot implements EventListener
             this.mongoHandler = new MongoHandler();
             this.ghLoader = new GitHubLoader();
             this.voiceSystem = new VoiceSystem();
+            this.levelSystem = new LevelSystem();
             this.commandHandler = new CommandHandler();
             jda.addEventListener(new VoiceConnect());
             jda.addEventListener(new VoiceLeave());
@@ -108,6 +111,11 @@ class Bot implements EventListener
     public VoiceSystem getVoiceSystem()
     {
         return voiceSystem;
+    }
+
+    public LevelSystem getLevelSystem()
+    {
+        return levelSystem;
     }
 
     public GitHubLoader getGhLoader()
