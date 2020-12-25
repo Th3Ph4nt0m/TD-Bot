@@ -38,7 +38,7 @@ public class ReactionListener extends ListenerAdapter
         //listener for accepting rules and privacy by reaction
         if (!event.getUser().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
             if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))
-                    && event.getReactionEmote().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.ruleReactionID"))) {
+                    && event.getReactionEmote().getName().equals(Bot.getInstance().getProperty().get("bot", "bot.reactionEmojiName"))) {
                 NationMember nationMember = new NationMember(event.getMember(), event.getMember().getId());
                 if (!nationMember.existsinDB()) {
                     nationMember.createInDB();
@@ -53,7 +53,7 @@ public class ReactionListener extends ListenerAdapter
     {
         //listener for declining rules and privacy by reaction
         if (event.getChannel().equals(Bot.getInstance().getJda().getTextChannelById(Bot.getInstance().getProperty().get("bot", "bot.rulesID")))
-                && event.getReactionEmote().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.ruleReactionID"))) {
+                && event.getReactionEmote().getName().equals(Bot.getInstance().getProperty().get("bot", "bot.reactionEmojiName"))) {
             NationMember nationMember = new NationMember(event.getMember(), event.getUserId());
             if (nationMember.existsinDB()) {
                 nationMember.removeFromDB();
