@@ -22,14 +22,14 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_version implements ICommand
 {
-    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+    CommandInfo commandInfo = new CommandInfo(
             "Version",
             "Version,BotVersion",
             false,
@@ -49,7 +49,7 @@ public class CMD_version implements ICommand
     }
 
     @Override
-    public CommandHandler.CommandInfo getInfo() {
+    public CommandInfo getInfo() {
         return commandInfo;
     }
 

@@ -23,7 +23,7 @@
 package de.th3ph4nt0m.tdbot.commands;
 
 import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 public class CMD_help implements ICommand
 {
-    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+    CommandInfo commandInfo = new CommandInfo(
             "Help",
             "Help,BotInfo,CommandInfo,Command",
             false,
@@ -44,32 +44,26 @@ public class CMD_help implements ICommand
 
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        return false;
+        Member author = event.getMember();
+        assert author != null;
+        NationMember authorMember = new NationMember(author, author.getId());
+        return authorMember.getRank().isAtLeast(DiscordRank.OP);
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        Member author = event.getMember();
-        assert author != null;
-        NationMember authorMember = new NationMember(author,author.getId());
-        //check if user gets admin commands
-        if (authorMember.getRank().isAtLeast(DiscordRank.OP)) {
-            MessageCenter.getInstance().printHelp(event.getChannel().getId(),Bot.getInstance().getCommandHandler().listCommands());
-        }
-        else {
-            ArrayList<CommandHandler.CommandInfo>  notOpCommands = new ArrayList<>();
+        ArrayList<CommandInfo>  notOpCommands = new ArrayList<>();
 
-            for (CommandHandler.CommandInfo info : Bot.getInstance().getCommandHandler().listCommands()) {
-                if (!info.adminCommand) {
-                    notOpCommands.add(info);
-                }
+        for (CommandInfo info : Bot.getInstance().getCommandHandler().listCommands()) {
+            if (!info.adminCommand) {
+                notOpCommands.add(info);
             }
-            MessageCenter.getInstance().printHelp(event.getChannel().getId(), notOpCommands);
         }
+        MessageCenter.getInstance().printHelp(event.getChannel().getId(), notOpCommands);
     }
 
     @Override
-    public CommandHandler.CommandInfo getInfo() { return commandInfo; }
+    public CommandInfo getInfo() { return commandInfo; }
 }
 
 

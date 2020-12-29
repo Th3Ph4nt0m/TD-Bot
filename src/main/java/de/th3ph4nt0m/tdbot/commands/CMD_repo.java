@@ -22,7 +22,7 @@
 
 package de.th3ph4nt0m.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -31,7 +31,7 @@ import java.awt.*;
 
 public class CMD_repo implements ICommand
 {
-    CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
+    CommandInfo commandInfo = new CommandInfo(
             "Repo",
             "Repo,Repository",
             false,
@@ -56,7 +56,7 @@ public class CMD_repo implements ICommand
     }
 
     @Override
-    public CommandHandler.CommandInfo getInfo() {
+    public CommandInfo getInfo() {
         return commandInfo;
     }
 
