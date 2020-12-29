@@ -77,7 +77,6 @@ class Bot implements EventListener
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
             jda.addEventListener(new CommandListener());
-            jda.addEventListener(new ReactionListener());
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
         } catch (LoginException | InterruptedException e) {

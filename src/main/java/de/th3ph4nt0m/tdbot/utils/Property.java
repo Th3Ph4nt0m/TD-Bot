@@ -61,7 +61,7 @@ public class Property
         File dir = new File("cfg");
         if (!dir.exists()) {
             dir.mkdirs();
-            try (OutputStream output = new FileOutputStream("cfg/database.properties")) {
+            /*try (OutputStream output = new FileOutputStream("cfg/database.properties")) {
 
                 Properties prop = new Properties();
 
@@ -77,7 +77,7 @@ public class Property
                 prop.store(output, null);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             try (OutputStream output = new FileOutputStream("cfg/bot.properties")) {
 
