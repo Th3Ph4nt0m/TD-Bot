@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/6
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -61,7 +61,7 @@ public class Property
         File dir = new File("cfg");
         if (!dir.exists()) {
             dir.mkdirs();
-            try (OutputStream output = new FileOutputStream("cfg/database.properties")) {
+            /*try (OutputStream output = new FileOutputStream("cfg/database.properties")) {
 
                 Properties prop = new Properties();
 
@@ -77,7 +77,7 @@ public class Property
                 prop.store(output, null);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             try (OutputStream output = new FileOutputStream("cfg/bot.properties")) {
 

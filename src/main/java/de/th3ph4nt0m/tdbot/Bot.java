@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/6
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot;
@@ -77,7 +77,6 @@ class Bot implements EventListener
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
             jda.addEventListener(new CommandListener());
-            jda.addEventListener(new ReactionListener());
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
         } catch (LoginException | InterruptedException e) {

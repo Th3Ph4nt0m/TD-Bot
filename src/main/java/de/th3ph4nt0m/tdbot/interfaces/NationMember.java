@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/2
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.interfaces;
@@ -46,7 +46,7 @@ public class NationMember
         this.member = member;
         this.id = id;
     }
-
+    @Deprecated
     private MongoCollection<Document> users()
     {
         return Bot.getInstance().getMongoHandler().users();
@@ -55,6 +55,7 @@ public class NationMember
     /**
      * @return user specific document from DB
      */
+    @Deprecated
     public Document getDocument()
     {
         return users().find(Filters.eq("_id", id)).first();
@@ -64,6 +65,7 @@ public class NationMember
     /**
      * @return if user exists in DB
      */
+    @Deprecated
     public boolean existsinDB()
     {
         return getDocument() != null;
@@ -72,6 +74,7 @@ public class NationMember
     /**
      * insert user into DB
      */
+    @Deprecated
     public void createInDB()
     {
         Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
@@ -81,6 +84,7 @@ public class NationMember
     /**
      * @return all information stored about a user
      */
+    @Deprecated
     public String getInfo()
     {
 
@@ -123,6 +127,7 @@ public class NationMember
     /**
      * delete the user specific document
      */
+    @Deprecated
     public void removeFromDB()
     {
         users().deleteOne(Filters.eq("_id", id));

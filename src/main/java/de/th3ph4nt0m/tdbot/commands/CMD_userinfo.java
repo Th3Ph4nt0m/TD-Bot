@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/2
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.commands;
@@ -59,7 +59,7 @@ public class CMD_userinfo implements ICommand
         Member m = event.getMessage().getMentionedMembers().get(0);
         NationMember nationMember = new NationMember(m, m.getId());
         //sending information to the channel
-        event.getChannel().sendMessage(nationMember.getInfo()).queue();
+        event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
     }
 
     @Override
