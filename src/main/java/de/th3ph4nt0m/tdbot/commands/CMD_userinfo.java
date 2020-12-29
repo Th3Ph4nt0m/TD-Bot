@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/2
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.commands;
