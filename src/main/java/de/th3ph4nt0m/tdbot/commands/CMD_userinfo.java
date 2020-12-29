@@ -59,7 +59,7 @@ public class CMD_userinfo implements ICommand
         Member m = event.getMessage().getMentionedMembers().get(0);
         NationMember nationMember = new NationMember(m, m.getId());
         //sending information to the channel
-        event.getChannel().sendMessage("No Database").queue();
+        event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
     }
 
     @Override
