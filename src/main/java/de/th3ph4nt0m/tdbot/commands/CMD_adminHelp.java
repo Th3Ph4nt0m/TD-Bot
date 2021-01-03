@@ -36,7 +36,7 @@ public class CMD_adminHelp implements ICommand
     CommandInfo commandInfo = new CommandInfo(
             "Help",
             "Help,BotInfo,CommandInfo,Command",
-            false,
+            true,
             "Help show you all available commands for your rank"
     );
 
