@@ -37,7 +37,7 @@ class VoiceMove extends ListenerAdapter
     public void onGuildVoiceMove(GuildVoiceMoveEvent event)
     {
         //initialize a NationMember to access the users document in DB
-        NationMember nMember = new NationMember(event.getMember(), event.getMember().getId());
+        NationMember nMember = new NationMember(event.getMember());
         //query for voice creator
         if (event.getChannelJoined().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.createID"))) {
             if (nMember.getRank().isAtLeast(DiscordRank.THE_NATION)) {

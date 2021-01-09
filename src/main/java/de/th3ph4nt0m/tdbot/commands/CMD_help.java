@@ -46,7 +46,7 @@ public class CMD_help implements ICommand
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
         Member author = event.getMember();
         assert author != null;
-        NationMember authorMember = new NationMember(author, author.getId());
+        NationMember authorMember = new NationMember(author);
         return authorMember.getRank().isAtLeast(DiscordRank.OP);
     }
 

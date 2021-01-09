@@ -22,29 +22,22 @@
 
 package de.th3ph4nt0m.tdbot.interfaces;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
-import org.bson.Document;
 
 @SuppressWarnings({"SpellCheckingInspection", "ConstantConditions"})
 public class NationMember
 {
     private final Member member;
-    private final String id;
 
 
     /**
      * @param member Discord Member to create a NationMember from
-     * @param id     Discord Member/user ID to create a NationMember from because of NullPointerExceptions at Member#getID
      */
-    public NationMember(Member member, String id)
+    public NationMember(Member member)
     {
         this.member = member;
-        this.id = id;
     }
 
     /**
