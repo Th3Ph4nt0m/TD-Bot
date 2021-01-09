@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_userinfo.java is part of the TD-Bot project
+ CMD_clear.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -30,13 +30,14 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class CMD_clear implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Clear",
-            new String[]{"clear","clearMessage","clearMessages"},
+            new String[]{"clear", "clearMessage", "clearMessages"},
             DiscordRank.TEAM,
             "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared."
     );

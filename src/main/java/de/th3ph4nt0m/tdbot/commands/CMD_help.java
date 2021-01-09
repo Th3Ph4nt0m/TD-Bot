@@ -28,7 +28,6 @@ import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ import java.util.ArrayList;
 public class CMD_help implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Help",
-            new String[]{"Help","BotInfo","CommandInfo"},
+            new String[]{"Help", "BotInfo", "CommandInfo"},
             DiscordRank.THE_NATION,
             "Help show you all available commands for your rank"
     );

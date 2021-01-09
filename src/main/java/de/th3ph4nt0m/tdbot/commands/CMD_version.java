@@ -32,7 +32,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class CMD_version implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Version",
-            new String[]{"Version","BotVersion"},
+            new String[]{"Version", "BotVersion"},
             DiscordRank.THE_NATION,
             "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
     );

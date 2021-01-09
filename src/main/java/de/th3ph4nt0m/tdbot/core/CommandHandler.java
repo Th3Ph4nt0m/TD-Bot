@@ -35,6 +35,7 @@ class CommandHandler {
         addCommand(new CMD_help());
         addCommand(new CMD_flipcoin());
         addCommand(new CMD_repo());
+        addCommand(new CMD_clear());
         //addCommand(new CMD_userinfo()); //TODO: register as soon as DB is implemented
         addCommand(new CMD_version());
     }
