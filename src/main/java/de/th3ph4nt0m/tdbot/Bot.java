@@ -45,37 +45,41 @@ public
 class Bot implements EventListener
 {
 
-    private final JDA jda;
+    private JDA jda;
     private static Bot instance;
-    private final VoiceSystem voiceSystem;
-    private final Property property;
-    private final GitHubLoader ghLoader;
-    private final CommandHandler commandHandler;
+    private VoiceSystem voiceSystem;
+    private Property property;
+    private GitHubLoader ghLoader;
+    private CommandHandler commandHandler;
 
 
-    public Bot() throws LoginException, InterruptedException
+    public Bot()
     {
         instance = this;
-        //JDA configuration
-        this.property = new Property();
-        property.setDefaultProps();
-        this.jda = JDABuilder.createDefault(property.get("bot", "bot.token"))
-                .setAutoReconnect(true)
-                .setStatus(OnlineStatus.ONLINE)
-                .setActivity(Activity.watching("over TD-Nation"))
-                .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
-                .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
-                .build();
-        this.ghLoader = new GitHubLoader();
-        this.voiceSystem = new VoiceSystem();
-        this.commandHandler = new CommandHandler();
-        jda.addEventListener(new VoiceConnect());
-        jda.addEventListener(new VoiceLeave());
-        jda.addEventListener(new VoiceMove());
-        jda.addEventListener(new CommandListener());
-        jda.addEventListener(new MessageReceive());
-        jda.awaitReady();
-        new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
+        try {
+            //JDA configuration
+            this.property = new Property();
+            property.setDefaultProps();
+            this.jda = JDABuilder.createDefault(property.get("bot", "bot.token"))
+                    .setAutoReconnect(true)
+                    .setStatus(OnlineStatus.ONLINE)
+                    .setActivity(Activity.watching("over TD-Nation"))
+                    .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
+                    .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
+                    .build();
+            this.ghLoader = new GitHubLoader();
+            this.voiceSystem = new VoiceSystem();
+            this.commandHandler = new CommandHandler();
+            jda.addEventListener(new VoiceConnect());
+            jda.addEventListener(new VoiceLeave());
+            jda.addEventListener(new VoiceMove());
+            jda.addEventListener(new CommandListener());
+            jda.addEventListener(new MessageReceive());
+            jda.awaitReady();
+            new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
+        } catch (LoginException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Bot getInstance()
