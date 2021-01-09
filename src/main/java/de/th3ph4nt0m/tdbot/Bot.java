@@ -27,7 +27,6 @@ import de.th3ph4nt0m.tdbot.core.VoiceSystem;
 import de.th3ph4nt0m.tdbot.event.*;
 import de.th3ph4nt0m.tdbot.loader.GitHubLoader;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import de.th3ph4nt0m.tdbot.utils.MongoHandler;
 import de.th3ph4nt0m.tdbot.utils.Property;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -48,7 +47,6 @@ class Bot implements EventListener
 
     private JDA jda;
     private static Bot instance;
-    private MongoHandler mongoHandler;
     private VoiceSystem voiceSystem;
     private Property property;
     private GitHubLoader ghLoader;
@@ -69,7 +67,6 @@ class Bot implements EventListener
                     .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
                     .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
                     .build();
-            this.mongoHandler = new MongoHandler();
             this.ghLoader = new GitHubLoader();
             this.voiceSystem = new VoiceSystem();
             this.commandHandler = new CommandHandler();
@@ -77,6 +74,7 @@ class Bot implements EventListener
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
             jda.addEventListener(new CommandListener());
+            jda.addEventListener(new MessageReceive());
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
         } catch (LoginException | InterruptedException e) {
@@ -97,11 +95,6 @@ class Bot implements EventListener
     public CommandHandler getCommandHandler()
     {
         return commandHandler;
-    }
-
-    public MongoHandler getMongoHandler()
-    {
-        return mongoHandler;
     }
 
     public VoiceSystem getVoiceSystem()
