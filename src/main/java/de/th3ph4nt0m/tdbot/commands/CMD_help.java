@@ -52,13 +52,9 @@ public class CMD_help implements ICommand
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        ArrayList<CommandInfo>  notOpCommands = new ArrayList<>();
+        ArrayList<CommandInfo>  notOpCommands = Bot.getInstance().getCommandHandler().listCommands();
+        notOpCommands.removeIf(commandInfo1 ->  commandInfo1.name.equals(this.commandInfo.name)||commandInfo1.adminCommand);
 
-        for (CommandInfo info : Bot.getInstance().getCommandHandler().listCommands()) {
-            if (!info.adminCommand) {
-                notOpCommands.add(info);
-            }
-        }
         MessageCenter.getInstance().printHelp(event.getChannel().getId(), notOpCommands);
     }
 
