@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_repo.java is part of the TD-Bot project
+ CMD_userinfo.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,50 +17,52 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/4
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CMD_adminHelp implements ICommand {
+public class CMD_clear implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
-            "Help",
-            "Help,BotInfo,CommandInfo,Command",
-            true,
-            "Help show you all available commands for your rank"
+            "Clear",
+            new String[]{"clear","clearMessage","clearMessages"},
+            DiscordRank.TEAM,
+            "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared."
     );
 
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        Member author = event.getMember();
-        assert author != null;
-        NationMember authorMember = new NationMember(author);
-        return !authorMember.getRank().isAtLeast(DiscordRank.OP);
+        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        ArrayList<CommandInfo> commands = Bot.getInstance().getCommandHandler().listCommands();
-        commands.removeIf(commandInfo1 -> commandInfo1.name.equals(this.commandInfo.name));
-
-        MessageCenter.getInstance().printHelp(event.getChannel().getId(), commands);
+        List<Message> messages = new ArrayList<>();
+        int i = Integer.parseInt(args[0]);
+        for(Message message : event.getChannel().getIterableHistory().cache(false)){
+            if(!message.isPinned()){
+                messages.add(message);
+            }
+            if(--i <=0)break;
+        }
+        event.getChannel().purgeMessages(messages);
+        MessageCenter.getInstance().printClear(event.getChannel().getId(),i);
     }
 
     @Override
     public CommandInfo getInfo() {
         return commandInfo;
     }
+
 }
-
-

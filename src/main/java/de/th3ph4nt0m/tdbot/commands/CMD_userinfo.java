@@ -34,22 +34,14 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 public class CMD_userinfo implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Info",
-            "Info",
-            true,
+            new String[]{"Info"},
+            DiscordRank.TEAM,
             "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine."
     );
 
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        Member author = event.getMember();
-        assert author != null;
-        NationMember authorMember = new NationMember(author);
-        //check if user is allowed to access the information
-        if (authorMember.getRank().isAtLeast(DiscordRank.OP) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
-            return false;
-        }
-        MessageCenter.getInstance().sendNoAccess(event.getChannel().getId());
-        return true;
+        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
     }
 
     @Override

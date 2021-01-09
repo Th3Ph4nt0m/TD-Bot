@@ -24,6 +24,8 @@ package de.th3ph4nt0m.tdbot.commands;
 
 import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -32,14 +34,14 @@ import java.awt.*;
 public class CMD_repo implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Repo",
-            "Repo,Repository",
-            false,
+            new String[]{"Repo","Repository"},
+            DiscordRank.THE_NATION,
             "Repo gives you information about the current open source bot repository."
     );
 
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        return false;
+        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
     }
 
     @Override

@@ -24,6 +24,7 @@ package de.th3ph4nt0m.tdbot.utils;
 
 import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.PrivateChannel;
@@ -32,6 +33,7 @@ import net.dv8tion.jda.api.requests.RestAction;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class MessageCenter {
 
@@ -165,7 +167,7 @@ public class MessageCenter {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setTitle("Authentication Error!")
                 .setColor(Color.RED)
-                .setDescription("you need to accept our Privacy Policy to use this service\n")
+                .setDescription("Xou need to accept our Privacy Policy to use this service\n")
                 .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         channel.complete().sendMessage(builder.build()).queue();
     }
@@ -189,15 +191,23 @@ public class MessageCenter {
      *
      * @param channelID ID of the channel to send the message to
      */
-    public void sendNoAccess(String channelID) {
+    public void sendNoAccess(String channelID, DiscordRank minRank) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(channelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.RED)
                 .setTitle("Limited Access")
-                .setDescription("You need to own the OP role to execute this command. \n\nPlease note that this command can only be executed in admin channels")
+                .setDescription("You need to own the "+minRank.name()+" role to execute this command.")
                 .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         assert channel != null;
         channel.sendMessage(builder.build()).queue();
+    }
 
+    public void printClear(String pChannelID,int messages) {
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.blue);
+        builder.setDescription("Deleted ``" + messages + "`` messages.");
+        assert channel != null;
+        channel.sendMessage(builder.build()).complete().delete().queueAfter(3, TimeUnit.SECONDS);
     }
 }

@@ -24,6 +24,7 @@ package de.th3ph4nt0m.tdbot.core;
 
 import de.th3ph4nt0m.tdbot.commands.*;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 
 import java.util.*;
 
@@ -32,8 +33,6 @@ class CommandHandler {
 
     public CommandHandler() {
         addCommand(new CMD_help());
-        addCommand(new CMD_adminHelp());
-
         addCommand(new CMD_flipcoin());
         addCommand(new CMD_repo());
         //addCommand(new CMD_userinfo()); //TODO: register as soon as DB is implemented
@@ -57,7 +56,6 @@ class CommandHandler {
                 }
             }
         }
-
     }
 
     /**
@@ -84,13 +82,13 @@ class CommandHandler {
     public static class CommandInfo {
         public final String name;
         public final String[] invokes;
-        public final boolean adminCommand;
+        public final DiscordRank accessRank;
         public final String description;
 
-        public CommandInfo(String name, String invokes, boolean adminCommand, String description) {
+        public CommandInfo(String name, String[] invokes, DiscordRank accessRank, String description) {
             this.name = name;
-            this.invokes = invokes.split(",");
-            this.adminCommand = adminCommand;
+            this.invokes = invokes;
+            this.accessRank = accessRank;
             this.description = description;
         }
     }

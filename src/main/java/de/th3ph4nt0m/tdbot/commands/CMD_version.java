@@ -24,20 +24,22 @@ package de.th3ph4nt0m.tdbot.commands;
 
 import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_version implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Version",
-            "Version,BotVersion",
-            false,
+            new String[]{"Version","BotVersion"},
+            DiscordRank.THE_NATION,
             "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
     );
 
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        return false;
+        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
     }
 
     @Override

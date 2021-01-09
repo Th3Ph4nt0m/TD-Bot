@@ -24,20 +24,22 @@ package de.th3ph4nt0m.tdbot.commands;
 
 import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class CMD_flipcoin implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "FlipCoin",
-            "FlipCoin,CoinFlip,Flip,Coin,CoinToss,TossCoin,Toss",
-            false,
+            new String[]{"FlipCoin","CoinFlip","Flip","Coin","CoinToss","TossCoin","Toss"},
+            DiscordRank.THE_NATION,
             "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
     );
 
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        return false;
+        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
     }
 
     @Override

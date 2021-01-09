@@ -36,25 +36,22 @@ import java.util.ArrayList;
 public class CMD_help implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Help",
-            "Help,BotInfo,CommandInfo,Command",
-            false,
+            new String[]{"Help","BotInfo","CommandInfo"},
+            DiscordRank.THE_NATION,
             "Help show you all available commands for your rank"
     );
 
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        Member author = event.getMember();
-        assert author != null;
-        NationMember authorMember = new NationMember(author);
-        return authorMember.getRank().isAtLeast(DiscordRank.OP);
+        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        ArrayList<CommandInfo> notOpCommands = Bot.getInstance().getCommandHandler().listCommands();
-        notOpCommands.removeIf(commandInfo1 -> commandInfo1.name.equals(this.commandInfo.name) || commandInfo1.adminCommand);
+        ArrayList<CommandInfo> accessibleCommands = Bot.getInstance().getCommandHandler().listCommands();
+        accessibleCommands.removeIf(commandInfo1 -> commandInfo1.name.equals(this.commandInfo.name) || !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo1.accessRank));
 
-        MessageCenter.getInstance().printHelp(event.getChannel().getId(), notOpCommands);
+        MessageCenter.getInstance().printHelp(event.getChannel().getId(), accessibleCommands);
     }
 
     @Override
