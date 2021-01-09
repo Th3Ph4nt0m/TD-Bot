@@ -24,7 +24,11 @@ package de.th3ph4nt0m.tdbot;
 
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
-import de.th3ph4nt0m.tdbot.event.*;
+import de.th3ph4nt0m.tdbot.event.CommandListener;
+import de.th3ph4nt0m.tdbot.event.MessageReceive;
+import de.th3ph4nt0m.tdbot.event.VoiceConnect;
+import de.th3ph4nt0m.tdbot.event.VoiceLeave;
+import de.th3ph4nt0m.tdbot.event.VoiceMove;
 import de.th3ph4nt0m.tdbot.loader.GitHubLoader;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import de.th3ph4nt0m.tdbot.utils.Property;
