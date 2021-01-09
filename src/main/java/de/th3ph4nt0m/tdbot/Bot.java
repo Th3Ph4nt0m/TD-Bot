@@ -17,17 +17,20 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot;
 
-import de.th3ph4nt0m.tdbot.commands.CMD_userinfo;
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
-import de.th3ph4nt0m.tdbot.listener.*;
+import de.th3ph4nt0m.tdbot.event.CommandListener;
+import de.th3ph4nt0m.tdbot.event.MessageReceive;
+import de.th3ph4nt0m.tdbot.event.VoiceConnect;
+import de.th3ph4nt0m.tdbot.event.VoiceLeave;
+import de.th3ph4nt0m.tdbot.event.VoiceMove;
+import de.th3ph4nt0m.tdbot.loader.GitHubLoader;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import de.th3ph4nt0m.tdbot.utils.MongoHandler;
 import de.th3ph4nt0m.tdbot.utils.Property;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -43,18 +46,17 @@ import java.util.EventListener;
 import java.util.stream.Collectors;
 
 public
-class Bot implements EventListener
-{
+class Bot implements EventListener {
 
     private JDA jda;
     private static Bot instance;
-    private MongoHandler mongoHandler;
     private VoiceSystem voiceSystem;
     private Property property;
+    private transient GitHubLoader ghLoader;
+    private transient CommandHandler commandHandler;
 
 
-    public Bot()
-    {
+    public Bot() {
         instance = this;
         try {
             //JDA configuration
@@ -67,43 +69,42 @@ class Bot implements EventListener
                     .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
                     .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
                     .build();
-            this.mongoHandler = new MongoHandler();
+            this.ghLoader = new GitHubLoader();
+            this.voiceSystem = new VoiceSystem();
+            this.commandHandler = new CommandHandler();
             jda.addEventListener(new VoiceConnect());
             jda.addEventListener(new VoiceLeave());
             jda.addEventListener(new VoiceMove());
             jda.addEventListener(new CommandListener());
-            jda.addEventListener(new ReactionListener());
-            this.voiceSystem = new VoiceSystem();
+            jda.addEventListener(new MessageReceive());
             jda.awaitReady();
             new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
-            CommandHandler.commands.put("info", new CMD_userinfo());
         } catch (LoginException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public static Bot getInstance()
-    {
+    public static Bot getInstance() {
         return instance;
     }
 
-    public JDA getJda()
-    {
+    public JDA getJda() {
         return jda;
     }
 
-    public MongoHandler getMongoHandler()
-    {
-        return mongoHandler;
+    public CommandHandler getCommandHandler() {
+        return commandHandler;
     }
 
-    public VoiceSystem getVoiceSystem()
-    {
+    public VoiceSystem getVoiceSystem() {
         return voiceSystem;
     }
 
-    public Property getProperty()
-    {
+    public GitHubLoader getGhLoader() {
+        return ghLoader;
+    }
+
+    public Property getProperty() {
         return property;
     }
 

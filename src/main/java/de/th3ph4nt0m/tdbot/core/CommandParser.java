@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/2
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.core;
@@ -27,8 +27,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.util.ArrayList;
 
 public
-class CommandParser
-{
+class CommandParser {
 
     /**
      * Parser of command system
@@ -37,8 +36,7 @@ class CommandParser
      * @param event event in what the message was received
      * @return CommandContainer
      */
-    public static CommandContainer parser(String raw, MessageReceivedEvent event)
-    {
+    public static CommandContainer parser(String raw, MessageReceivedEvent event) {
         String beheaded = raw.replaceFirst("\\+", "");
         String[] splitBeheaded = beheaded.split(" ");
         String invoke = splitBeheaded[0];
@@ -52,8 +50,7 @@ class CommandParser
     }
 
     public static
-    class CommandContainer
-    {
+    class CommandContainer {
         public final String raw;
         public final String beheaded;
         public final String[] splitBeheaded;
@@ -62,9 +59,7 @@ class CommandParser
         public final MessageReceivedEvent event;
 
 
-        public
-        CommandContainer(String raw, String beheaded, String[] splitBeheaded, String invoke, String[] args, MessageReceivedEvent event)
-        {
+        public CommandContainer(String raw, String beheaded, String[] splitBeheaded, String invoke, String[] args, MessageReceivedEvent event) {
             this.raw = raw;
             this.beheaded = beheaded;
             this.splitBeheaded = splitBeheaded;

@@ -17,7 +17,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.utils;
@@ -25,16 +25,14 @@ package de.th3ph4nt0m.tdbot.utils;
 import java.io.*;
 import java.util.Properties;
 
-public class Property
-{
+public class Property {
 
     /**
      * @param file name of the file
      * @param key  the key to look for in the config
      * @return value of the given key
      */
-    public String get(String file, String key)
-    {
+    public String get(String file, String key) {
         try (InputStream input = new FileInputStream("cfg/" + file + ".properties")) {
 
             Properties prop = new Properties();
@@ -55,13 +53,12 @@ public class Property
     /**
      * create the default properties-file
      */
-    public void setDefaultProps()
-    {
+    public void setDefaultProps() {
         //create the file if not exists
         File dir = new File("cfg");
         if (!dir.exists()) {
             dir.mkdirs();
-            try (OutputStream output = new FileOutputStream("cfg/database.properties")) {
+            /*try (OutputStream output = new FileOutputStream("cfg/database.properties")) {
 
                 Properties prop = new Properties();
 
@@ -77,7 +74,7 @@ public class Property
                 prop.store(output, null);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             try (OutputStream output = new FileOutputStream("cfg/bot.properties")) {
 
@@ -91,7 +88,6 @@ public class Property
                 prop.setProperty("bot.afkID", "AFKChannelID");
                 prop.setProperty("bot.createID", "CreateChannelID");
                 prop.setProperty("bot.compID", "CompCreateChannelID");
-                prop.setProperty("bot.highestRole", "HighestRoleID");
                 prop.setProperty("bot.adminChannelID", "AdminChannelID");
 
                 // save properties to project folder

@@ -1,5 +1,5 @@
 /*******************************************************************************
- MessageReceive.java is part of the TD-Bot project
+ CMD_repo.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,29 +17,38 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/4
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.listener;
+package de.th3ph4nt0m.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.Bot;
-import net.dv8tion.jda.api.entities.Message;
+import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
+import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+public class CMD_flipcoin implements ICommand {
+    CommandInfo commandInfo = new CommandInfo(
+            "FlipCoin",
+            "FlipCoin,CoinFlip,Flip,Coin,CoinToss,TossCoin,Toss",
+            false,
+            "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
+    );
 
-public
-class MessageReceive extends ListenerAdapter {
     @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        Message msg = event.getMessage();
+    public boolean unsafe(String[] args, MessageReceivedEvent event) {
+        return false;
+    }
 
-        //delete commands for @Groovy in unsupported channels
-        if (event.getMessage().getContentRaw().startsWith("-") && !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyChannelID"))) {
-                msg.delete().queue();
-            }
-        }
+    @Override
+    public void action(String[] args, MessageReceivedEvent event) {
+        MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
+    }
 
+    @Override
+    public CommandInfo getInfo() {
+        return commandInfo;
     }
 }
+
+

@@ -1,5 +1,5 @@
 /*******************************************************************************
- ICommand.java is part of the TD-Bot project
+ CMD_version.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,38 +17,37 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/2
+ Last edit: 2020/11/3
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.interfaces;
+package de.th3ph4nt0m.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
+import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+public class CMD_version implements ICommand {
+    CommandInfo commandInfo = new CommandInfo(
+            "Version",
+            "Version,BotVersion",
+            false,
+            "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
+    );
 
-public
-interface ICommand {
-    /**
-     * The unsafe-Method is called before the action-Method
-     *
-     * @param args  args from CommandParser
-     * @param event MessageReceivedEvent form CommandParser
-     * @return true when unsafe under current conditions
-     */
-    boolean unsafe(String[] args, MessageReceivedEvent event);
+    @Override
+    public boolean unsafe(String[] args, MessageReceivedEvent event) {
+        return false;
+    }
 
-    /**
-     * The action-Method is called after unsafe returned false
-     *
-     * @param args  from CommandParser
-     * @param event MessageReceivedEvent form CommandParser
-     */
-    void action(String[] args, MessageReceivedEvent event);
+    @Override
+    public void action(String[] args, MessageReceivedEvent event) {
+        MessageCenter.getInstance().printVersion(event.getChannel().getId());
+    }
 
-    /**
-     * Returns information about the command
-     *
-     * @return command information
-     */
-    CommandHandler.CommandInfo getInfo();
+    @Override
+    public CommandInfo getInfo() {
+        return commandInfo;
+    }
+
 }

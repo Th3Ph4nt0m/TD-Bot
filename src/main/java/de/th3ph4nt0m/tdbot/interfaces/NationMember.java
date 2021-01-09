@@ -17,80 +17,31 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/12/29
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.interfaces;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
-import de.th3ph4nt0m.tdbot.Bot;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
-import org.bson.Document;
 
 @SuppressWarnings({"SpellCheckingInspection", "ConstantConditions"})
-public class NationMember
-{
+public class NationMember {
     private final Member member;
-    private final String id;
 
 
     /**
      * @param member Discord Member to create a NationMember from
-     * @param id     Discord Member/user ID to create a NationMember from because of NullPointerExceptions at Member#getID
      */
-    public NationMember(Member member, String id)
-    {
+    public NationMember(Member member) {
         this.member = member;
-        this.id = id;
-    }
-
-    private MongoCollection<Document> users()
-    {
-        return Bot.getInstance().getMongoHandler().users();
-    }
-
-    /**
-     * @return user specific document from DB
-     */
-    public Document getDocument()
-    {
-        return users().find(Filters.eq("_id", id)).first();
-    }
-
-
-    /**
-     * @return if user exists in DB
-     */
-    public boolean existsinDB()
-    {
-        return getDocument() != null;
-    }
-
-    /**
-     * insert user into DB
-     */
-    public void createInDB()
-    {
-        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
-        users().insertOne(append);
-    }
-
-    /**
-     * @return all information stored about a user
-     */
-    public String getInfo()
-    {
-
-        return getDocument().toJson();
     }
 
     /**
      * @return name the user's current game
      */
-    public String getGame()
-    {
+    public String getGame() {
         if (member.getActivities().size() >= 1) {
             for (int i = 0; i < member.getActivities().size(); i++) {
                 if (!member.getActivities().get(i).getType().equals(Activity.ActivityType.CUSTOM_STATUS)) {
@@ -101,27 +52,34 @@ public class NationMember
         return null;
     }
 
-    /**
-     * delete the user specific document
-     */
-    public void removeFromDB()
-    {
-        users().deleteOne(Filters.eq("_id", id));
+    public DiscordRank getRank() {
+        switch (member.getRoles().get(0).getName()) {
+            case "OP":
+                return DiscordRank.OP;
+            case "Bot":
+                return DiscordRank.BOT;
+            case "Team":
+                return DiscordRank.TEAM;
+            case "VIP":
+                return DiscordRank.VIP;
+            case "The Nation":
+                return DiscordRank.THE_NATION;
+            default:
+                return DiscordRank.UNVERIFIED;
+        }
     }
 
     /**
      * @return user's nickname
      */
-    public String getNickname()
-    {
+    public String getNickname() {
         return member.getEffectiveName();
     }
 
     /**
      * @return user as mention
      */
-    public String asTag()
-    {
+    public String asTag() {
         return member.getAsMention();
     }
 }

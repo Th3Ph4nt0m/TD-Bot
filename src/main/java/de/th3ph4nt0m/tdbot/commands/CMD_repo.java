@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_userinfo.java is part of the TD-Bot project
+ CMD_repo.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,48 +17,39 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/12/29
+ Last edit: 2020/11/4
  ******************************************************************************/
 
 package de.th3ph4nt0m.tdbot.commands;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
-import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_userinfo implements ICommand {
+import java.awt.*;
+
+public class CMD_repo implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
-            "Info",
-            "Info",
-            true,
-            "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine."
+            "Repo",
+            "Repo,Repository",
+            false,
+            "Repo gives you information about the current open source bot repository."
     );
 
     @Override
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        Member author = event.getMember();
-        assert author != null;
-        NationMember authorMember = new NationMember(author);
-        //check if user is allowed to access the information
-        if (authorMember.getRank().isAtLeast(DiscordRank.OP) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
-            return false;
-        }
-        MessageCenter.getInstance().sendNoAccess(event.getChannel().getId());
-        return true;
+        return false;
     }
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        //initialising a NationMember to access the DB
-        Member m = event.getMessage().getMentionedMembers().get(0);
-        NationMember nationMember = new NationMember(m);
-        //sending information to the channel
-        event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.BLUE);
+        builder.setTitle("Repository Information");
+        builder.setDescription("The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github](https://github.com/Th3Ph4nt0m/TD-Bot/)");
+        builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+        event.getChannel().sendMessage(builder.build()).queue();
     }
 
     @Override

@@ -1,3 +1,4 @@
+package de.th3ph4nt0m.tdbot.core;
 /*******************************************************************************
  CommandHandler.java is part of the TD-Bot project
 
@@ -17,32 +18,81 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/1
+ Last edit: 2020/11/2
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.core;
 
+import de.th3ph4nt0m.tdbot.commands.*;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
-import java.util.HashMap;
+import java.util.*;
 
 public
-class CommandHandler
-{
+class CommandHandler {
 
-    public static final CommandParser parse = new CommandParser();
-    public static HashMap <String, ICommand> commands = new HashMap <>();
+    public CommandHandler() {
+        addCommand(new CMD_help());
+        addCommand(new CMD_adminHelp());
 
-    public static
-    void handleCommand(CommandParser.CommandContainer cmd)
-    {
-        if (commands.containsKey(cmd.invoke)) {
-            boolean safe = commands.get(cmd.invoke).called(cmd.args, cmd.event);
+        addCommand(new CMD_flipcoin());
+        addCommand(new CMD_repo());
+        //addCommand(new CMD_userinfo()); //TODO: register as soon as DB is implemented
+        addCommand(new CMD_version());
+    }
 
-            if (!safe) {
-                commands.get(cmd.invoke).action(cmd.args, cmd.event);
+    public ArrayList<ICommand> commands = new ArrayList<>();
+
+    /**
+     * Handels a command
+     *
+     * @param cmd CommandContainer from CommandParser
+     */
+    public void handleCommand(CommandParser.CommandContainer cmd) {
+        for (ICommand command : commands) {
+            if (Arrays.stream(command.getInfo().invokes).anyMatch(i -> i.equalsIgnoreCase(cmd.invoke))) {
+                boolean unsafe = command.unsafe(cmd.args, cmd.event);
+
+                if (!unsafe) {
+                    command.action(cmd.args, cmd.event);
+                }
             }
-            commands.get(cmd.invoke).excecuted(safe, cmd.event);
+        }
+
+    }
+
+    /**
+     * Adds a command to the current command list
+     *
+     * @param command ICommand to be added
+     */
+    public void addCommand(ICommand command) {
+        if (commands.contains(command)) return;
+        commands.add(command);
+    }
+
+    /**
+     * Lists the CommandInfo of the current Command liSt
+     *
+     * @return List of CommandInfos
+     */
+    public ArrayList<CommandInfo> listCommands() {
+        ArrayList<CommandInfo> list = new ArrayList<>();
+        commands.forEach(iCommand -> list.add(iCommand.getInfo()));
+        return list;
+    }
+
+    public static class CommandInfo {
+        public final String name;
+        public final String[] invokes;
+        public final boolean adminCommand;
+        public final String description;
+
+        public CommandInfo(String name, String invokes, boolean adminCommand, String description) {
+            this.name = name;
+            this.invokes = invokes.split(",");
+            this.adminCommand = adminCommand;
+            this.description = description;
         }
     }
+
 }

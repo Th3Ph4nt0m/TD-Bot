@@ -1,5 +1,5 @@
 /*******************************************************************************
- ICommand.java is part of the TD-Bot project
+ VoiceLeave.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -20,35 +20,24 @@
  Last edit: 2020/11/2
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.interfaces;
+package de.th3ph4nt0m.tdbot.event;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
+import de.th3ph4nt0m.tdbot.Bot;
+import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public
-interface ICommand {
-    /**
-     * The unsafe-Method is called before the action-Method
-     *
-     * @param args  args from CommandParser
-     * @param event MessageReceivedEvent form CommandParser
-     * @return true when unsafe under current conditions
-     */
-    boolean unsafe(String[] args, MessageReceivedEvent event);
+class VoiceLeave extends ListenerAdapter {
 
-    /**
-     * The action-Method is called after unsafe returned false
-     *
-     * @param args  from CommandParser
-     * @param event MessageReceivedEvent form CommandParser
-     */
-    void action(String[] args, MessageReceivedEvent event);
+    @Override
+    public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
+        //delete custom channel as soon as empty
+        if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
+            if (event.getChannelLeft().getMembers().size() <= 0) {
+                event.getChannelLeft().delete().queue();
+                Bot.getInstance().getVoiceSystem().voiceChannels.remove(event.getChannelLeft());
+            }
+        }
 
-    /**
-     * Returns information about the command
-     *
-     * @return command information
-     */
-    CommandHandler.CommandInfo getInfo();
+    }
 }
