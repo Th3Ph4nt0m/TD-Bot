@@ -33,24 +33,21 @@ import net.dv8tion.jda.api.requests.RestAction;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MessageCenter
-{
+public class MessageCenter {
 
     private static MessageCenter instance;
 
     /**
      * @param autoPrint variable to decide if messages are printed at startup
      */
-    public MessageCenter(boolean autoPrint)
-    {
+    public MessageCenter(boolean autoPrint) {
         instance = this;
         if (autoPrint) {
             autoPrint();
         }
     }
 
-    public static MessageCenter getInstance()
-    {
+    public static MessageCenter getInstance() {
         return instance;
     }
 
@@ -59,8 +56,7 @@ public class MessageCenter
      *
      * @param channelID ID of the channel to send the message to
      */
-    public void printRulesAndPrivacy(String channelID)
-    {
+    public void printRulesAndPrivacy(String channelID) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(channelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.YELLOW);
@@ -79,22 +75,18 @@ public class MessageCenter
      * Shows the outcome of the coin toss command
      *
      * @param pChannelID ID of the channel to send the message to
-     * @param head Outcome of the coin toss
+     * @param head       Outcome of the coin toss
      */
-    public void printCoinToss(String pChannelID, boolean head)
-    {
+    public void printCoinToss(String pChannelID, boolean head) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.blue);
         Emote emote;
-        if(head)
-        {
+        if (head) {
             emote = Bot.getInstance().getJda().getEmotesByName("CoinHeads", false).get(0);
             builder.setTitle("Head");
             builder.setDescription("You got Head.");
-        }
-        else
-        {
+        } else {
             emote = Bot.getInstance().getJda().getEmotesByName("CoinTails", false).get(0);
             builder.setTitle("Tails");
             builder.setDescription("You got Tails.");
@@ -108,18 +100,16 @@ public class MessageCenter
      * Prints the given commands as help
      *
      * @param pChannelID ID of the channel to send the message to
-     * @param commands Commands to be listed in help
+     * @param commands   Commands to be listed in help
      */
-    public void printHelp(String pChannelID, ArrayList<CommandHandler.CommandInfo> commands)
-    {
+    public void printHelp(String pChannelID, ArrayList<CommandHandler.CommandInfo> commands) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.pink);
         builder.setTitle("Help");
         builder.setDescription("Following commands are accessible to you.");
-        for(CommandHandler.CommandInfo info:commands)
-        {
-            builder.addField(info.name,info.description,false);
+        for (CommandHandler.CommandInfo info : commands) {
+            builder.addField(info.name, info.description, false);
         }
         builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         assert channel != null;
@@ -134,8 +124,7 @@ public class MessageCenter
      * @param pEmbedColor color of the embed
      * @param pChannelID  ID of the channel to send the message to
      */
-    public void printError(String pErrorName, Color pEmbedColor, String pChannelID)
-    {
+    public void printError(String pErrorName, Color pEmbedColor, String pChannelID) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(pEmbedColor);
@@ -151,8 +140,7 @@ public class MessageCenter
      *
      * @param pChannelID ID of the channel to send the message to
      */
-    public void printVersion(String pChannelID)
-    {
+    public void printVersion(String pChannelID) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.blue);
@@ -164,8 +152,7 @@ public class MessageCenter
     /**
      * automatically send messages on startup
      */
-    private void autoPrint()
-    {
+    private void autoPrint() {
         printRulesAndPrivacy(Bot.getInstance().getProperty().get("bot", "bot.rulesID"));
     }
 
@@ -174,8 +161,7 @@ public class MessageCenter
      *
      * @param channel private message Channel
      */
-    public void sendPrivacyNotAccepted(RestAction<PrivateChannel> channel)
-    {
+    public void sendPrivacyNotAccepted(RestAction<PrivateChannel> channel) {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setTitle("Authentication Error!")
                 .setColor(Color.RED)
@@ -189,8 +175,7 @@ public class MessageCenter
      *
      * @param channel private message channel
      */
-    public void sendNoGame(RestAction<PrivateChannel> channel)
-    {
+    public void sendNoGame(RestAction<PrivateChannel> channel) {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.ORANGE)
                 .setTitle("No game detected")
@@ -204,8 +189,7 @@ public class MessageCenter
      *
      * @param channelID ID of the channel to send the message to
      */
-    public void sendNoAccess(String channelID)
-    {
+    public void sendNoAccess(String channelID) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(channelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.RED)

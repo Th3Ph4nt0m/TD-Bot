@@ -27,11 +27,10 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceLeaveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public
-class VoiceLeave extends ListenerAdapter
-{
+class VoiceLeave extends ListenerAdapter {
 
-    @Override public void onGuildVoiceLeave(GuildVoiceLeaveEvent event)
-    {
+    @Override
+    public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
         //delete custom channel as soon as empty
         if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
             if (event.getChannelLeft().getMembers().size() <= 0) {

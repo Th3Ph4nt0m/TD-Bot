@@ -31,8 +31,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 
-public class GitHubLoader
-{
+public class GitHubLoader {
     public static final String BASE_URL = "https://api.github.com/repos/th3ph4nt0m/TD-Bot";
 
 
@@ -41,8 +40,7 @@ public class GitHubLoader
      *
      * @return name of the release
      */
-    public String getLatestTagName()
-    {
+    public String getLatestTagName() {
         try {
             URL url = new URL(BASE_URL + "/releases");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

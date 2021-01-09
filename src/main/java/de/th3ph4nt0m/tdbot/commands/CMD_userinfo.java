@@ -31,8 +31,7 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_userinfo implements ICommand
-{
+public class CMD_userinfo implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Info",
             "Info",
@@ -46,7 +45,7 @@ public class CMD_userinfo implements ICommand
         assert author != null;
         NationMember authorMember = new NationMember(author);
         //check if user is allowed to access the information
-        if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
+        if (authorMember.getRank().isAtLeast(DiscordRank.OP) && event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
             return false;
         }
         MessageCenter.getInstance().sendNoAccess(event.getChannel().getId());
