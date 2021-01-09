@@ -27,8 +27,7 @@ import de.th3ph4nt0m.tdbot.core.CommandParser;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public
-class CommandListener extends ListenerAdapter {
+public class CommandListener extends ListenerAdapter {
     /**
      * Listener for command handling
      */

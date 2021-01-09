@@ -45,8 +45,7 @@ import java.util.EnumSet;
 import java.util.EventListener;
 import java.util.stream.Collectors;
 
-public
-class Bot implements EventListener {
+public class Bot implements EventListener {
 
     private JDA jda;
     private static Bot instance;

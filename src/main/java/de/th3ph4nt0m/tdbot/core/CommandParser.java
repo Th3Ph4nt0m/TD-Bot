@@ -26,8 +26,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
 
-public
-class CommandParser {
+public class CommandParser {
 
     /**
      * Parser of command system

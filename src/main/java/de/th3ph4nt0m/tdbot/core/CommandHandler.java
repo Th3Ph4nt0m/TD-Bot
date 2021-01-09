@@ -27,8 +27,7 @@ import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 
 import java.util.*;
 
-public
-class CommandHandler {
+public class CommandHandler {
 
     public CommandHandler() {
         addCommand(new CMD_help());

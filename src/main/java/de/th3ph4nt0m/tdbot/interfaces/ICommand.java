@@ -26,8 +26,7 @@ import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
-public
-interface ICommand {
+public interface ICommand {
     /**
      * The unsafe-Method is called before the action-Method
      *

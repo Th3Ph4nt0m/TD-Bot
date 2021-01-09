@@ -30,8 +30,7 @@ import net.dv8tion.jda.api.events.guild.voice.GuildVoiceJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 @SuppressWarnings({"DuplicatedCode", "unchecked"})
-public
-class VoiceConnect extends ListenerAdapter {
+public class VoiceConnect extends ListenerAdapter {
     @Override
     public void onGuildVoiceJoin(GuildVoiceJoinEvent event) {
         //initialize a NationMember to access the users document in DB
