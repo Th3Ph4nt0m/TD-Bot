@@ -24,8 +24,7 @@ package de.th3ph4nt0m.tdbot.core;
 
 import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
-import net.dv8tion.jda.api.entities.Invite;
-import net.dv8tion.jda.api.entities.Member;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 
 import java.util.Objects;
@@ -37,6 +36,9 @@ public class LevelSystem
 	public final float pointLimit = 69420;
 	public final float upperBorderDiff = 2000;
 	public final float lowerBorderDiff = -2000;
+
+	public final float maxMultiVoicePoints=10;
+	public final float multiVoiceSoftening=69;
 
 	public LevelSystem(){startTimer();}
 
@@ -56,12 +58,21 @@ public class LevelSystem
 	{
 		Bot.getInstance().getJda().getGuilds().get(0).getVoiceStates().forEach(guildVoiceState -> {
 			VoiceChannel channel = Objects.requireNonNull(guildVoiceState.getChannel());
-			if(channel.getMembers().size()==1){
-				//(subtractRelPoints(guildVoiceState.getMember(),1);
+			NationMember nMember = new NationMember(guildVoiceState.getMember(), guildVoiceState.getMember().getId());
+			int userCount = channel.getMembers().size();
+			if(userCount==1){
+				if(nMember.getRank().isAtLeast(DiscordRank.VIP)) {
+					subtractRelPoints(nMember,1);
+				}
+				else{
+					subtractRelPoints(nMember,2);
+				}
+			}
+			else if(userCount>1) {
+				float points=-(multiVoiceSoftening/(userCount+(multiVoiceSoftening/maxMultiVoicePoints)))+maxMultiVoicePoints;
+				addRelPoints(nMember,points);
 			}
 		});
-		//TODO: Add System for ParticipationPoint addition and subtraction.
-		System.out.println("minute passed");
 	}
 
 	public void addRelPoints(NationMember member,float points) {

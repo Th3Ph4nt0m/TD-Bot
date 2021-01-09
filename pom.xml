@@ -28,7 +28,7 @@
 
     <groupId>de.th3ph4nt0m</groupId>
     <artifactId>tdbot</artifactId>
-    <version>beta-2.0.0</version>
+    <version>1.2.0</version>
 
     <repositories>
         <repository>
