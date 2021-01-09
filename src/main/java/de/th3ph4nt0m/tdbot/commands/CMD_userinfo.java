@@ -44,7 +44,7 @@ public class CMD_userinfo implements ICommand
     public boolean unsafe(String[] args, MessageReceivedEvent event) {
         Member author = event.getMember();
         assert author != null;
-        NationMember authorMember = new NationMember(author,author.getId());
+        NationMember authorMember = new NationMember(author);
         //check if user is allowed to access the information
         if (authorMember.getRank().isAtLeast(DiscordRank.OP)&& event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.adminChannelID"))) {
             return false;
@@ -57,7 +57,7 @@ public class CMD_userinfo implements ICommand
     public void action(String[] args, MessageReceivedEvent event) {
         //initialising a NationMember to access the DB
         Member m = event.getMessage().getMentionedMembers().get(0);
-        NationMember nationMember = new NationMember(m, m.getId());
+        NationMember nationMember = new NationMember(m);
         //sending information to the channel
         event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
     }
