@@ -53,8 +53,8 @@ class Bot implements EventListener
     private static Bot instance;
     private VoiceSystem voiceSystem;
     private Property property;
-    private GitHubLoader ghLoader;
-    private CommandHandler commandHandler;
+    private transient GitHubLoader ghLoader;
+    private transient CommandHandler commandHandler;
 
 
     public Bot()
