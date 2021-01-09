@@ -31,6 +31,8 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.util.ArrayList;
+
 public class CMD_adminHelp implements ICommand
 {
     CommandInfo commandInfo = new CommandInfo(
@@ -50,7 +52,10 @@ public class CMD_adminHelp implements ICommand
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        MessageCenter.getInstance().printHelp(event.getChannel().getId(),Bot.getInstance().getCommandHandler().listCommands());
+        ArrayList<CommandInfo> commands = Bot.getInstance().getCommandHandler().listCommands();
+        commands.removeIf(commandInfo1 ->  commandInfo1.name.equals(this.commandInfo.name));
+
+        MessageCenter.getInstance().printHelp(event.getChannel().getId(),commands);
     }
 
     @Override
