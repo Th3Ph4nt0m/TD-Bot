@@ -22,8 +22,13 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
+import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import net.dv8tion.jda.api.entities.Invite;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.VoiceChannel;
 
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,6 +54,12 @@ public class LevelSystem
 
 	public void minuteCall()
 	{
+		Bot.getInstance().getJda().getGuilds().get(0).getVoiceStates().forEach(guildVoiceState -> {
+			VoiceChannel channel = Objects.requireNonNull(guildVoiceState.getChannel());
+			if(channel.getMembers().size()==1){
+				//(subtractRelPoints(guildVoiceState.getMember(),1);
+			}
+		});
 		//TODO: Add System for ParticipationPoint addition and subtraction.
 		System.out.println("minute passed");
 	}
