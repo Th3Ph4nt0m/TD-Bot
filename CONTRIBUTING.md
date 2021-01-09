@@ -12,10 +12,6 @@ Reading and following these guidelines will help us make the contribution proces
     * [Pull Requests](#pull-requests)
 * [Getting Help](#getting-help)
 
-## Code of Conduct
-
-We take our open source community seriously and hold ourselves and other contributors to high standards of communication. By participating and contributing to this project, you agree to uphold our [Code of Conduct](https://github.com/th3ph4nt0m/TD-Bot/blob/master/CODE-OF-CONDUCT.md).
-
 ## Getting Started
 
 Contributions are made to this repo via Issues and Pull Requests (PRs). A few general guidelines that cover both:
