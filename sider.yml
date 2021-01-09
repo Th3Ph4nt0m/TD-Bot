@@ -1,0 +1,4 @@
+linter:
+  pmd_java:
+    dir: src
+    encoding: UTF-8
