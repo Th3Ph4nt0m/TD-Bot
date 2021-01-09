@@ -54,12 +54,12 @@ public enum DiscordRank
 
     public boolean isAtLeast(DiscordRank rank)
     {
-        return this.ordinal() >= rank.ordinal();
+        return this.ordinal() <= rank.ordinal();
     }
 
     public boolean isHigherThan(DiscordRank rank)
     {
-        return this.ordinal() > rank.ordinal();
+        return this.ordinal() < rank.ordinal();
     }
 
     public String getDescription()

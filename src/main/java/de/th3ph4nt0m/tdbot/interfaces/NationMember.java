@@ -46,50 +46,6 @@ public class NationMember
         this.member = member;
         this.id = id;
     }
-    @Deprecated
-    private MongoCollection<Document> users()
-    {
-        return Bot.getInstance().getMongoHandler().users();
-    }
-
-    /**
-     * @return user specific document from DB
-     */
-    @Deprecated
-    public Document getDocument()
-    {
-        return users().find(Filters.eq("_id", id)).first();
-    }
-
-
-    /**
-     * @return if user exists in DB
-     */
-    @Deprecated
-    public boolean existsinDB()
-    {
-        return getDocument() != null;
-    }
-
-    /**
-     * insert user into DB
-     */
-    @Deprecated
-    public void createInDB()
-    {
-        Document append = new Document("_id", member.getId()).append("nick", member.getEffectiveName());
-        users().insertOne(append);
-    }
-
-    /**
-     * @return all information stored about a user
-     */
-    @Deprecated
-    public String getInfo()
-    {
-
-        return getDocument().toJson();
-    }
 
     /**
      * @return name the user's current game
@@ -122,15 +78,6 @@ public class NationMember
             default:
                 return DiscordRank.UNVERIFIED;
         }
-    }
-
-    /**
-     * delete the user specific document
-     */
-    @Deprecated
-    public void removeFromDB()
-    {
-        users().deleteOne(Filters.eq("_id", id));
     }
 
     /**
