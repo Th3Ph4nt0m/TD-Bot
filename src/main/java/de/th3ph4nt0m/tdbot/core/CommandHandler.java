@@ -24,72 +24,75 @@ package de.th3ph4nt0m.tdbot.core;
 
 import de.th3ph4nt0m.tdbot.commands.*;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+
 import java.util.*;
 
 public
-class CommandHandler
-{
+class CommandHandler {
 
-	public CommandHandler() {
-		addCommand(new CMD_help());
-		addCommand(new CMD_adminHelp());
+    public CommandHandler() {
+        addCommand(new CMD_help());
+        addCommand(new CMD_adminHelp());
 
-		addCommand(new CMD_flipcoin());
-		addCommand(new CMD_repo());
-		//addCommand(new CMD_userinfo()); //TODO: register as soon as DB is implemented
-		addCommand(new CMD_version());
-	}
+        addCommand(new CMD_flipcoin());
+        addCommand(new CMD_repo());
+        //addCommand(new CMD_userinfo()); //TODO: register as soon as DB is implemented
+        addCommand(new CMD_version());
+    }
 
-	public ArrayList <ICommand> commands = new ArrayList<>();
+    public ArrayList<ICommand> commands = new ArrayList<>();
 
-	/**
-	 * Handels a command
-	 * @param cmd CommandContainer from CommandParser
-	 */
-	public void handleCommand(CommandParser.CommandContainer cmd) {
-		for(ICommand command: commands) {
-			if(Arrays.stream(command.getInfo().invokes).anyMatch(i -> i.equalsIgnoreCase(cmd.invoke))) {
-				boolean unsafe = command.unsafe(cmd.args, cmd.event);
+    /**
+     * Handels a command
+     *
+     * @param cmd CommandContainer from CommandParser
+     */
+    public void handleCommand(CommandParser.CommandContainer cmd) {
+        for (ICommand command : commands) {
+            if (Arrays.stream(command.getInfo().invokes).anyMatch(i -> i.equalsIgnoreCase(cmd.invoke))) {
+                boolean unsafe = command.unsafe(cmd.args, cmd.event);
 
-				if (!unsafe) {
-					command.action(cmd.args, cmd.event);
-				}
-			}
-		}
+                if (!unsafe) {
+                    command.action(cmd.args, cmd.event);
+                }
+            }
+        }
 
-	}
+    }
 
-	/**
-	 * Adds a command to the current command list
-	 * @param command ICommand to be added
-	 */
-	public void addCommand(ICommand command) {
-		if(commands.contains(command)) return;
-		commands.add(command);
-	}
+    /**
+     * Adds a command to the current command list
+     *
+     * @param command ICommand to be added
+     */
+    public void addCommand(ICommand command) {
+        if (commands.contains(command)) return;
+        commands.add(command);
+    }
 
-	/**
-	 * Lists the CommandInfo of the current Command liSt
-	 * @return List of CommandInfos
-	 */
-	public ArrayList<CommandInfo> listCommands() {
-		ArrayList<CommandInfo> list = new ArrayList<>();
-		commands.forEach(iCommand -> list.add(iCommand.getInfo()));
-		return list;
-	}
+    /**
+     * Lists the CommandInfo of the current Command liSt
+     *
+     * @return List of CommandInfos
+     */
+    public ArrayList<CommandInfo> listCommands() {
+        ArrayList<CommandInfo> list = new ArrayList<>();
+        commands.forEach(iCommand -> list.add(iCommand.getInfo()));
+        return list;
+    }
 
-	public static class CommandInfo {
-		public final String name;
-		public final String[] invokes;
-		public final boolean adminCommand;
-		public final String description;
+    public static class CommandInfo {
+        public final String name;
+        public final String[] invokes;
+        public final boolean adminCommand;
+        public final String description;
 
-		public CommandInfo(String name, String invokes, boolean adminCommand, String description) {
-			this.name = name;
-			this.invokes = invokes.split(",");
-			this.adminCommand = adminCommand;
-			this.description = description;
-		}
-	}
+        public CommandInfo(String name, String invokes, boolean adminCommand, String description) {
+            this.name = name;
+            this.invokes = invokes.split(",");
+            this.adminCommand = adminCommand;
+            this.description = description;
+        }
+    }
 
 }

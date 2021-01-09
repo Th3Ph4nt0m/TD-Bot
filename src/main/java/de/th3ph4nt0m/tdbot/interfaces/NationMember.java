@@ -27,24 +27,21 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Member;
 
 @SuppressWarnings({"SpellCheckingInspection", "ConstantConditions"})
-public class NationMember
-{
+public class NationMember {
     private final Member member;
 
 
     /**
      * @param member Discord Member to create a NationMember from
      */
-    public NationMember(Member member)
-    {
+    public NationMember(Member member) {
         this.member = member;
     }
 
     /**
      * @return name the user's current game
      */
-    public String getGame()
-    {
+    public String getGame() {
         if (member.getActivities().size() >= 1) {
             for (int i = 0; i < member.getActivities().size(); i++) {
                 if (!member.getActivities().get(i).getType().equals(Activity.ActivityType.CUSTOM_STATUS)) {
@@ -55,8 +52,7 @@ public class NationMember
         return null;
     }
 
-    public DiscordRank getRank()
-    {
+    public DiscordRank getRank() {
         switch (member.getRoles().get(0).getName()) {
             case "OP":
                 return DiscordRank.OP;
@@ -76,16 +72,14 @@ public class NationMember
     /**
      * @return user's nickname
      */
-    public String getNickname()
-    {
+    public String getNickname() {
         return member.getEffectiveName();
     }
 
     /**
      * @return user as mention
      */
-    public String asTag()
-    {
+    public String asTag() {
         return member.getAsMention();
     }
 }

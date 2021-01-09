@@ -31,11 +31,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 @SuppressWarnings({"DuplicatedCode", "unchecked"})
 public
-class VoiceConnect extends ListenerAdapter
-{
+class VoiceConnect extends ListenerAdapter {
     @Override
-    public void onGuildVoiceJoin(GuildVoiceJoinEvent event)
-    {
+    public void onGuildVoiceJoin(GuildVoiceJoinEvent event) {
         //initialize a NationMember to access the users document in DB
         NationMember nMember = new NationMember(event.getMember());
         //query for voice creator

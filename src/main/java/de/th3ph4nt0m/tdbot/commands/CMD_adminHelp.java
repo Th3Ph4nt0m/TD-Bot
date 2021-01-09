@@ -33,8 +33,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
 
-public class CMD_adminHelp implements ICommand
-{
+public class CMD_adminHelp implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Help",
             "Help,BotInfo,CommandInfo,Command",
@@ -53,13 +52,15 @@ public class CMD_adminHelp implements ICommand
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         ArrayList<CommandInfo> commands = Bot.getInstance().getCommandHandler().listCommands();
-        commands.removeIf(commandInfo1 ->  commandInfo1.name.equals(this.commandInfo.name));
+        commands.removeIf(commandInfo1 -> commandInfo1.name.equals(this.commandInfo.name));
 
-        MessageCenter.getInstance().printHelp(event.getChannel().getId(),commands);
+        MessageCenter.getInstance().printHelp(event.getChannel().getId(), commands);
     }
 
     @Override
-    public CommandInfo getInfo() { return commandInfo; }
+    public CommandInfo getInfo() {
+        return commandInfo;
+    }
 }
 
 

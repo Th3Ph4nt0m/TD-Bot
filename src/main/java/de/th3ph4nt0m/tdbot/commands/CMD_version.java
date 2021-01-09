@@ -27,8 +27,7 @@ import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_version implements ICommand
-{
+public class CMD_version implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Version",
             "Version,BotVersion",
@@ -37,14 +36,12 @@ public class CMD_version implements ICommand
     );
 
     @Override
-    public boolean unsafe(String[] args, MessageReceivedEvent event)
-    {
+    public boolean unsafe(String[] args, MessageReceivedEvent event) {
         return false;
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event)
-    {
+    public void action(String[] args, MessageReceivedEvent event) {
         MessageCenter.getInstance().printVersion(event.getChannel().getId());
     }
 

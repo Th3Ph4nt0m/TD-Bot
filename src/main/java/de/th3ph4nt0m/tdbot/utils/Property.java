@@ -25,16 +25,14 @@ package de.th3ph4nt0m.tdbot.utils;
 import java.io.*;
 import java.util.Properties;
 
-public class Property
-{
+public class Property {
 
     /**
      * @param file name of the file
      * @param key  the key to look for in the config
      * @return value of the given key
      */
-    public String get(String file, String key)
-    {
+    public String get(String file, String key) {
         try (InputStream input = new FileInputStream("cfg/" + file + ".properties")) {
 
             Properties prop = new Properties();
@@ -55,8 +53,7 @@ public class Property
     /**
      * create the default properties-file
      */
-    public void setDefaultProps()
-    {
+    public void setDefaultProps() {
         //create the file if not exists
         File dir = new File("cfg");
         if (!dir.exists()) {

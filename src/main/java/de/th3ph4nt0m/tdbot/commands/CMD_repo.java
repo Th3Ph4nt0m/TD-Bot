@@ -29,8 +29,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 
-public class CMD_repo implements ICommand
-{
+public class CMD_repo implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "Repo",
             "Repo,Repository",
@@ -39,14 +38,12 @@ public class CMD_repo implements ICommand
     );
 
     @Override
-    public boolean unsafe(String[] args, MessageReceivedEvent event)
-    {
+    public boolean unsafe(String[] args, MessageReceivedEvent event) {
         return false;
     }
 
     @Override
-    public void action(String[] args, MessageReceivedEvent event)
-    {
+    public void action(String[] args, MessageReceivedEvent event) {
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.BLUE);
         builder.setTitle("Repository Information");

@@ -27,10 +27,10 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
 public
-interface ICommand
-{
+interface ICommand {
     /**
      * The unsafe-Method is called before the action-Method
+     *
      * @param args  args from CommandParser
      * @param event MessageReceivedEvent form CommandParser
      * @return true when unsafe under current conditions
@@ -39,13 +39,15 @@ interface ICommand
 
     /**
      * The action-Method is called after unsafe returned false
-     * @param args from CommandParser
+     *
+     * @param args  from CommandParser
      * @param event MessageReceivedEvent form CommandParser
      */
     void action(String[] args, MessageReceivedEvent event);
 
     /**
      * Returns information about the command
+     *
      * @return command information
      */
     CommandHandler.CommandInfo getInfo();

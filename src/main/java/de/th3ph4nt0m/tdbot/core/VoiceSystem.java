@@ -31,12 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
-public class VoiceSystem
-{
+public class VoiceSystem {
     public final List<VoiceChannel> voiceChannels; //list of existing custom voice channels
 
-    public VoiceSystem()
-    {
+    public VoiceSystem() {
         this.voiceChannels = new ArrayList<>();
     }
 
@@ -48,8 +46,7 @@ public class VoiceSystem
      * @param member user that creates the channel
      * @param joined channel the user connected to to get the category
      */
-    public void createVoiceChannel(String game, Guild guild, Member member, VoiceChannel joined)
-    {
+    public void createVoiceChannel(String game, Guild guild, Member member, VoiceChannel joined) {
         ChannelAction<VoiceChannel> temp = guild.createVoiceChannel("» " + game).setParent(joined.getParent()).setPosition(voiceChannels.size() + 1);
         VoiceChannel channel = temp.complete();
         voiceChannels.add(channel);
@@ -64,8 +61,7 @@ public class VoiceSystem
      * @param member user that creates the channel
      * @param joined channel the user connected to to get the category
      */
-    public void createCompChannel(String game, Guild guild, Member member, VoiceChannel joined)
-    {
+    public void createCompChannel(String game, Guild guild, Member member, VoiceChannel joined) {
         int limit = 0;
         //set user limit for specific games
         if (game.equalsIgnoreCase("Overwatch")) {

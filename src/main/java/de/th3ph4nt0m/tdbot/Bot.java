@@ -46,8 +46,7 @@ import java.util.EventListener;
 import java.util.stream.Collectors;
 
 public
-class Bot implements EventListener
-{
+class Bot implements EventListener {
 
     private JDA jda;
     private static Bot instance;
@@ -57,8 +56,7 @@ class Bot implements EventListener
     private transient CommandHandler commandHandler;
 
 
-    public Bot()
-    {
+    public Bot() {
         instance = this;
         try {
             //JDA configuration
@@ -86,33 +84,27 @@ class Bot implements EventListener
         }
     }
 
-    public static Bot getInstance()
-    {
+    public static Bot getInstance() {
         return instance;
     }
 
-    public JDA getJda()
-    {
+    public JDA getJda() {
         return jda;
     }
 
-    public CommandHandler getCommandHandler()
-    {
+    public CommandHandler getCommandHandler() {
         return commandHandler;
     }
 
-    public VoiceSystem getVoiceSystem()
-    {
+    public VoiceSystem getVoiceSystem() {
         return voiceSystem;
     }
 
-    public GitHubLoader getGhLoader()
-    {
+    public GitHubLoader getGhLoader() {
         return ghLoader;
     }
 
-    public Property getProperty()
-    {
+    public Property getProperty() {
         return property;
     }
 

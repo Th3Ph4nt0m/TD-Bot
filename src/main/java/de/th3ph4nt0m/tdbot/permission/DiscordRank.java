@@ -22,8 +22,7 @@
 
 package de.th3ph4nt0m.tdbot.permission;
 
-public enum DiscordRank
-{
+public enum DiscordRank {
     OP("Admin role"),
     BOT("Bot role"),
     TEAM("Team role"),
@@ -32,8 +31,7 @@ public enum DiscordRank
     UNVERIFIED("default member");
     private final String description;
 
-    DiscordRank(String description)
-    {
+    DiscordRank(String description) {
         this.description = description;
     }
 
@@ -43,8 +41,7 @@ public enum DiscordRank
      * @param search the rank to search for
      * @return rank || null
      */
-    public static DiscordRank findRank(String search)
-    {
+    public static DiscordRank findRank(String search) {
         for (DiscordRank discordRank : values()) {
             if (discordRank.name().equalsIgnoreCase(search))
                 return discordRank;
@@ -52,18 +49,15 @@ public enum DiscordRank
         return null;
     }
 
-    public boolean isAtLeast(DiscordRank rank)
-    {
+    public boolean isAtLeast(DiscordRank rank) {
         return this.ordinal() <= rank.ordinal();
     }
 
-    public boolean isHigherThan(DiscordRank rank)
-    {
+    public boolean isHigherThan(DiscordRank rank) {
         return this.ordinal() < rank.ordinal();
     }
 
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
 

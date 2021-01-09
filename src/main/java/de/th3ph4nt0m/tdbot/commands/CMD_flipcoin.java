@@ -27,8 +27,7 @@ import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-public class CMD_flipcoin implements ICommand
-{
+public class CMD_flipcoin implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
             "FlipCoin",
             "FlipCoin,CoinFlip,Flip,Coin,CoinToss,TossCoin,Toss",
@@ -47,7 +46,9 @@ public class CMD_flipcoin implements ICommand
     }
 
     @Override
-    public CommandInfo getInfo() { return commandInfo; }
+    public CommandInfo getInfo() {
+        return commandInfo;
+    }
 }
 
 
