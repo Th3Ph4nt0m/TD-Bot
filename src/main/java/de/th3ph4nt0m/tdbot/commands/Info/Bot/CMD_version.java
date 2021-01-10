@@ -20,7 +20,7 @@
  Last edit: 2020/11/3
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands;
+package de.th3ph4nt0m.tdbot.commands.Info.Bot;
 
 import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;

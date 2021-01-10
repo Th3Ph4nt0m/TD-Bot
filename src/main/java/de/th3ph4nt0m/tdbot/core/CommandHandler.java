@@ -22,7 +22,12 @@ package de.th3ph4nt0m.tdbot.core;
  ******************************************************************************/
 
 
-import de.th3ph4nt0m.tdbot.commands.*;
+import de.th3ph4nt0m.tdbot.commands.Administration.CMD_clear;
+import de.th3ph4nt0m.tdbot.commands.CMD_help;
+import de.th3ph4nt0m.tdbot.commands.Info.Bot.CMD_repo;
+import de.th3ph4nt0m.tdbot.commands.Info.Bot.CMD_version;
+import de.th3ph4nt0m.tdbot.commands.Info.CMD_serverinfo;
+import de.th3ph4nt0m.tdbot.commands.Utils.CMD_flipcoin;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 
@@ -36,6 +41,7 @@ class CommandHandler {
         addCommand(new CMD_flipcoin());
         addCommand(new CMD_repo());
         addCommand(new CMD_clear());
+        addCommand(new CMD_serverinfo());
         //addCommand(new CMD_userinfo()); //TODO: register as soon as DB is implemented
         addCommand(new CMD_version());
     }

@@ -210,4 +210,28 @@ public class MessageCenter {
         assert channel != null;
         channel.sendMessage(builder.build()).complete().delete().queueAfter(3, TimeUnit.SECONDS);
     }
+
+    public void printServerInfo(int userCount,ArrayList<RoleInfo> roleInfos,String pChannelID) {
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.blue);
+
+        //TODO: print serverinfo in a appealing design
+
+        assert channel != null;
+        channel.sendMessage(builder.build()).queue();
+    }
+
+    public static class RoleInfo
+    {
+        public final String name;
+        public final Color color;
+        public final int userCount;
+        public RoleInfo(String name, Color color, int userCount)
+        {
+            this.name = name;
+            this.color = color;
+            this.userCount = userCount;
+        }
+    }
 }

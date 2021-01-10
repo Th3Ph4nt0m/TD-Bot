@@ -20,23 +20,21 @@
  Last edit: 2020/11/4
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands;
+package de.th3ph4nt0m.tdbot.commands.Utils;
 
 import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import net.dv8tion.jda.api.EmbedBuilder;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.awt.*;
-
-public class CMD_repo implements ICommand {
+public class CMD_flipcoin implements ICommand {
     CommandInfo commandInfo = new CommandInfo(
-            "Repo",
-            new String[]{"Repo","Repository"},
+            "FlipCoin",
+            new String[]{"FlipCoin", "CoinFlip", "Flip", "Coin", "CoinToss", "TossCoin", "Toss"},
             DiscordRank.THE_NATION,
-            "Repo gives you information about the current open source bot repository."
+            "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
     );
 
     @Override
@@ -46,17 +44,13 @@ public class CMD_repo implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        EmbedBuilder builder = new EmbedBuilder();
-        builder.setColor(Color.BLUE);
-        builder.setTitle("Repository Information");
-        builder.setDescription("The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github](https://github.com/Th3Ph4nt0m/TD-Bot/)");
-        builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
-        event.getChannel().sendMessage(builder.build()).queue();
+        MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
     }
 
     @Override
     public CommandInfo getInfo() {
         return commandInfo;
     }
-
 }
+
+
