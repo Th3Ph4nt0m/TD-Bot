@@ -22,22 +22,22 @@
 
 package de.th3ph4nt0m.tdbot.commands.Info.Bot;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
+
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 
+@CommandInfo(
+        name="Repo",
+        invokes={"Repo","Repository"},
+        accessRank = DiscordRank.THE_NATION,
+        description = "Repo gives you information about the current open source bot repository."
+)
 public class CMD_repo implements ICommand {
-    CommandInfo commandInfo = new CommandInfo(
-            "Repo",
-            new String[]{"Repo","Repository"},
-            DiscordRank.THE_NATION,
-            "Repo gives you information about the current open source bot repository."
-    );
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
@@ -49,9 +49,5 @@ public class CMD_repo implements ICommand {
         event.getChannel().sendMessage(builder.build()).queue();
     }
 
-    @Override
-    public CommandInfo getInfo() {
-        return commandInfo;
-    }
 
 }

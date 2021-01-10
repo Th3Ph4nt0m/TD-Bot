@@ -22,22 +22,20 @@
 
 package de.th3ph4nt0m.tdbot.commands.Info;
 
-import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+@CommandInfo(
+        name="UserInfo",
+        invokes={"Info", "Userinfo"},
+        accessRank = DiscordRank.TEAM,
+        description =  "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine."
+)
 public class CMD_userinfo implements ICommand {
-    CommandInfo commandInfo = new CommandInfo(
-            "UserInfo",
-            new String[]{"Info", "Userinfo"},
-            DiscordRank.TEAM,
-            "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine."
-    );
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
@@ -46,11 +44,6 @@ public class CMD_userinfo implements ICommand {
         NationMember nationMember = new NationMember(m);
         //sending information to the channel
         event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
-    }
-
-    @Override
-    public CommandInfo getInfo() {
-        return commandInfo;
     }
 
 }

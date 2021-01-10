@@ -22,29 +22,23 @@
 
 package de.th3ph4nt0m.tdbot.commands.Info.Bot;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+@CommandInfo(
+        name="Version",
+        invokes={"Version", "BotVersion"},
+        accessRank = DiscordRank.THE_NATION,
+        description = "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
+)
 public class CMD_version implements ICommand {
-    CommandInfo commandInfo = new CommandInfo(
-            "Version",
-            new String[]{"Version", "BotVersion"},
-            DiscordRank.THE_NATION,
-            "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
-    );
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
         MessageCenter.getInstance().printVersion(event.getChannel().getId());
-    }
-
-    @Override
-    public CommandInfo getInfo() {
-        return commandInfo;
     }
 
 }

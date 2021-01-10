@@ -28,8 +28,8 @@ import de.th3ph4nt0m.tdbot.commands.Info.Bot.CMD_repo;
 import de.th3ph4nt0m.tdbot.commands.Info.Bot.CMD_version;
 import de.th3ph4nt0m.tdbot.commands.Info.CMD_serverinfo;
 import de.th3ph4nt0m.tdbot.commands.Utils.CMD_flipcoin;
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 
 import java.util.*;
 
@@ -55,7 +55,7 @@ class CommandHandler {
      */
     public void handleCommand(CommandParser.CommandContainer cmd) {
         for (ICommand command : commands) {
-            if (Arrays.stream(command.getInfo().invokes).anyMatch(i -> i.equalsIgnoreCase(cmd.invoke))) {
+            if (Arrays.stream(command.getInfo().invokes()).anyMatch(i -> i.equalsIgnoreCase(cmd.invoke))) {
                 boolean unsafe = command.unsafe(cmd.args, cmd.event);
 
                 if (!unsafe) {
@@ -84,20 +84,6 @@ class CommandHandler {
         ArrayList<CommandInfo> list = new ArrayList<>();
         commands.forEach(iCommand -> list.add(iCommand.getInfo()));
         return list;
-    }
-
-    public static class CommandInfo {
-        public final String name;
-        public final String[] invokes;
-        public final DiscordRank accessRank;
-        public final String description;
-
-        public CommandInfo(String name, String[] invokes, DiscordRank accessRank, String description) {
-            this.name = name;
-            this.invokes = invokes;
-            this.accessRank = accessRank;
-            this.description = description;
-        }
     }
 
 }

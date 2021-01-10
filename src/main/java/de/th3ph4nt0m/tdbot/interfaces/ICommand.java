@@ -22,7 +22,6 @@
 
 package de.th3ph4nt0m.tdbot.interfaces;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
@@ -37,7 +36,7 @@ interface ICommand {
      */
     default boolean unsafe(String[] args, MessageReceivedEvent event)
     {
-        return !new NationMember(event.getMember()).getRank().isAtLeast(getInfo().accessRank);
+        return !new NationMember(event.getMember()).getRank().isAtLeast(getInfo().accessRank());
     }
 
     /**
@@ -53,5 +52,8 @@ interface ICommand {
      *
      * @return command information
      */
-    CommandHandler.CommandInfo getInfo();
+    default CommandInfo getInfo() {
+        return getClass().getAnnotation(CommandInfo.class);
+    }
+
 }

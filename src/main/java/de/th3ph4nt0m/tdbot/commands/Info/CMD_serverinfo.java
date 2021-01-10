@@ -21,9 +21,8 @@
  ******************************************************************************/
 package de.th3ph4nt0m.tdbot.commands.Info;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter.RoleInfo;
@@ -31,17 +30,15 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-
 import java.util.ArrayList;
-import java.util.List;
 
+@CommandInfo(
+		name="ServerInfo",
+		invokes={"Info", "Serverinfo", "Server"},
+		accessRank = DiscordRank.THE_NATION,
+		description = "With ServerInfo you can get a some information about this discord server."
+)
 public class CMD_serverinfo implements ICommand {
-	CommandHandler.CommandInfo commandInfo = new CommandHandler.CommandInfo(
-			"ServerInfo",
-			new String[]{"Info", "Serverinfo", "Server"},
-			DiscordRank.THE_NATION,
-			"With ServerInfo you can get a some information about this discord server."
-	);
 
 	@Override
 	public void action(String[] args, MessageReceivedEvent event) {
@@ -55,11 +52,6 @@ public class CMD_serverinfo implements ICommand {
 		}
 
 		MessageCenter.getInstance().printServerInfo(members,roles,event.getChannel().getId());
-	}
-
-	@Override
-	public CommandHandler.CommandInfo getInfo() {
-		return commandInfo;
 	}
 
 }

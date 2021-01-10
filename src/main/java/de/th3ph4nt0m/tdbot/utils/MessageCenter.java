@@ -23,7 +23,7 @@
 package de.th3ph4nt0m.tdbot.utils;
 
 import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.core.CommandHandler;
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emote;
@@ -104,14 +104,14 @@ public class MessageCenter {
      * @param pChannelID ID of the channel to send the message to
      * @param commands   Commands to be listed in help
      */
-    public void printHelp(String pChannelID, ArrayList<CommandHandler.CommandInfo> commands) {
+    public void printHelp(String pChannelID, ArrayList<CommandInfo> commands) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.pink);
         builder.setTitle("Help");
         builder.setDescription("Following commands are accessible to you.");
-        for (CommandHandler.CommandInfo info : commands) {
-            builder.addField(info.name, info.description, false);
+        for (CommandInfo info : commands) {
+            builder.addField(info.name(), info.description(), false);
         }
         builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
         assert channel != null;

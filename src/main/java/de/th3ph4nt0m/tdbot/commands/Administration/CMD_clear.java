@@ -22,9 +22,8 @@
 
 package de.th3ph4nt0m.tdbot.commands.Administration;
 
-import de.th3ph4nt0m.tdbot.core.CommandHandler.CommandInfo;
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Message;
@@ -33,14 +32,13 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.util.List;
 import java.util.ArrayList;
 
-
+@CommandInfo(
+        name = "Clear",
+        invokes = {"clear", "clearMessage", "clearMessages"},
+        accessRank = DiscordRank.TEAM,
+        description = "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared."
+)
 public class CMD_clear implements ICommand {
-    CommandInfo commandInfo = new CommandInfo(
-            "Clear",
-            new String[]{"clear", "clearMessage", "clearMessages"},
-            DiscordRank.TEAM,
-            "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared."
-    );
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
@@ -54,11 +52,6 @@ public class CMD_clear implements ICommand {
         }
         event.getChannel().purgeMessages(messages);
         MessageCenter.getInstance().printClear(event.getChannel().getId(),i);
-    }
-
-    @Override
-    public CommandInfo getInfo() {
-        return commandInfo;
     }
 
 }
