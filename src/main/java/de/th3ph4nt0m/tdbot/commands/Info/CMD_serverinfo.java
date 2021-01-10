@@ -25,7 +25,7 @@ import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import de.th3ph4nt0m.tdbot.utils.MessageCenter.RoleInfo;
+import de.th3ph4nt0m.tdbot.interfaces.RoleInfo;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

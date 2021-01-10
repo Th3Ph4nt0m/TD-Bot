@@ -24,6 +24,7 @@ package de.th3ph4nt0m.tdbot.utils;
 
 import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
+import de.th3ph4nt0m.tdbot.interfaces.RoleInfo;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emote;
@@ -33,6 +34,7 @@ import net.dv8tion.jda.api.requests.RestAction;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class MessageCenter {
@@ -189,10 +191,10 @@ public class MessageCenter {
     /**
      * create and send an embed message
      *
-     * @param channelID ID of the channel to send the message to
+     * @param pChannelID ID of the channel to send the message to
      */
-    public void sendNoAccess(String channelID, DiscordRank minRank) {
-        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(channelID);
+    public void sendNoAccess(String pChannelID, DiscordRank minRank) {
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.RED)
                 .setTitle("Limited Access")
@@ -211,7 +213,7 @@ public class MessageCenter {
         channel.sendMessage(builder.build()).complete().delete().queueAfter(3, TimeUnit.SECONDS);
     }
 
-    public void printServerInfo(int userCount,ArrayList<RoleInfo> roleInfos,String pChannelID) {
+    public void printServerInfo(int userCount, ArrayList<RoleInfo> roleInfos, String pChannelID) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
         builder.setColor(Color.blue);
@@ -222,16 +224,19 @@ public class MessageCenter {
         channel.sendMessage(builder.build()).queue();
     }
 
-    public static class RoleInfo
+    public void printMissingArgument(String[] args, String pChannelID)
     {
-        public final String name;
-        public final Color color;
-        public final int userCount;
-        public RoleInfo(String name, Color color, int userCount)
-        {
-            this.name = name;
-            this.color = color;
-            this.userCount = userCount;
-        }
+        String arguments = "argument";
+        if(args.length>1) arguments = "arguments";
+
+        TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
+        EmbedBuilder builder = new EmbedBuilder();
+        builder.setColor(Color.RED)
+                .setTitle("Limited Access")
+                .setDescription("This command needs the following "+arguments+": "+ Arrays.toString(args))
+                .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+        assert channel != null;
+        channel.sendMessage(builder.build()).queue();
     }
+
 }

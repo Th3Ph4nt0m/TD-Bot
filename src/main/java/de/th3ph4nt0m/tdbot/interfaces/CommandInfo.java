@@ -10,5 +10,5 @@ public @interface CommandInfo {
 	String[] invokes();
 	DiscordRank accessRank();
 	String description()default "";
-	int args() default 0;
+	String[] args() default {};
 }

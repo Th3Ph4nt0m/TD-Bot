@@ -22,6 +22,7 @@
 
 package de.th3ph4nt0m.tdbot.interfaces;
 
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
@@ -34,8 +35,11 @@ interface ICommand {
      * @param event MessageReceivedEvent form CommandParser
      * @return true when unsafe under current conditions
      */
-    default boolean unsafe(String[] args, MessageReceivedEvent event)
-    {
+    default boolean unsafe(String[] args, MessageReceivedEvent event) {
+        if(args.length<getInfo().args().length) {
+            MessageCenter.getInstance().printMissingArgument(getInfo().args(), event.getChannel().getId());
+            return true;
+        }
         return !new NationMember(event.getMember()).getRank().isAtLeast(getInfo().accessRank());
     }
 
