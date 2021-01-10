@@ -41,11 +41,6 @@ public class CMD_help implements ICommand {
     );
 
     @Override
-    public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
-    }
-
-    @Override
     public void action(String[] args, MessageReceivedEvent event) {
         ArrayList<CommandInfo> accessibleCommands = Bot.getInstance().getCommandHandler().listCommands();
         accessibleCommands.removeIf(commandInfo1 -> commandInfo1.name.equals(this.commandInfo.name) || !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo1.accessRank));

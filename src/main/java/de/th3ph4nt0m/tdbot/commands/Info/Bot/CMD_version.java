@@ -38,11 +38,6 @@ public class CMD_version implements ICommand {
     );
 
     @Override
-    public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
-    }
-
-    @Override
     public void action(String[] args, MessageReceivedEvent event) {
         MessageCenter.getInstance().printVersion(event.getChannel().getId());
     }

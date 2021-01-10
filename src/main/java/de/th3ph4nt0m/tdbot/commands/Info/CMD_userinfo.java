@@ -40,11 +40,6 @@ public class CMD_userinfo implements ICommand {
     );
 
     @Override
-    public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
-    }
-
-    @Override
     public void action(String[] args, MessageReceivedEvent event) {
         //initialising a NationMember to access the DB
         Member m = event.getMessage().getMentionedMembers().get(0);

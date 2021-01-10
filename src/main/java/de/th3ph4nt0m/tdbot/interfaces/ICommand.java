@@ -35,7 +35,10 @@ interface ICommand {
      * @param event MessageReceivedEvent form CommandParser
      * @return true when unsafe under current conditions
      */
-    boolean unsafe(String[] args, MessageReceivedEvent event);
+    default boolean unsafe(String[] args, MessageReceivedEvent event)
+    {
+        return !new NationMember(event.getMember()).getRank().isAtLeast(getInfo().accessRank);
+    }
 
     /**
      * The action-Method is called after unsafe returned false

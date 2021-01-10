@@ -38,11 +38,6 @@ public class CMD_flipcoin implements ICommand {
     );
 
     @Override
-    public boolean unsafe(String[] args, MessageReceivedEvent event) {
-        return !new NationMember(event.getMember()).getRank().isAtLeast(commandInfo.accessRank);
-    }
-
-    @Override
     public void action(String[] args, MessageReceivedEvent event) {
         MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
     }
