@@ -30,7 +30,7 @@ public
 interface ICommand {
     /**
      * The unsafe-Method is called before the action-Method
-     *
+     * The default checks if all required arguments are given and if the userrank is high enough
      * @param args  args from CommandParser
      * @param event MessageReceivedEvent form CommandParser
      * @return true when unsafe under current conditions

@@ -204,6 +204,11 @@ public class MessageCenter {
         channel.sendMessage(builder.build()).queue();
     }
 
+    /**
+     * self deleting message after clear command
+     * @param pChannelID ID of the channel to send the message to
+     * @param messages amount of deleted messages
+     */
     public void printClear(String pChannelID,int messages) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
@@ -213,6 +218,12 @@ public class MessageCenter {
         channel.sendMessage(builder.build()).complete().delete().queueAfter(3, TimeUnit.SECONDS);
     }
 
+    /**
+     * prints the server information
+     * @param userCount users on Server
+     * @param roleInfos RoleInfo List with the current roles on the server
+     * @param pChannelID ID of the channel to send the message to
+     */
     public void printServerInfo(int userCount, ArrayList<RoleInfo> roleInfos, String pChannelID) {
         TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
         EmbedBuilder builder = new EmbedBuilder();
@@ -224,6 +235,11 @@ public class MessageCenter {
         channel.sendMessage(builder.build()).queue();
     }
 
+    /**
+     * prints error when command is missing arguments
+     * @param args arguments that are missing
+     * @param pChannelID ID of the channel to send the message to
+     */
     public void printMissingArgument(String[] args, String pChannelID)
     {
         String arguments = "argument";

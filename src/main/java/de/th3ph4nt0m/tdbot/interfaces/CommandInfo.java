@@ -6,9 +6,28 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface CommandInfo {
+	/**
+	 * @return returns the name of the command
+	 */
 	String name();
+
+	/**
+	 * @return returns the command invokes
+	 */
 	String[] invokes();
-	DiscordRank accessRank();
+
+	/**
+	 * @return returns the minimum access Rank (defaults to THE_NATION)
+	 */
+	DiscordRank accessRank()default DiscordRank.THE_NATION;
+
+	/**
+	 * @return returns the command description for the help command
+	 */
 	String description()default "";
+
+	/**
+	 * @return returns the required arguments for the command to run (defaults to none)
+	 */
 	String[] args() default {};
 }
