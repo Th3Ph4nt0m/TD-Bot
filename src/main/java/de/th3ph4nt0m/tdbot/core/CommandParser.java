@@ -22,9 +22,9 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
+import java.util.ArrayList;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.util.ArrayList;
 
 public
 class CommandParser {

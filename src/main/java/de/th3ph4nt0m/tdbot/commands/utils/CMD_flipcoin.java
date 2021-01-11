@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_clear.java is part of the TD-Bot project
+ CMD_repo.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,41 +17,30 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/12/29
+ Last edit: 2020/11/4
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands.Administration;
+package de.th3ph4nt0m.tdbot.commands.utils;
 
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.util.List;
-import java.util.ArrayList;
-
 @CommandInfo(
-        name = "Clear",
-        invokes = {"clear", "clearMessage", "clearMessages"},
-        accessRank = DiscordRank.TEAM,
-        description = "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared."
+        name = "FlipCoin",
+        invokes = {"FlipCoin", "CoinFlip", "Flip", "Coin", "CoinToss", "TossCoin", "Toss"},
+        accessRank = DiscordRank.THE_NATION,
+        description =  "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
 )
-public class CMD_clear implements ICommand {
+public class CMD_flipcoin implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        List<Message> messages = new ArrayList<>();
-        int i = Integer.parseInt(args[0]);
-        for(Message message : event.getChannel().getIterableHistory().cache(false)){
-            if(!message.isPinned()){
-                messages.add(message);
-            }
-            if(--i <=0)break;
-        }
-        event.getChannel().purgeMessages(messages);
-        MessageCenter.getInstance().printClear(event.getChannel().getId(),i);
+        MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
     }
 
 }
+
+

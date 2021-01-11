@@ -22,15 +22,14 @@ package de.th3ph4nt0m.tdbot.core;
  ******************************************************************************/
 
 
-import de.th3ph4nt0m.tdbot.commands.Administration.CMD_clear;
+import de.th3ph4nt0m.tdbot.commands.administration.CMD_clear;
 import de.th3ph4nt0m.tdbot.commands.CMD_help;
-import de.th3ph4nt0m.tdbot.commands.Info.Bot.CMD_repo;
-import de.th3ph4nt0m.tdbot.commands.Info.Bot.CMD_version;
-import de.th3ph4nt0m.tdbot.commands.Info.CMD_serverinfo;
-import de.th3ph4nt0m.tdbot.commands.Utils.CMD_flipcoin;
+import de.th3ph4nt0m.tdbot.commands.info.bot.CMD_repo;
+import de.th3ph4nt0m.tdbot.commands.info.bot.CMD_version;
+import de.th3ph4nt0m.tdbot.commands.info.CMD_serverinfo;
+import de.th3ph4nt0m.tdbot.commands.utils.CMD_flipcoin;
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-
 import java.util.*;
 
 public

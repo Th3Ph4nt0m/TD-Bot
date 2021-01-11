@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_userinfo.java is part of the TD-Bot project
+ CMD_clear.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -20,31 +20,38 @@
  Last edit: 2020/12/29
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands.Info;
+package de.th3ph4nt0m.tdbot.commands.administration;
 
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import net.dv8tion.jda.api.entities.Member;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import java.util.List;
+import java.util.ArrayList;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+
 @CommandInfo(
-        name="UserInfo",
-        invokes={"Info", "Userinfo"},
+        name = "Clear",
+        invokes = {"clear", "clearMessage", "clearMessages"},
         accessRank = DiscordRank.TEAM,
-        description =  "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine.",
-        args={"@username"}
+        description = "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared."
 )
-public class CMD_userinfo implements ICommand {
+public class CMD_clear implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        //initialising a NationMember to access the DB
-        Member m = event.getMessage().getMentionedMembers().get(0);
-        NationMember nationMember = new NationMember(m);
-        //sending information to the channel
-        event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
+        List<Message> messages = new ArrayList<>();
+        int i = Integer.parseInt(args[0]);
+        for(Message message : event.getChannel().getIterableHistory().cache(false)){
+            if(!message.isPinned()){
+                messages.add(message);
+            }
+            if(--i <=0)break;
+        }
+        event.getChannel().purgeMessages(messages);
+        MessageCenter.getInstance().printClear(event.getChannel().getId(),i);
     }
 
 }

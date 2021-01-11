@@ -22,13 +22,12 @@
 
 package de.th3ph4nt0m.tdbot.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.requests.restaction.ChannelAction;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
 public class VoiceSystem {

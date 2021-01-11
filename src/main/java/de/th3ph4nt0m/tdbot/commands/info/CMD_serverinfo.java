@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_repo.java is part of the TD-Bot project
+ CMD_serverinfo.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,37 +17,40 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/4
+ Last edit: 2020/12/29
  ******************************************************************************/
-
-package de.th3ph4nt0m.tdbot.commands.Info.Bot;
-
+package de.th3ph4nt0m.tdbot.commands.info;
 
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import net.dv8tion.jda.api.EmbedBuilder;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import de.th3ph4nt0m.tdbot.interfaces.RoleInfo;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-
-import java.awt.*;
+import java.util.ArrayList;
 
 @CommandInfo(
-        name="Repo",
-        invokes={"Repo","Repository"},
-        accessRank = DiscordRank.THE_NATION,
-        description = "Repo gives you information about the current open source bot repository."
+		name="ServerInfo",
+		invokes={"Info", "Serverinfo", "Server"},
+		accessRank = DiscordRank.THE_NATION,
+		description = "With ServerInfo you can get a some information about this discord server."
 )
-public class CMD_repo implements ICommand {
+public class CMD_serverinfo implements ICommand {
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent event) {
-        EmbedBuilder builder = new EmbedBuilder();
-        builder.setColor(Color.BLUE);
-        builder.setTitle("Repository Information");
-        builder.setDescription("The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github](https://github.com/Th3Ph4nt0m/TD-Bot/)");
-        builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
-        event.getChannel().sendMessage(builder.build()).queue();
-    }
+	@Override
+	public void action(String[] args, MessageReceivedEvent event) {
+		Guild guild = event.getGuild();
 
+		int members = guild.getMemberCount();
+		ArrayList<RoleInfo> roles = new ArrayList<>();
+
+		for(Role role: guild.getRoles()) {
+			roles.add(new RoleInfo(role.getName(),role.getColor(), guild.getMembersWithRoles(role).size()));
+		}
+
+		MessageCenter.getInstance().printServerInfo(members,roles,event.getChannel().getId());
+	}
 
 }

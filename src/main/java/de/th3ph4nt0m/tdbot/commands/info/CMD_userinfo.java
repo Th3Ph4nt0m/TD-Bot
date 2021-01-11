@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_version.java is part of the TD-Bot project
+ CMD_userinfo.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,28 +17,34 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/3
+ Last edit: 2020/12/29
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands.Info.Bot;
+package de.th3ph4nt0m.tdbot.commands.info;
 
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @CommandInfo(
-        name="Version",
-        invokes={"Version", "BotVersion"},
-        accessRank = DiscordRank.THE_NATION,
-        description = "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
+        name="UserInfo",
+        invokes={"Info", "Userinfo"},
+        accessRank = DiscordRank.TEAM,
+        description =  "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine.",
+        args={"@username"}
 )
-public class CMD_version implements ICommand {
+public class CMD_userinfo implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        MessageCenter.getInstance().printVersion(event.getChannel().getId());
+        //initialising a NationMember to access the DB
+        Member m = event.getMessage().getMentionedMembers().get(0);
+        NationMember nationMember = new NationMember(m);
+        //sending information to the channel
+        event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
     }
 
 }

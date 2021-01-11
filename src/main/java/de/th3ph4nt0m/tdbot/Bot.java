@@ -32,18 +32,17 @@ import de.th3ph4nt0m.tdbot.event.VoiceMove;
 import de.th3ph4nt0m.tdbot.loader.GitHubLoader;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import de.th3ph4nt0m.tdbot.utils.Property;
+import javax.security.auth.login.LoginException;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.EventListener;
+import java.util.stream.Collectors;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-
-import javax.security.auth.login.LoginException;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.EventListener;
-import java.util.stream.Collectors;
 
 public
 class Bot implements EventListener {

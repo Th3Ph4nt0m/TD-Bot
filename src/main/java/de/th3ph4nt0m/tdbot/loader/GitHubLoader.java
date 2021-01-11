@@ -22,13 +22,12 @@
 
 package de.th3ph4nt0m.tdbot.loader;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 public class GitHubLoader {

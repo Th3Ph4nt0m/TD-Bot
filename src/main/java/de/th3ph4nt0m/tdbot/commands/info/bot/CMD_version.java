@@ -1,5 +1,5 @@
 /*******************************************************************************
- CMD_repo.java is part of the TD-Bot project
+ CMD_version.java is part of the TD-Bot project
 
  TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  Copyright (C) 2020 Henrik Steffens
@@ -17,10 +17,10 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
- Last edit: 2020/11/4
+ Last edit: 2020/11/3
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands.Utils;
+package de.th3ph4nt0m.tdbot.commands.info.bot;
 
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
@@ -29,18 +29,16 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @CommandInfo(
-        name = "FlipCoin",
-        invokes = {"FlipCoin", "CoinFlip", "Flip", "Coin", "CoinToss", "TossCoin", "Toss"},
+        name="Version",
+        invokes={"Version", "BotVersion"},
         accessRank = DiscordRank.THE_NATION,
-        description =  "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
+        description = "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
 )
-public class CMD_flipcoin implements ICommand {
+public class CMD_version implements ICommand {
 
     @Override
     public void action(String[] args, MessageReceivedEvent event) {
-        MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
+        MessageCenter.getInstance().printVersion(event.getChannel().getId());
     }
 
 }
-
-
