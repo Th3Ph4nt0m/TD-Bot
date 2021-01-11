@@ -30,11 +30,11 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @CommandInfo(
-        name="UserInfo",
-        invokes={"Info", "Userinfo"},
+        name = "UserInfo",
+        invokes = {"Info", "Userinfo"},
         accessRank = DiscordRank.TEAM,
         description =  "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine.",
-        args={"@username"}
+        args = {"@username"}
 )
 public class CMD_userinfo implements ICommand {
 

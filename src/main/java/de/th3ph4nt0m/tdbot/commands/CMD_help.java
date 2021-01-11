@@ -33,8 +33,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
 @CommandInfo(
-        name="Help",
-        invokes={"Help", "BotInfo", "CommandInfo"},
+        name = "Help",
+        invokes = {"Help", "BotInfo", "CommandInfo"},
         accessRank = DiscordRank.THE_NATION,
         description = "Help show you all available commands for your rank"
 )

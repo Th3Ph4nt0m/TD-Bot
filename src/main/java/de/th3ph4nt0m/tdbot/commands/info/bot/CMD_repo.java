@@ -32,8 +32,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 
 @CommandInfo(
-        name="Repo",
-        invokes={"Repo","Repository"},
+        name = "Repo",
+        invokes = {"Repo","Repository"},
         accessRank = DiscordRank.THE_NATION,
         description = "Repo gives you information about the current open source bot repository."
 )

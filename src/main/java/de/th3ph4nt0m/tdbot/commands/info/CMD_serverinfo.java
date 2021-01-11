@@ -32,8 +32,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import java.util.ArrayList;
 
 @CommandInfo(
-		name="ServerInfo",
-		invokes={"Info", "Serverinfo", "Server"},
+		name = "ServerInfo",
+		invokes = {"Info", "Serverinfo", "Server"},
 		accessRank = DiscordRank.THE_NATION,
 		description = "With ServerInfo you can get a some information about this discord server."
 )
