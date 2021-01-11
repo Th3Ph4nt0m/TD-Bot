@@ -26,32 +26,33 @@ import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import java.util.List;
-import java.util.ArrayList;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @CommandInfo(
-        name = "Clear",
-        invokes = {"clear", "clearMessage", "clearMessages"},
-        accessRank = DiscordRank.TEAM,
-        description = "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared."
+		name = "Clear",
+		invokes = {"clear", "clearMessage", "clearMessages"},
+		accessRank = DiscordRank.TEAM,
+		description = "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared."
 )
 public class CMD_clear implements ICommand {
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent event) {
-        List<Message> messages = new ArrayList<>();
-        int i = Integer.parseInt(args[0]);
-        for(Message message : event.getChannel().getIterableHistory().cache(false)) {
-            if(!message.isPinned()) {
-                messages.add(message);
-            }
-            if(i-- <= 0)break;
-        }
-        event.getChannel().purgeMessages(messages);
-        MessageCenter.getInstance().printClear(event.getChannel().getId(), i);
-    }
+	@Override
+	public void action(String[] args, MessageReceivedEvent event) {
+		List<Message> messages = new ArrayList<>();
+		int i = Integer.parseInt(args[0]);
+		for (Message message : event.getChannel().getIterableHistory().cache(false)) {
+			if (!message.isPinned()) {
+				messages.add(message);
+			}
+			if (i-- <= 0) break;
+		}
+		event.getChannel().purgeMessages(messages);
+		MessageCenter.getInstance().printClear(event.getChannel().getId(), i);
+	}
 
 }

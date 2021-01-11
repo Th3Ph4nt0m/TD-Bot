@@ -24,13 +24,14 @@ package de.th3ph4nt0m.tdbot.commands.info;
 
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.interfaces.RoleInfo;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
-import java.util.ArrayList;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+
+import java.util.ArrayList;
 
 
 @CommandInfo(
@@ -48,11 +49,11 @@ public class CMD_serverinfo implements ICommand {
 		int members = guild.getMemberCount();
 		ArrayList<RoleInfo> roles = new ArrayList<>();
 
-		for(Role role: guild.getRoles()) {
-			roles.add(new RoleInfo(role.getName(),role.getColor(), guild.getMembersWithRoles(role).size()));
+		for (Role role : guild.getRoles()) {
+			roles.add(new RoleInfo(role.getName(), role.getColor(), guild.getMembersWithRoles(role).size()));
 		}
 
-		MessageCenter.getInstance().printServerInfo(members,roles,event.getChannel().getId());
+		MessageCenter.getInstance().printServerInfo(members, roles, event.getChannel().getId());
 	}
 
 }

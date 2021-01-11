@@ -30,21 +30,21 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @CommandInfo(
-        name = "UserInfo",
-        invokes = {"Info", "Userinfo"},
-        accessRank = DiscordRank.TEAM,
-        description =  "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine.",
-        args = {"@username"}
+		name = "UserInfo",
+		invokes = {"Info", "Userinfo"},
+		accessRank = DiscordRank.TEAM,
+		description = "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine.",
+		args = {"@username"}
 )
 public class CMD_userinfo implements ICommand {
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent event) {
-        //initialising a NationMember to access the DB
-        Member m = event.getMessage().getMentionedMembers().get(0);
-        NationMember nationMember = new NationMember(m);
-        //sending information to the channel
-        event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
-    }
+	@Override
+	public void action(String[] args, MessageReceivedEvent event) {
+		//initialising a NationMember to access the DB
+		Member m = event.getMessage().getMentionedMembers().get(0);
+		NationMember nationMember = new NationMember(m);
+		//sending information to the channel
+		event.getChannel().sendMessage("No Database").queue(); //TODO: send info about user instead of "No Database" as soon as db is implemented
+	}
 
 }

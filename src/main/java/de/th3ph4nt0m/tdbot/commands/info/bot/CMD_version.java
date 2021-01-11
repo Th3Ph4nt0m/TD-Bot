@@ -29,16 +29,16 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @CommandInfo(
-        name = "Version",
-        invokes = {"Version", "BotVersion"},
-        accessRank = DiscordRank.THE_NATION,
-        description = "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
+		name = "Version",
+		invokes = {"Version", "BotVersion"},
+		accessRank = DiscordRank.THE_NATION,
+		description = "Version gets you the current version of our bot.\nFeel free to checkout our repo as well."
 )
 public class CMD_version implements ICommand {
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent event) {
-        MessageCenter.getInstance().printVersion(event.getChannel().getId());
-    }
+	@Override
+	public void action(String[] args, MessageReceivedEvent event) {
+		MessageCenter.getInstance().printVersion(event.getChannel().getId());
+	}
 
 }

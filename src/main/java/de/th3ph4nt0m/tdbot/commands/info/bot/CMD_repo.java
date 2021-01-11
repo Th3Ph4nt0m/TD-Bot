@@ -26,28 +26,29 @@ package de.th3ph4nt0m.tdbot.commands.info.bot;
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import java.awt.*;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import java.awt.*;
+
 
 @CommandInfo(
-        name = "Repo",
-        invokes = {"Repo","Repository"},
-        accessRank = DiscordRank.THE_NATION,
-        description = "Repo gives you information about the current open source bot repository."
+		name = "Repo",
+		invokes = {"Repo", "Repository"},
+		accessRank = DiscordRank.THE_NATION,
+		description = "Repo gives you information about the current open source bot repository."
 )
 public class CMD_repo implements ICommand {
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent event) {
-        EmbedBuilder builder = new EmbedBuilder();
-        builder.setColor(Color.BLUE);
-        builder.setTitle("Repository Information");
-        builder.setDescription("The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github](https://github.com/Th3Ph4nt0m/TD-Bot/)");
-        builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
-        event.getChannel().sendMessage(builder.build()).queue();
-    }
+	@Override
+	public void action(String[] args, MessageReceivedEvent event) {
+		EmbedBuilder builder = new EmbedBuilder();
+		builder.setColor(Color.BLUE);
+		builder.setTitle("Repository Information");
+		builder.setDescription("The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github](https://github.com/Th3Ph4nt0m/TD-Bot/)");
+		builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+		event.getChannel().sendMessage(builder.build()).queue();
+	}
 
 
 }

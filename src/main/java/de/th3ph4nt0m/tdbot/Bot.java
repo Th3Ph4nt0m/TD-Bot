@@ -24,19 +24,10 @@ package de.th3ph4nt0m.tdbot;
 
 import de.th3ph4nt0m.tdbot.core.CommandHandler;
 import de.th3ph4nt0m.tdbot.core.VoiceSystem;
-import de.th3ph4nt0m.tdbot.event.CommandListener;
-import de.th3ph4nt0m.tdbot.event.MessageReceive;
-import de.th3ph4nt0m.tdbot.event.VoiceConnect;
-import de.th3ph4nt0m.tdbot.event.VoiceLeave;
-import de.th3ph4nt0m.tdbot.event.VoiceMove;
+import de.th3ph4nt0m.tdbot.event.*;
 import de.th3ph4nt0m.tdbot.loader.GitHubLoader;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import de.th3ph4nt0m.tdbot.utils.Property;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.EventListener;
-import java.util.stream.Collectors;
-import javax.security.auth.login.LoginException;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -44,68 +35,74 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
+import javax.security.auth.login.LoginException;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.EventListener;
+import java.util.stream.Collectors;
+
 public
 class Bot implements EventListener {
 
-    private JDA jda;
-    private static Bot instance;
-    private VoiceSystem voiceSystem;
-    private Property property;
-    private transient GitHubLoader ghLoader;
-    private transient CommandHandler commandHandler;
+	private JDA jda;
+	private static Bot instance;
+	private VoiceSystem voiceSystem;
+	private Property property;
+	private transient GitHubLoader ghLoader;
+	private transient CommandHandler commandHandler;
 
 
-    public Bot() {
-        instance = this;
-        try {
-            //JDA configuration
-            this.property = new Property();
-            property.setDefaultProps();
-            this.jda = JDABuilder.createDefault(property.get("bot", "bot.token"))
-                    .setAutoReconnect(true)
-                    .setStatus(OnlineStatus.ONLINE)
-                    .setActivity(Activity.watching("over TD-Nation"))
-                    .enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
-                    .enableCache(EnumSet.of(CacheFlag.ACTIVITY))
-                    .build();
-            this.ghLoader = new GitHubLoader();
-            this.voiceSystem = new VoiceSystem();
-            this.commandHandler = new CommandHandler();
-            jda.addEventListener(new VoiceConnect());
-            jda.addEventListener(new VoiceLeave());
-            jda.addEventListener(new VoiceMove());
-            jda.addEventListener(new CommandListener());
-            jda.addEventListener(new MessageReceive());
-            jda.awaitReady();
-            new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
-        } catch (LoginException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+	public Bot() {
+		instance = this;
+		try {
+			//JDA configuration
+			this.property = new Property();
+			property.setDefaultProps();
+			this.jda = JDABuilder.createDefault(property.get("bot", "bot.token"))
+					.setAutoReconnect(true)
+					.setStatus(OnlineStatus.ONLINE)
+					.setActivity(Activity.watching("over TD-Nation"))
+					.enableIntents(Arrays.stream(GatewayIntent.values()).collect(Collectors.toList()))
+					.enableCache(EnumSet.of(CacheFlag.ACTIVITY))
+					.build();
+			this.ghLoader = new GitHubLoader();
+			this.voiceSystem = new VoiceSystem();
+			this.commandHandler = new CommandHandler();
+			jda.addEventListener(new VoiceConnect());
+			jda.addEventListener(new VoiceLeave());
+			jda.addEventListener(new VoiceMove());
+			jda.addEventListener(new CommandListener());
+			jda.addEventListener(new MessageReceive());
+			jda.awaitReady();
+			new MessageCenter(Boolean.parseBoolean(property.get("bot", "bot.autoprint")));
+		} catch (LoginException | InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public static Bot getInstance() {
-        return instance;
-    }
+	public static Bot getInstance() {
+		return instance;
+	}
 
-    public JDA getJda() {
-        return jda;
-    }
+	public JDA getJda() {
+		return jda;
+	}
 
-    public CommandHandler getCommandHandler() {
-        return commandHandler;
-    }
+	public CommandHandler getCommandHandler() {
+		return commandHandler;
+	}
 
-    public VoiceSystem getVoiceSystem() {
-        return voiceSystem;
-    }
+	public VoiceSystem getVoiceSystem() {
+		return voiceSystem;
+	}
 
-    public GitHubLoader getGhLoader() {
-        return ghLoader;
-    }
+	public GitHubLoader getGhLoader() {
+		return ghLoader;
+	}
 
-    public Property getProperty() {
-        return property;
-    }
+	public Property getProperty() {
+		return property;
+	}
 
 
 }

@@ -23,42 +23,42 @@
 package de.th3ph4nt0m.tdbot.permission;
 
 public enum DiscordRank {
-    OP("Admin role"),
-    BOT("Bot role"),
-    TEAM("Team role"),
-    VIP("VIP member"),
-    THE_NATION("verified member"),
-    UNVERIFIED("default member");
-    private final String description;
+	OP("Admin role"),
+	BOT("Bot role"),
+	TEAM("Team role"),
+	VIP("VIP member"),
+	THE_NATION("verified member"),
+	UNVERIFIED("default member");
+	private final String description;
 
-    DiscordRank(String description) {
-        this.description = description;
-    }
+	DiscordRank(String description) {
+		this.description = description;
+	}
 
-    /**
-     * find a rank by name
-     *
-     * @param search the rank to search for
-     * @return rank || null
-     */
-    public static DiscordRank findRank(String search) {
-        for (DiscordRank discordRank : values()) {
-            if (discordRank.name().equalsIgnoreCase(search))
-                return discordRank;
-        }
-        return null;
-    }
+	/**
+	 * find a rank by name
+	 *
+	 * @param search the rank to search for
+	 * @return rank || null
+	 */
+	public static DiscordRank findRank(String search) {
+		for (DiscordRank discordRank : values()) {
+			if (discordRank.name().equalsIgnoreCase(search))
+				return discordRank;
+		}
+		return null;
+	}
 
-    public boolean isAtLeast(DiscordRank rank) {
-        return this.ordinal() <= rank.ordinal();
-    }
+	public boolean isAtLeast(DiscordRank rank) {
+		return this.ordinal() <= rank.ordinal();
+	}
 
-    public boolean isHigherThan(DiscordRank rank) {
-        return this.ordinal() < rank.ordinal();
-    }
+	public boolean isHigherThan(DiscordRank rank) {
+		return this.ordinal() < rank.ordinal();
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
 }
