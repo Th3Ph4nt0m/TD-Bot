@@ -2,8 +2,8 @@ linter:
   pmd_java:
     dir: src
     rulesets:
-      category/java/errorprone.xml
-      category/java/security.xml
-      category/java/performance.xml
-      category/java/bestpractices.xml
+      - category/java/errorprone.xml
+      - category/java/security.xml
+      - category/java/performance.xml
+      - category/java/bestpractices.xml
     encoding: UTF-8
