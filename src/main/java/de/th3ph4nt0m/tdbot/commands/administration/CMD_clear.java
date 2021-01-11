@@ -44,14 +44,14 @@ public class CMD_clear implements ICommand {
     public void action(String[] args, MessageReceivedEvent event) {
         List<Message> messages = new ArrayList<>();
         int i = Integer.parseInt(args[0]);
-        for(Message message : event.getChannel().getIterableHistory().cache(false)){
-            if(!message.isPinned()){
+        for(Message message : event.getChannel().getIterableHistory().cache(false)) {
+            if(!message.isPinned()) {
                 messages.add(message);
             }
-            if(--i <=0)break;
+            if(i-- <= 0)break;
         }
         event.getChannel().purgeMessages(messages);
-        MessageCenter.getInstance().printClear(event.getChannel().getId(),i);
+        MessageCenter.getInstance().printClear(event.getChannel().getId(), i);
     }
 
 }
