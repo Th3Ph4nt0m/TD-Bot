@@ -7,8 +7,3 @@ linter:
       category/java/performance.xml
       category/java/bestpractices.xml
     encoding: UTF-8
-    min_priority: 0
-branches:
-   exclude:
-      master
-      /^release-.*$/
