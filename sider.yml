@@ -1,14 +1,14 @@
 linter:
   pmd_java:
     dir: src
-    encoding: UTF-8
     rulesets:
-     - category/java/errorprone.xml
-     - category/java/security.xml
-     - category/java/performance.xml
-     - category/java/bestpractices.xml
-     min_priority: 0
+      category/java/errorprone.xml
+      category/java/security.xml
+      category/java/performance.xml
+      category/java/bestpractices.xml
+    encoding: UTF-8
+    min_priority: 0
 branches:
    exclude:
-     - master
-     - /^release-.*$/
+      master
+      /^release-.*$/
