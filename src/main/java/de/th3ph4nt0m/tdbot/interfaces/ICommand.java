@@ -28,36 +28,37 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public
 interface ICommand {
-    /**
-     * The unsafe-Method is called before the action-Method
-     * The default checks if all required arguments are given and if the userrank is high enough
-     * @param args  args from CommandParser
-     * @param event MessageReceivedEvent form CommandParser
-     * @return true when unsafe under current conditions
-     */
-    default boolean unsafe(String[] args, MessageReceivedEvent event) {
-        if(args.length<getInfo().args().length) {
-            MessageCenter.getInstance().printMissingArgument(getInfo().args(), event.getChannel().getId());
-            return true;
-        }
-        return !new NationMember(event.getMember()).getRank().isAtLeast(getInfo().accessRank());
-    }
+	/**
+	 * The unsafe-Method is called before the action-Method
+	 * The default checks if all required arguments are given and if the userrank is high enough
+	 *
+	 * @param args  args from CommandParser
+	 * @param event MessageReceivedEvent form CommandParser
+	 * @return true when unsafe under current conditions
+	 */
+	default boolean unsafe(String[] args, MessageReceivedEvent event) {
+		if (args.length < getInfo().args().length) {
+			MessageCenter.getInstance().printMissingArgument(getInfo().args(), event.getChannel().getId());
+			return true;
+		}
+		return !new NationMember(event.getMember()).getRank().isAtLeast(getInfo().accessRank());
+	}
 
-    /**
-     * The action-Method is called after unsafe returned false
-     *
-     * @param args  from CommandParser
-     * @param event MessageReceivedEvent form CommandParser
-     */
-    void action(String[] args, MessageReceivedEvent event);
+	/**
+	 * The action-Method is called after unsafe returned false
+	 *
+	 * @param args  from CommandParser
+	 * @param event MessageReceivedEvent form CommandParser
+	 */
+	void action(String[] args, MessageReceivedEvent event);
 
-    /**
-     * Returns information about the command
-     *
-     * @return command information
-     */
-    default CommandInfo getInfo() {
-        return getClass().getAnnotation(CommandInfo.class);
-    }
+	/**
+	 * Returns information about the command
+	 *
+	 * @return command information
+	 */
+	default CommandInfo getInfo() {
+		return getClass().getAnnotation(CommandInfo.class);
+	}
 
 }

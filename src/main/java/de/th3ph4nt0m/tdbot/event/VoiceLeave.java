@@ -29,15 +29,15 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public
 class VoiceLeave extends ListenerAdapter {
 
-    @Override
-    public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
-        //delete custom channel as soon as empty
-        if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
-            if (event.getChannelLeft().getMembers().size() <= 0) {
-                event.getChannelLeft().delete().queue();
-                Bot.getInstance().getVoiceSystem().voiceChannels.remove(event.getChannelLeft());
-            }
-        }
+	@Override
+	public void onGuildVoiceLeave(GuildVoiceLeaveEvent event) {
+		//delete custom channel as soon as empty
+		if (Bot.getInstance().getVoiceSystem().voiceChannels.contains(event.getChannelLeft())) {
+			if (event.getChannelLeft().getMembers().size() <= 0) {
+				event.getChannelLeft().delete().queue();
+				Bot.getInstance().getVoiceSystem().voiceChannels.remove(event.getChannelLeft());
+			}
+		}
 
-    }
+	}
 }

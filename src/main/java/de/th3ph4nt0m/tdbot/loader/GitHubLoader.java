@@ -22,53 +22,54 @@
 
 package de.th3ph4nt0m.tdbot.loader;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 
 public class GitHubLoader {
-    public static final String BASE_URL = "https://api.github.com/repos/th3ph4nt0m/TD-Bot";
+	public static final String BASE_URL = "https://api.github.com/repos/th3ph4nt0m/TD-Bot";
 
 
-    /**
-     * gets the tag name of the latest github release
-     *
-     * @return name of the release
-     */
-    public String getLatestTagName() {
-        try {
-            URL url = new URL(BASE_URL + "/releases");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
+	/**
+	 * gets the tag name of the latest github release
+	 *
+	 * @return name of the release
+	 */
+	public String getLatestTagName() {
+		try {
+			URL url = new URL(BASE_URL + "/releases");
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.connect();
 
 
-            int responseCode = conn.getResponseCode();
+			int responseCode = conn.getResponseCode();
 
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
+			if (responseCode != 200) {
+				throw new RuntimeException("HttpResponseCode: " + responseCode);
+			} else {
 
-                StringBuilder inline = new StringBuilder();
-                Scanner scanner = new Scanner(url.openStream());
+				StringBuilder inline = new StringBuilder();
+				Scanner scanner = new Scanner(url.openStream());
 
-                while (scanner.hasNext()) {
-                    inline.append(scanner.nextLine());
-                }
+				while (scanner.hasNext()) {
+					inline.append(scanner.nextLine());
+				}
 
-                scanner.close();
+				scanner.close();
 
-                JSONArray array = new JSONArray(inline.toString());
-                JSONObject obj = array.getJSONObject(0);
-                return obj.getString("tag_name");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+				JSONArray array = new JSONArray(inline.toString());
+				JSONObject obj = array.getJSONObject(0);
+				return obj.getString("tag_name");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

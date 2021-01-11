@@ -30,16 +30,16 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public
 class MessageReceive extends ListenerAdapter {
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-        Message msg = event.getMessage();
+	@Override
+	public void onMessageReceived(MessageReceivedEvent event) {
+		Message msg = event.getMessage();
 
-        //delete commands for @Groovy in unsupported channels
-        if (event.getMessage().getContentRaw().startsWith("-") && !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyChannelID"))) {
-                msg.delete().queue();
-            }
-        }
+		//delete commands for @Groovy in unsupported channels
+		if (event.getMessage().getContentRaw().startsWith("-") && !event.getAuthor().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
+			if (!event.getChannel().getId().equals(Bot.getInstance().getProperty().get("bot", "bot.groovyChannelID"))) {
+				msg.delete().queue();
+			}
+		}
 
-    }
+	}
 }

@@ -27,37 +27,37 @@ import java.util.Properties;
 
 public class Property {
 
-    /**
-     * @param file name of the file
-     * @param key  the key to look for in the config
-     * @return value of the given key
-     */
-    public String get(String file, String key) {
-        try (InputStream input = new FileInputStream("cfg/" + file + ".properties")) {
+	/**
+	 * @param file name of the file
+	 * @param key  the key to look for in the config
+	 * @return value of the given key
+	 */
+	public String get(String file, String key) {
+		try (InputStream input = new FileInputStream("cfg/" + file + ".properties")) {
 
-            Properties prop = new Properties();
+			Properties prop = new Properties();
 
-            // load a properties file from InputStream
-            prop.load(input);
+			// load a properties file from InputStream
+			prop.load(input);
 
-            return prop.getProperty(key);
+			return prop.getProperty(key);
 
-            // Java 8 , print key and values
+			// Java 8 , print key and values
 //            prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
 
-    /**
-     * create the default properties-file
-     */
-    public void setDefaultProps() {
-        //create the file if not exists
-        File dir = new File("cfg");
-        if (!dir.exists()) {
-            dir.mkdirs();
+	/**
+	 * create the default properties-file
+	 */
+	public void setDefaultProps() {
+		//create the file if not exists
+		File dir = new File("cfg");
+		if (!dir.exists()) {
+			dir.mkdirs();
             /*try (OutputStream output = new FileOutputStream("cfg/database.properties")) {
 
                 Properties prop = new Properties();
@@ -76,25 +76,25 @@ public class Property {
                 e.printStackTrace();
             }*/
 
-            try (OutputStream output = new FileOutputStream("cfg/bot.properties")) {
+			try (OutputStream output = new FileOutputStream("cfg/bot.properties")) {
 
-                Properties prop = new Properties();
+				Properties prop = new Properties();
 
-                // set the properties value
-                prop.setProperty("bot.token", "token");
-                prop.setProperty("bot.autoprint", "0");
-                prop.setProperty("bot.rulesID", "RuleChannelID");
-                prop.setProperty("bot.groovyChannelID", "GroovyChannelID");
-                prop.setProperty("bot.afkID", "AFKChannelID");
-                prop.setProperty("bot.createID", "CreateChannelID");
-                prop.setProperty("bot.compID", "CompCreateChannelID");
-                prop.setProperty("bot.adminChannelID", "AdminChannelID");
+				// set the properties value
+				prop.setProperty("bot.token", "token");
+				prop.setProperty("bot.autoprint", "0");
+				prop.setProperty("bot.rulesID", "RuleChannelID");
+				prop.setProperty("bot.groovyChannelID", "GroovyChannelID");
+				prop.setProperty("bot.afkID", "AFKChannelID");
+				prop.setProperty("bot.createID", "CreateChannelID");
+				prop.setProperty("bot.compID", "CompCreateChannelID");
+				prop.setProperty("bot.adminChannelID", "AdminChannelID");
 
-                // save properties to project folder
-                prop.store(output, null);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+				// save properties to project folder
+				prop.store(output, null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

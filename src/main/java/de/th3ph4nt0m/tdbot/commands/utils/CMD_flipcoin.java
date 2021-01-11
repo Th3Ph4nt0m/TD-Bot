@@ -29,17 +29,17 @@ import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 @CommandInfo(
-        name = "FlipCoin",
-        invokes = {"FlipCoin", "CoinFlip", "Flip", "Coin", "CoinToss", "TossCoin", "Toss"},
-        accessRank = DiscordRank.THE_NATION,
-        description =  "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
+		name = "FlipCoin",
+		invokes = {"FlipCoin", "CoinFlip", "Flip", "Coin", "CoinToss", "TossCoin", "Toss"},
+		accessRank = DiscordRank.THE_NATION,
+		description = "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%"
 )
 public class CMD_flipcoin implements ICommand {
 
-    @Override
-    public void action(String[] args, MessageReceivedEvent event) {
-        MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
-    }
+	@Override
+	public void action(String[] args, MessageReceivedEvent event) {
+		MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
+	}
 
 }
 

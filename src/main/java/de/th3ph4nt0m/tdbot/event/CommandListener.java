@@ -29,13 +29,13 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public
 class CommandListener extends ListenerAdapter {
-    /**
-     * Listener for command handling
-     */
-    public void onMessageReceived(MessageReceivedEvent event) {
-        if (event.getMessage().getContentRaw().startsWith("+") && !event.getMessage().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-            Bot.getInstance().getCommandHandler().handleCommand(CommandParser.parser(event.getMessage().getContentRaw(), event));
-        }
-    }
+	/**
+	 * Listener for command handling
+	 */
+	public void onMessageReceived(MessageReceivedEvent event) {
+		if (event.getMessage().getContentRaw().startsWith("+") && !event.getMessage().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
+			Bot.getInstance().getCommandHandler().handleCommand(CommandParser.parser(event.getMessage().getContentRaw(), event));
+		}
+	}
 
 }
