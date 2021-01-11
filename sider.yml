@@ -5,5 +5,4 @@ linter:
       - category/java/errorprone.xml
       - category/java/security.xml
       - category/java/performance.xml
-      - category/java/bestpractices.xml
     encoding: UTF-8
