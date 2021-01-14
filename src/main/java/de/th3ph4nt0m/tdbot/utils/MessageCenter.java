@@ -29,6 +29,7 @@ import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.PrivateChannel;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.RestAction;
 
@@ -234,13 +235,19 @@ public class MessageCenter {
    */
   public void printServerInfo(int userCount, ArrayList<RoleInfo> roleInfos, String pChannelID) {
     TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
+    assert channel != null;
+
     EmbedBuilder builder = new EmbedBuilder();
     builder.setColor(Color.blue);
+    builder.setTitle("**Users: **"+userCount);
+    channel.sendMessage(builder.build()).complete().delete().queueAfter(10, TimeUnit.SECONDS);
 
-    // TODO: print serverinfo in a appealing design
-
-    assert channel != null;
-    channel.sendMessage(builder.build()).queue();
+    for (RoleInfo info : roleInfos) {
+      builder = new EmbedBuilder();
+      builder.setColor(info.color);
+      builder.addField(info.name, String.valueOf(info.userCount), false);
+      channel.sendMessage(builder.build()).complete().delete().queueAfter(10, TimeUnit.SECONDS);
+    }
   }
 
   /**
@@ -262,6 +269,6 @@ public class MessageCenter {
             "This command needs the following " + arguments + ": " + Arrays.toString(args))
         .setFooter("TD-Bot ©2020 Th3Ph4nt0m");
     assert channel != null;
-    channel.sendMessage(builder.build()).queue();
+    channel.sendMessage(builder.build()).complete().delete().queueAfter(5, TimeUnit.SECONDS);
   }
 }

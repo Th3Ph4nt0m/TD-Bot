@@ -49,7 +49,7 @@ public interface ICommand {
    * @param args from CommandParser
    * @param event MessageReceivedEvent form CommandParser
    */
-  void action(String[] args, MessageReceivedEvent event);
+  void action(String[] args, MessageReceivedEvent event) throws InterruptedException;
 
   /**
    * Returns information about the command

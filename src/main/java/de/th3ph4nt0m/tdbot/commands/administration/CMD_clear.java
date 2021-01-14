@@ -51,6 +51,6 @@ public class CMD_clear implements ICommand {
       if (i-- <= 0) break;
     }
     event.getChannel().purgeMessages(messages);
-    MessageCenter.getInstance().printClear(event.getChannel().getId(), i);
+    MessageCenter.getInstance().printClear(event.getChannel().getId(), Integer.parseInt(args[0]));
   }
 }

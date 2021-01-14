@@ -28,10 +28,13 @@ import de.th3ph4nt0m.tdbot.interfaces.RoleInfo;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.utils.concurrent.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @CommandInfo(
     name = "ServerInfo",
@@ -44,14 +47,18 @@ public class CMD_serverinfo implements ICommand {
   public void action(String[] args, MessageReceivedEvent event) {
     Guild guild = event.getGuild();
 
-    int members = guild.getMemberCount();
+    int memberCount = guild.getMemberCount();
     ArrayList<RoleInfo> roles = new ArrayList<>();
-
-    for (Role role : guild.getRoles()) {
-      roles.add(
-          new RoleInfo(role.getName(), role.getColor(), guild.getMembersWithRoles(role).size()));
-    }
-
-    MessageCenter.getInstance().printServerInfo(members, roles, event.getChannel().getId());
+    Task<List<Member>> members = guild.loadMembers();
+    members.onSuccess(members1 -> {
+      for (Role role : guild.getRoles()) {
+        if(role.isMentionable()||role.getName().equalsIgnoreCase("bot"))
+        {
+          roles.add(
+                  new RoleInfo(role.getName(), role.getColor(),(int)members1.stream().filter(member -> member.getRoles().contains(role)).count()));
+        }
+      }
+      MessageCenter.getInstance().printServerInfo(memberCount, roles, event.getChannel().getId());
+    });
   }
 }

@@ -59,7 +59,11 @@ public class CommandHandler {
         boolean unsafe = command.unsafe(cmd.args, cmd.event);
 
         if (!unsafe) {
-          command.action(cmd.args, cmd.event);
+          try {
+            command.action(cmd.args, cmd.event);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
       }
     }
