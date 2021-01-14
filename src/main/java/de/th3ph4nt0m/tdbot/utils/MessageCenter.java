@@ -29,7 +29,6 @@ import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Emote;
 import net.dv8tion.jda.api.entities.PrivateChannel;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.requests.RestAction;
 
@@ -237,15 +236,15 @@ public class MessageCenter {
     TextChannel channel = Bot.getInstance().getJda().getTextChannelById(pChannelID);
     assert channel != null;
 
-    EmbedBuilder builder = new EmbedBuilder();
-    builder.setColor(Color.blue);
-    builder.setTitle("**Users: **"+userCount);
-    channel.sendMessage(builder.build()).complete().delete().queueAfter(10, TimeUnit.SECONDS);
-
+    ArrayList<EmbedBuilder> builders = new ArrayList<>();
+    builders.add(new EmbedBuilder().setColor(Color.blue).setTitle("**Users: **"+userCount));
     for (RoleInfo info : roleInfos) {
-      builder = new EmbedBuilder();
-      builder.setColor(info.color);
-      builder.addField(info.name, String.valueOf(info.userCount), false);
+      builders.add(new EmbedBuilder()
+      .setColor(info.color)
+      .addField(info.name, String.valueOf(info.userCount), false));
+    }
+    for(EmbedBuilder builder:builders)
+    {
       channel.sendMessage(builder.build()).complete().delete().queueAfter(10, TimeUnit.SECONDS);
     }
   }
