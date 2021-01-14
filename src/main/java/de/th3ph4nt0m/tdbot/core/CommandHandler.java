@@ -57,14 +57,7 @@ public class CommandHandler {
       if (Arrays.stream(command.getInfo().invokes())
           .anyMatch(i -> i.equalsIgnoreCase(cmd.invoke))) {
         boolean unsafe = command.unsafe(cmd.args, cmd.event);
-
-        if (!unsafe) {
-          try {
-            command.action(cmd.args, cmd.event);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-        }
+        if (!unsafe) command.action(cmd.args, cmd.event);
       }
     }
   }
