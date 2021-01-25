@@ -1,5 +1,5 @@
 /*******************************************************************************
- * CommandListener.java is part of the TD-Bot project
+ * CMD_version.java is part of the TD-Bot project
  *
  * TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  * Copyright (C) 2020 Henrik Steffens
@@ -17,24 +17,27 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Last edit: 2020/11/2
+ * Last edit: 2020/11/3
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.event;
+package de.th3ph4nt0m.tdbot.commands.info.bot;
 
-import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.core.CommandParser;
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
+import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class CommandListener extends ListenerAdapter {
-  /** Listener for command handling */
-  public void onMessageReceived(MessageReceivedEvent event) {
-    if (event.getMessage().getContentRaw().startsWith("+")
-        && !event.getMessage().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-      Bot.getInstance()
-          .getCommandHandler()
-          .handleCommand(CommandParser.parser(event.getMessage().getContentRaw(), event));
-    }
+@CommandInfo(
+    name = "Version",
+    invokes = {"Version", "BotVersion"},
+    accessRank = DiscordRank.THE_NATION,
+    description =
+        "Version gets you the current version of our bot.\nFeel free to checkout our repo as well.")
+public class CMD_version implements ICommand {
+
+  @Override
+  public void action(String[] args, MessageReceivedEvent event) {
+    MessageCenter.getInstance().printVersion(event.getChannel().getId());
   }
 }

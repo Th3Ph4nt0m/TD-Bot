@@ -1,5 +1,5 @@
 /*******************************************************************************
- * CMD_repo.java is part of the TD-Bot project
+ * CMD_userinfo.java is part of the TD-Bot project
  *
  * TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  * Copyright (C) 2020 Henrik Steffens
@@ -17,39 +17,37 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Last edit: 2020/11/4
+ * Last edit: 2020/12/29
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands;
+package de.th3ph4nt0m.tdbot.commands.info;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
 import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.util.ArrayList;
-
 @CommandInfo(
-    name = "Help",
-    invokes = {"Help", "BotInfo", "CommandInfo"},
-    accessRank = DiscordRank.THE_NATION,
-    description = "Help show you all available commands for your rank")
-public class CMD_help implements ICommand {
+    name = "UserInfo",
+    invokes = {"Info", "Userinfo"},
+    accessRank = DiscordRank.TEAM,
+    description =
+        "With UserInfo you can get the currently stored Information about the tagged member.\nA normal tag in the format @exampleUserName works just fine.",
+    args = {"@username"})
+public class CMD_userinfo implements ICommand {
 
   @Override
   public void action(String[] args, MessageReceivedEvent event) {
-    ArrayList<CommandInfo> accessibleCommands =
-        Bot.getInstance().getCommandHandler().listCommands();
-    accessibleCommands.removeIf(
-        commandInfo1 ->
-            commandInfo1.name().equals(CMD_help.class.getAnnotation(CommandInfo.class).name())
-                || !new NationMember(event.getMember())
-                    .getRank()
-                    .isAtLeast(commandInfo1.accessRank()));
-
-    MessageCenter.getInstance().printHelp(event.getChannel().getId(), accessibleCommands);
+    // initialising a NationMember to access the DB
+    Member m = event.getMessage().getMentionedMembers().get(0);
+    NationMember nationMember = new NationMember(m);
+    // sending information to the channel
+    event
+        .getChannel()
+        .sendMessage("No Database")
+        .queue(); // TODO: send info about user instead of "No Database" as soon as db is
+                  // implemented
   }
 }

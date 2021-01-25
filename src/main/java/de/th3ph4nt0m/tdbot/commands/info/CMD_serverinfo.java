@@ -1,5 +1,5 @@
 /*******************************************************************************
- * CMD_repo.java is part of the TD-Bot project
+ * CMD_serverinfo.java is part of the TD-Bot project
  *
  * TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  * Copyright (C) 2020 Henrik Steffens
@@ -17,39 +17,48 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Last edit: 2020/11/4
+ * Last edit: 2020/12/29
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands;
+package de.th3ph4nt0m.tdbot.commands.info;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
+import de.th3ph4nt0m.tdbot.interfaces.RoleInfo;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.utils.concurrent.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @CommandInfo(
-    name = "Help",
-    invokes = {"Help", "BotInfo", "CommandInfo"},
+    name = "ServerInfo",
+    invokes = {"Info", "Serverinfo", "Server"},
     accessRank = DiscordRank.THE_NATION,
-    description = "Help show you all available commands for your rank")
-public class CMD_help implements ICommand {
+    description = "With ServerInfo you can get a some information about this discord server.")
+public class CMD_serverinfo implements ICommand {
 
   @Override
   public void action(String[] args, MessageReceivedEvent event) {
-    ArrayList<CommandInfo> accessibleCommands =
-        Bot.getInstance().getCommandHandler().listCommands();
-    accessibleCommands.removeIf(
-        commandInfo1 ->
-            commandInfo1.name().equals(CMD_help.class.getAnnotation(CommandInfo.class).name())
-                || !new NationMember(event.getMember())
-                    .getRank()
-                    .isAtLeast(commandInfo1.accessRank()));
+    Guild guild = event.getGuild();
 
-    MessageCenter.getInstance().printHelp(event.getChannel().getId(), accessibleCommands);
+    int memberCount = guild.getMemberCount();
+    ArrayList<RoleInfo> roles = new ArrayList<>();
+    Task<List<Member>> members = guild.loadMembers();
+    members.onSuccess(members1 -> {
+      for (Role role : guild.getRoles()) {
+        if(role.isMentionable()||role.getName().equalsIgnoreCase("bot"))
+        {
+          roles.add(
+                  new RoleInfo(role.getName(), role.getColor(),(int)members1.stream().filter(member -> member.getRoles().contains(role)).count()));
+        }
+      }
+      MessageCenter.getInstance().printServerInfo(memberCount, roles, event.getChannel().getId());
+    });
   }
 }

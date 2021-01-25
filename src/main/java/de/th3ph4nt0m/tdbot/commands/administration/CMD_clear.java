@@ -1,5 +1,5 @@
 /*******************************************************************************
- * CMD_repo.java is part of the TD-Bot project
+ * CMD_clear.java is part of the TD-Bot project
  *
  * TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  * Copyright (C) 2020 Henrik Steffens
@@ -17,39 +17,40 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Last edit: 2020/11/4
+ * Last edit: 2020/12/29
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands;
+package de.th3ph4nt0m.tdbot.commands.administration;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
 import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @CommandInfo(
-    name = "Help",
-    invokes = {"Help", "BotInfo", "CommandInfo"},
-    accessRank = DiscordRank.THE_NATION,
-    description = "Help show you all available commands for your rank")
-public class CMD_help implements ICommand {
+    name = "Clear",
+    invokes = {"clear", "clearMessage", "clearMessages"},
+    accessRank = DiscordRank.TEAM,
+    description =
+        "With Clear you can bulk delete messages in a channel.\nAdd a number after the command to specify the amount that has to be cleared.")
+public class CMD_clear implements ICommand {
 
   @Override
   public void action(String[] args, MessageReceivedEvent event) {
-    ArrayList<CommandInfo> accessibleCommands =
-        Bot.getInstance().getCommandHandler().listCommands();
-    accessibleCommands.removeIf(
-        commandInfo1 ->
-            commandInfo1.name().equals(CMD_help.class.getAnnotation(CommandInfo.class).name())
-                || !new NationMember(event.getMember())
-                    .getRank()
-                    .isAtLeast(commandInfo1.accessRank()));
-
-    MessageCenter.getInstance().printHelp(event.getChannel().getId(), accessibleCommands);
+    List<Message> messages = new ArrayList<>();
+    int i = Integer.parseInt(args[0]);
+    for (Message message : event.getChannel().getIterableHistory().cache(false)) {
+      if (!message.isPinned()) {
+        messages.add(message);
+      }
+      if (i-- <= 0) break;
+    }
+    event.getChannel().purgeMessages(messages);
+    MessageCenter.getInstance().printClear(event.getChannel().getId(), Integer.parseInt(args[0]));
   }
 }

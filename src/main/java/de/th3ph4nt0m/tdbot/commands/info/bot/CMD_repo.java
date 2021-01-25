@@ -20,36 +20,31 @@
  * Last edit: 2020/11/4
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.commands;
+package de.th3ph4nt0m.tdbot.commands.info.bot;
 
-import de.th3ph4nt0m.tdbot.Bot;
 import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
 import de.th3ph4nt0m.tdbot.interfaces.ICommand;
-import de.th3ph4nt0m.tdbot.interfaces.NationMember;
 import de.th3ph4nt0m.tdbot.permission.DiscordRank;
-import de.th3ph4nt0m.tdbot.utils.MessageCenter;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import java.util.ArrayList;
+import java.awt.*;
 
 @CommandInfo(
-    name = "Help",
-    invokes = {"Help", "BotInfo", "CommandInfo"},
+    name = "Repo",
+    invokes = {"Repo", "Repository"},
     accessRank = DiscordRank.THE_NATION,
-    description = "Help show you all available commands for your rank")
-public class CMD_help implements ICommand {
+    description = "Repo gives you information about the current open source bot repository.")
+public class CMD_repo implements ICommand {
 
   @Override
   public void action(String[] args, MessageReceivedEvent event) {
-    ArrayList<CommandInfo> accessibleCommands =
-        Bot.getInstance().getCommandHandler().listCommands();
-    accessibleCommands.removeIf(
-        commandInfo1 ->
-            commandInfo1.name().equals(CMD_help.class.getAnnotation(CommandInfo.class).name())
-                || !new NationMember(event.getMember())
-                    .getRank()
-                    .isAtLeast(commandInfo1.accessRank()));
-
-    MessageCenter.getInstance().printHelp(event.getChannel().getId(), accessibleCommands);
+    EmbedBuilder builder = new EmbedBuilder();
+    builder.setColor(Color.BLUE);
+    builder.setTitle("Repository Information");
+    builder.setDescription(
+        "The TD-Bot is an opensource-project!\n\n**License:** GNU AFFERO GENERAL PUBLIC License v3\n\n\nFeel free to contribute!\n\n[TD-Bot on github](https://github.com/Th3Ph4nt0m/TD-Bot/)");
+    builder.setFooter("TD-Bot ©2020 Th3Ph4nt0m");
+    event.getChannel().sendMessage(builder.build()).queue();
   }
 }

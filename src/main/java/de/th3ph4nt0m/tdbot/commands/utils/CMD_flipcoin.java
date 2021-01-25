@@ -1,5 +1,5 @@
 /*******************************************************************************
- * CommandListener.java is part of the TD-Bot project
+ * CMD_repo.java is part of the TD-Bot project
  *
  * TD-Bot is the Discord-Bot of the TD-Nation Discord Server.
  * Copyright (C) 2020 Henrik Steffens
@@ -17,24 +17,27 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Last edit: 2020/11/2
+ * Last edit: 2020/11/4
  ******************************************************************************/
 
-package de.th3ph4nt0m.tdbot.event;
+package de.th3ph4nt0m.tdbot.commands.utils;
 
-import de.th3ph4nt0m.tdbot.Bot;
-import de.th3ph4nt0m.tdbot.core.CommandParser;
+import de.th3ph4nt0m.tdbot.interfaces.CommandInfo;
+import de.th3ph4nt0m.tdbot.interfaces.ICommand;
+import de.th3ph4nt0m.tdbot.permission.DiscordRank;
+import de.th3ph4nt0m.tdbot.utils.MessageCenter;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-public class CommandListener extends ListenerAdapter {
-  /** Listener for command handling */
-  public void onMessageReceived(MessageReceivedEvent event) {
-    if (event.getMessage().getContentRaw().startsWith("+")
-        && !event.getMessage().getId().equals(Bot.getInstance().getJda().getSelfUser().getId())) {
-      Bot.getInstance()
-          .getCommandHandler()
-          .handleCommand(CommandParser.parser(event.getMessage().getContentRaw(), event));
-    }
+@CommandInfo(
+    name = "FlipCoin",
+    invokes = {"FlipCoin", "CoinFlip", "Flip", "Coin", "CoinToss", "TossCoin", "Toss"},
+    accessRank = DiscordRank.THE_NATION,
+    description =
+        "With FlipCoin you can flip a coin,\neither to heads or tails with a chance for each of 50%")
+public class CMD_flipcoin implements ICommand {
+
+  @Override
+  public void action(String[] args, MessageReceivedEvent event) {
+    MessageCenter.getInstance().printCoinToss(event.getChannel().getId(), Math.random() < 0.5);
   }
 }
