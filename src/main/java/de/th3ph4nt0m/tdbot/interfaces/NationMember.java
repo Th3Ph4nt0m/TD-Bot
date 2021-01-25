@@ -48,20 +48,7 @@ public class NationMember {
   }
 
   public DiscordRank getRank() {
-    switch (member.getRoles().get(0).getName()) {
-      case "OP":
-        return DiscordRank.OP;
-      case "Bot":
-        return DiscordRank.BOT;
-      case "Team":
-        return DiscordRank.TEAM;
-      case "VIP":
-        return DiscordRank.VIP;
-      case "The Nation":
-        return DiscordRank.THE_NATION;
-      default:
-        return DiscordRank.UNVERIFIED;
-    }
+    return DiscordRank.findRank(member.getRoles().get(0).getIdLong());
   }
 
   /** @return user's nickname */
